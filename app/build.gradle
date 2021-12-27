@@ -23,6 +23,20 @@ android {
     buildFeatures{
         viewBinding true
     }
+    signingConfigs {
+        debug {
+            storeFile file {'./debug.keystore'}
+            storePassword '170998'
+            keyAlias 'quyenln'
+            keyPassword '170998'
+        }
+        release {
+            storeFile file {'./debug.keystore'}
+            storePassword '170998'
+            keyAlias 'quyenln'
+            keyPassword '170998'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
