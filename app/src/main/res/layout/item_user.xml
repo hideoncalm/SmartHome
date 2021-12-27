@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="5dp"
+    android:layout_marginTop="10dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageAvatar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/jisoo"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.22"
+        app:shapeAppearance="@style/RoundedImage" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/lato"
+        android:text="Le Ngoc Quyen"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/imageAvatar"
+        app:layout_constraintTop_toTopOf="@id/imageAvatar" />
+
+    <TextView
+        android:id="@+id/textActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_user_active"
+        android:fontFamily="@font/lato"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:text="Active User"
+        android:textColor="@color/C23A586"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/textName"
+        app:layout_constraintTop_toBottomOf="@id/textName" />
+
+    <TextView
+        android:id="@+id/textRole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg_user_role"
+        android:fontFamily="@font/lato"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:text="Admin"
+        android:textColor="@color/CE6E60"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/textActive"
+        app:layout_constraintTop_toTopOf="@id/textActive" />
+
+    <TextView
+        android:id="@+id/textRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/lato"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:text="Remove User"
+        android:textColor="@color/CE6E60"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_trash_red"
+        app:layout_constraintTop_toBottomOf="@id/textActive"
+        app:layout_constraintBottom_toBottomOf="@id/imageAvatar"
+        app:layout_constraintStart_toStartOf="@id/textActive" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

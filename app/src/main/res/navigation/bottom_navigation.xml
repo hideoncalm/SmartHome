@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/analysisFragment">
+
+    <fragment
+        android:id="@+id/analysisFragment"
+        android:name="com.quyen.smarthome.ui.analysis.AnalysisFragment"
+        android:label="AnalysisFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.quyen.smarthome.ui.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/myProfileFragment"
+        android:name="com.quyen.smarthome.ui.me.MyProfileFragment"
+        android:label="MyProfileFragment" />
+    <fragment
+        android:id="@+id/roomDetailFragment"
+        android:name="com.quyen.smarthome.ui.roomdetail.RoomDetailFragment"
+        android:label="RoomDetailFragment" />
+    <fragment
+        android:id="@+id/listUserFragment"
+        android:name="com.quyen.smarthome.ui.listuser.ListUserFragment"
+        android:label="ListUserFragment" />
+</navigation>
