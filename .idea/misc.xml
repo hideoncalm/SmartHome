@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/drawable/ic_add_device.xml" value="0.37864583333333335" />
+        <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/fragment_analysis.xml" value="0.3625" />
+        <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/fragment_home.xml" value="0.3625" />
+        <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/fragment_me.xml" value="0.3625" />
+        <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/fragment_pager_list_item.xml" value="0.3625" />
+        <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/fragment_room_detail.xml" value="0.3625" />
+        <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/fragment_user.xml" value="0.3625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14583333333333334" />
       </map>
     </option>

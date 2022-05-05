@@ -34,11 +34,24 @@
         android:id="@+id/imageAvatar"
         android:layout_width="56dp"
         android:layout_height="56dp"
+        android:layout_marginStart="20dp"
         android:scaleType="fitCenter"
         android:src="@drawable/jisoo"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textName"
         app:layout_constraintTop_toTopOf="@id/textWelcome"
+        app:layout_constraintBottom_toBottomOf="@id/textName"
         app:shapeAppearance="@style/RoundedImage" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAddDevice"
+        android:contentDescription="@null"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="@id/imageAvatar"
+        app:layout_constraintBottom_toBottomOf="@id/imageAvatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_add_device"/>
 
     <View
         android:id="@+id/viewPower"

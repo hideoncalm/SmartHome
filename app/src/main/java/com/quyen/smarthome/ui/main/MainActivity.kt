@@ -3,25 +3,33 @@ package com.quyen.smarthome.ui.main
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.firebase.database.FirebaseDatabase
 import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseActivity
+import com.quyen.smarthome.data.source.remote.UserRemoteDataSource
 import com.quyen.smarthome.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
+    @Inject
+    lateinit var userData : UserRemoteDataSource
+
     override fun initViews() {
         setUpBottomNavigation()
     }
 
     override fun initData() {
-        val database : FirebaseDatabase = FirebaseDatabase.getInstance("https://iot-project-ebf71-default-rtdb.asia-southeast1.firebasedatabase.app")
-        val myRef = database.getReference("name")
-        myRef.setValue("Le Ngoc Quyen dep trai vo dich")
+        GlobalScope.launch {
+            val users = userData.getUsers()
+            Timber.d("userSize ${users?.size}")
+        }
     }
 
     private fun setUpBottomNavigation() {

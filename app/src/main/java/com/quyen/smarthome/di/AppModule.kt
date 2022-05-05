@@ -2,6 +2,7 @@ package com.quyen.smarthome.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.firebase.database.FirebaseDatabase
 import com.quyen.smarthome.utils.Constant
 import dagger.Module
 import dagger.Provides
@@ -19,11 +20,11 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient() : OkHttpClient = OkHttpClient()
+    fun provideOkHttpClient(): OkHttpClient = OkHttpClient()
 
     @Singleton
     @Provides
-    fun provideRetrofitClient(okHttpClient: OkHttpClient) : Retrofit =
+    fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(Constant.BASE_URL)
             .client(okHttpClient)
@@ -33,6 +34,11 @@ object AppModule {
     @Singleton
     @Provides
     fun provideSharedPreference(
-        @ApplicationContext app : Context
-    ) : SharedPreferences = app.getSharedPreferences("com.quyen.shared", Context.MODE_PRIVATE)
+        @ApplicationContext app: Context
+    ): SharedPreferences = app.getSharedPreferences("com.quyen.shared", Context.MODE_PRIVATE)
+
+    @Singleton
+    @Provides
+    fun provideFirebaseDatabase(): FirebaseDatabase =
+        FirebaseDatabase.getInstance("https://smarthome-e6d0f-default-rtdb.asia-southeast1.firebasedatabase.app")
 }

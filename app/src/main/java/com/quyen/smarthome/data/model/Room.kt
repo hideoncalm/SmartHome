@@ -6,12 +6,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Room(
-    val id: String,
-    val name: String? = "Living Room",
-    val homeId: String,
-    val totalDevice: Int? = 0,
-    val switchState: Boolean = false,
-    val iconUrl: String
+    var id: String = "",
+    var name: String? = "Living Room",
+    var homeId: String = "",
+    var totalDevice: Int? = 0,
+    var stateAllDevices: Boolean = false,
+    var roomImage: String = ""
 ) : Parcelable {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Room>() {
