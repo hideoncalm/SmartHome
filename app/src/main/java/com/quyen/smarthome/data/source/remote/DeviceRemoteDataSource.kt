@@ -16,7 +16,7 @@ class DeviceRemoteDataSource @Inject constructor(
     private val devices = mutableListOf<Device>()
 
     override suspend fun insertDevice(device: Device): Boolean {
-        return deviceReference.child(device.id).setValue(device).isSuccessful
+        return deviceReference.child(device.device_id).setValue(device).isSuccessful
     }
 
     override suspend fun deleteDevice(deviceId: String): Boolean {
@@ -24,14 +24,17 @@ class DeviceRemoteDataSource @Inject constructor(
     }
 
     override suspend fun updateDevice(device: Device): Boolean {
-        return deviceReference.child(device.id).setValue(device).isSuccessful
+        return deviceReference.child(device.device_id).setValue(device).isSuccessful
     }
 
     override suspend fun getDevicesByRoomId(roomId: Int): List<Device>? {
         val snapshot = deviceReference.get().await()
-        val device : Device? = snapshot.getValue(Device::class.java)
-        device?.let {
-            devices.add(device)
+        for(snap : DataSnapshot in snapshot.children)
+        {
+            val device : Device? = snap.getValue(Device::class.java)
+            device?.let {
+                devices.add(device)
+            }
         }
         return devices
     }
