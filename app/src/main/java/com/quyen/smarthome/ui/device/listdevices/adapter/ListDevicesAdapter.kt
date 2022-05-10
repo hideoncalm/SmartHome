@@ -1,19 +1,15 @@
-package com.quyen.smarthome.ui.listnewitems.adapter
+package com.quyen.smarthome.ui.device.listdevices.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import com.quyen.smarthome.base.BaseRecyclerViewAdapter
 import com.quyen.smarthome.base.BaseViewHolder
 import com.quyen.smarthome.data.model.Device
-import com.quyen.smarthome.data.model.Room
 import com.quyen.smarthome.databinding.ItemDeviceBinding
-import com.quyen.smarthome.databinding.ItemRoomBinding
-import com.quyen.smarthome.utils.loadImageFromUrl
 
-class ListNewDevicesAdapter(
+class ListDevicesAdapter(
     private val onNewItemDeviceClick: (Device) -> Unit,
-) : BaseRecyclerViewAdapter<Device, ListNewDevicesAdapter.ListNewDevicesHolder>(
+) : BaseRecyclerViewAdapter<Device, ListDevicesAdapter.ListNewDevicesHolder>(
     Device.diffUtil,
     onNewItemDeviceClick
 ) {

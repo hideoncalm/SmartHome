@@ -5,15 +5,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.quyen.smarthome.base.BaseFragment
 import com.quyen.smarthome.base.BaseViewPagerAdapter
-import com.quyen.smarthome.data.source.remote.DeviceRemoteDataSource
 import com.quyen.smarthome.databinding.FragmentHomeBinding
-import com.quyen.smarthome.ui.listitempager.FragmentListItem
-import com.quyen.smarthome.ui.listnewitems.ListNewDevicesFragment
+import com.quyen.smarthome.ui.room.listrooms.FragmentListItem
+import com.quyen.smarthome.ui.device.listdevices.ListNewDevicesFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {

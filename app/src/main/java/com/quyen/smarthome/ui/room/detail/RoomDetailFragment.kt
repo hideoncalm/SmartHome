@@ -1,4 +1,4 @@
-package com.quyen.smarthome.ui.roomdetail
+package com.quyen.smarthome.ui.room.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

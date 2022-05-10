@@ -1,4 +1,4 @@
-package com.quyen.smarthome.ui.listuser
+package com.quyen.smarthome.ui.user.listusers
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

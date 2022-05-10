@@ -18,10 +18,10 @@
         android:label="MyProfileFragment" />
     <fragment
         android:id="@+id/roomDetailFragment"
-        android:name="com.quyen.smarthome.ui.roomdetail.RoomDetailFragment"
+        android:name="com.quyen.smarthome.ui.room.detail.RoomDetailFragment"
         android:label="RoomDetailFragment" />
     <fragment
         android:id="@+id/listUserFragment"
-        android:name="com.quyen.smarthome.ui.listuser.ListUserFragment"
+        android:name="com.quyen.smarthome.ui.user.listusers.ListUserFragment"
         android:label="ListUserFragment" />
 </navigation>

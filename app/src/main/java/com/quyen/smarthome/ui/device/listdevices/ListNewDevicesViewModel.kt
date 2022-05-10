@@ -1,4 +1,4 @@
-package com.quyen.smarthome.ui.listnewitems
+package com.quyen.smarthome.ui.device.listdevices
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.source.remote.DeviceRemoteDataSource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ListNewDevicesViewModel @Inject constructor(
     private val deviceDataSource: DeviceRemoteDataSource
 ) : ViewModel() {

@@ -1,4 +1,4 @@
-package com.quyen.smarthome.ui.listitempager
+package com.quyen.smarthome.ui.room.listrooms
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

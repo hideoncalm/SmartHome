@@ -1,22 +1,24 @@
-package com.quyen.smarthome.ui.listnewitems
+package com.quyen.smarthome.ui.device.listdevices
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.quyen.smarthome.base.BaseFragment
-import com.quyen.smarthome.base.OnItemClickListener
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.databinding.FragmentListNewDeviceBinding
-import com.quyen.smarthome.ui.listnewitems.adapter.ListNewDevicesAdapter
+import com.quyen.smarthome.ui.device.listdevices.adapter.ListDevicesAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class ListNewDevicesFragment : BaseFragment<FragmentListNewDeviceBinding>(), OnItemClickListener<Device> {
+@AndroidEntryPoint
+class ListNewDevicesFragment : BaseFragment<FragmentListNewDeviceBinding>(){
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentListNewDeviceBinding =
         FragmentListNewDeviceBinding::inflate
 
-    private val newDeviceAdapter = ListNewDevicesAdapter(this::onItemClick)
+    private val newDeviceAdapter by lazy {
+        ListDevicesAdapter(::onItemClick)
+    }
+
     private val viewModel : ListNewDevicesViewModel by viewModels()
 
     override fun initViews() {
@@ -29,7 +31,8 @@ class ListNewDevicesFragment : BaseFragment<FragmentListNewDeviceBinding>(), OnI
         })
     }
 
-    override fun onItemClick(item: Device) {
-        Toast.makeText(requireContext(), "Item ${item.device_ip_addr} Click", Toast.LENGTH_LONG)
+    private fun onItemClick(item: Device) {
+        // go to the fragment device detail
+
     }
 }
