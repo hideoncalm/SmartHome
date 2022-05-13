@@ -8,6 +8,6 @@
     android:layout_height="match_parent"
     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
     app:spanCount="2"
-    tools:listitem="@layout/item_device">
+    tools:listitem="@layout/item_device_detail">
 
 </androidx.recyclerview.widget.RecyclerView>

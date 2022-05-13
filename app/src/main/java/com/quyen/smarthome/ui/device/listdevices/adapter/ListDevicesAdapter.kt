@@ -31,7 +31,7 @@ class ListDevicesAdapter(
             super.onBindData(item)
             binding.apply {
                 textDeviceName.text = item.device_name
-                textDeviceIP.text = item.device_ip_addr
+                textRoomName.text = item.device_ip_addr
             }
         }
     }

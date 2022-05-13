@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_navigation"
-    app:startDestination="@id/analysisFragment">
+    app:startDestination="@id/sceneFragment">
 
     <fragment
-        android:id="@+id/analysisFragment"
-        android:name="com.quyen.smarthome.ui.analysis.AnalysisFragment"
-        android:label="AnalysisFragment" />
+        android:id="@+id/sceneFragment"
+        android:name="com.quyen.smarthome.ui.scenes.SceneFragment"
+        android:label="SceneFragment" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.quyen.smarthome.ui.home.HomeFragment"
@@ -17,11 +17,7 @@
         android:name="com.quyen.smarthome.ui.me.MyProfileFragment"
         android:label="MyProfileFragment" />
     <fragment
-        android:id="@+id/roomDetailFragment"
-        android:name="com.quyen.smarthome.ui.room.detail.RoomDetailFragment"
-        android:label="RoomDetailFragment" />
-    <fragment
-        android:id="@+id/listUserFragment"
-        android:name="com.quyen.smarthome.ui.user.listusers.ListUserFragment"
-        android:label="ListUserFragment" />
+        android:id="@+id/listDevicesFragment"
+        android:name="com.quyen.smarthome.ui.device.listdevices.ListDevicesFragment"
+        android:label="ListDevicesFragment" />
 </navigation>

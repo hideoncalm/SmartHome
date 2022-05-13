@@ -4,11 +4,12 @@
     android:layout_margin="10dp"
     android:layout_width="140dp"
     android:layout_height="wrap_content"
+    android:padding="5dp"
     android:background="@drawable/bg_rounded_stroke_white"
     android:elevation="5dp">
 
     <ImageView
-        android:id="@+id/imageDevice"
+        android:id="@+id/imageHome"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:src="@drawable/ic_living_room"
@@ -16,36 +17,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textLocation"
+        android:id="@+id/textHouseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/lato"
-        android:text="Living Room"
+        android:text="Mikami Home"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/imageDevice"
-        app:layout_constraintTop_toBottomOf="@id/imageDevice"
-        app:layout_constraintEnd_toEndOf="@id/imageDevice"/>
+        app:layout_constraintStart_toStartOf="@id/imageHome"
+        app:layout_constraintTop_toBottomOf="@id/imageHome"
+        app:layout_constraintEnd_toEndOf="@id/imageHome"/>
 
     <TextView
-        android:id="@+id/textTotalDevice"
+        android:id="@+id/textTotalRooms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/lato"
-        android:text="5 devices"
-        app:layout_constraintStart_toStartOf="@id/textLocation"
-        app:layout_constraintTop_toBottomOf="@id/textLocation" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchDevice"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_height="30dp"
-        android:checked="true"
-        app:layout_constraintStart_toStartOf="@id/textLocation"
-        app:layout_constraintTop_toBottomOf="@id/textTotalDevice"/>
+        android:text="5 rooms"
+        app:layout_constraintStart_toStartOf="@id/textHouseName"
+        app:layout_constraintTop_toBottomOf="@id/textHouseName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

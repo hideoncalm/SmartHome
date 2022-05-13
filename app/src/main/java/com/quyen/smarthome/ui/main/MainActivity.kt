@@ -26,10 +26,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initData() {
-        GlobalScope.launch {
-            val users = userData.getUsers()
-            Timber.d("userSize ${users?.size}")
-        }
     }
 
     private fun setUpBottomNavigation() {
@@ -41,15 +37,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
         binding.bottomNavigation.apply {
             setupWithNavController(navController)
-            selectedItemId = R.id.analysisFragment
+            selectedItemId = R.id.homeFragment
             setOnItemReselectedListener { }
         }
     }
 
     companion object {
         private val mainFragment = listOf(
-            R.id.analysisFragment,
             R.id.homeFragment,
+            R.id.listDevicesFragment,
+            R.id.sceneFragment,
             R.id.myProfileFragment
         )
     }

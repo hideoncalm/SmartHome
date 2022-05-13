@@ -5,28 +5,28 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.quyen.smarthome.base.BaseFragment
 import com.quyen.smarthome.data.model.Device
-import com.quyen.smarthome.databinding.FragmentListNewDeviceBinding
+import com.quyen.smarthome.databinding.FragmentListDeviceBinding
 import com.quyen.smarthome.ui.device.listdevices.adapter.ListDevicesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ListNewDevicesFragment : BaseFragment<FragmentListNewDeviceBinding>(){
+class ListDevicesFragment : BaseFragment<FragmentListDeviceBinding>() {
 
-    override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentListNewDeviceBinding =
-        FragmentListNewDeviceBinding::inflate
+    override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentListDeviceBinding =
+        FragmentListDeviceBinding::inflate
 
     private val newDeviceAdapter by lazy {
         ListDevicesAdapter(::onItemClick)
     }
 
-    private val viewModel : ListNewDevicesViewModel by viewModels()
+    private val viewModel: ListNewDevicesViewModel by viewModels()
 
     override fun initViews() {
         binding.recyclerItem.adapter = newDeviceAdapter
     }
 
     override fun initData() {
-        viewModel.devices.observe( viewLifecycleOwner, {
+        viewModel.devices.observe(viewLifecycleOwner, {
             newDeviceAdapter.updateData(it)
         })
     }
