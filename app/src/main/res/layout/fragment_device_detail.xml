@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <ImageButton
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:background="?selectableItemBackground"
         android:contentDescription="@null"
         android:src="@drawable/ic_back_black"
@@ -22,10 +22,105 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:fontFamily="@font/lato"
-        android:text="Bat em di"
+        android:text="Device Detail"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonBack"
         app:layout_constraintTop_toTopOf="@id/buttonBack" />
+
+    <ImageView
+        android:id="@+id/imageDevice"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="30dp"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toTopOf="@id/buttonOnOff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonBack" />
+
+    <ImageButton
+        android:id="@+id/buttonOnOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/bg_circle_button"
+        android:contentDescription="@null"
+        android:padding="10dp"
+        android:src="@drawable/ic_power"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/buttonBack"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageButton
+        android:id="@+id/buttonAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_circle_button"
+        android:contentDescription="@null"
+        android:padding="10dp"
+        android:src="@drawable/ic_clock"
+        app:layout_constraintBottom_toBottomOf="@id/buttonOnOff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/buttonOnOff" />
+
+    <ImageButton
+        android:id="@+id/buttonCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/bg_circle_button"
+        android:contentDescription="@null"
+        android:padding="10dp"
+        android:src="@drawable/ic_clock_timmer"
+        app:layout_constraintBottom_toBottomOf="@id/buttonOnOff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/buttonOnOff" />
+
+    <TextView
+        android:id="@+id/textPower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Power"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/buttonOnOff"
+        app:layout_constraintStart_toStartOf="@id/buttonOnOff"
+        app:layout_constraintTop_toBottomOf="@id/buttonOnOff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Alarm"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/buttonAlarm"
+        app:layout_constraintStart_toStartOf="@id/buttonAlarm"
+        app:layout_constraintTop_toBottomOf="@id/buttonAlarm" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Counter"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/buttonCounter"
+        app:layout_constraintStart_toStartOf="@id/buttonCounter"
+        app:layout_constraintTop_toBottomOf="@id/buttonCounter" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerUsedTime"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textPower"
+        tools:listitem="@layout/item_used_time" />
 </androidx.constraintlayout.widget.ConstraintLayout>

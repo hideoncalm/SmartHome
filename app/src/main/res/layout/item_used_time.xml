@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp"
+    android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rounded_stroke_white">
+
+    <TextView
+        android:id="@+id/textTimeOn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato"
+        android:text="Living Room"
+        android:textSize="15sp"
+        android:layout_marginHorizontal="15dp"
+        android:padding="5dp"
+        android:textColor="@color/green_388E3C"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textTimeOff"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato"
+        android:text="Living Room"
+        android:textSize="15sp"
+        android:layout_marginHorizontal="15dp"
+        android:padding="5dp"
+        android:textColor="@color/red_F44336"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTimeOn" />
+</androidx.constraintlayout.widget.ConstraintLayout>

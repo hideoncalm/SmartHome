@@ -6,6 +6,7 @@ import com.quyen.smarthome.base.BaseRecyclerViewAdapter
 import com.quyen.smarthome.base.BaseViewHolder
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.databinding.ItemDeviceBinding
+import com.quyen.smarthome.databinding.ItemDeviceDetailBinding
 
 class ListDevicesAdapter(
     private val onNewItemDeviceClick: (Device) -> Unit,
@@ -18,12 +19,12 @@ class ListDevicesAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ListNewDevicesHolder = ListNewDevicesHolder(
-        ItemDeviceBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+        ItemDeviceDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false),
         onNewItemDeviceClick
     )
 
     class ListNewDevicesHolder(
-        private val binding: ItemDeviceBinding,
+        private val binding: ItemDeviceDetailBinding,
         onNewItemDeviceClick: (Device) -> Unit,
     ) : BaseViewHolder<Device>(binding, onNewItemDeviceClick) {
 

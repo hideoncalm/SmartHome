@@ -15,5 +15,6 @@
     <color name="CE6E60">#CE6E60</color>
     <color name="B4B4B4">#B4B4B4</color>
     <color name="F2F2F2">#F2F2F2</color>
-
+    <color name="red_F44336">#F44336</color>
+    <color name="green_388E3C">#388E3C</color>
 </resources>
