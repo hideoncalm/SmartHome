@@ -21,17 +21,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textTimeOff"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lato"
-        android:text="Living Room"
-        android:textSize="15sp"
-        android:layout_marginHorizontal="15dp"
-        android:padding="5dp"
-        android:textColor="@color/red_F44336"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textTimeOn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

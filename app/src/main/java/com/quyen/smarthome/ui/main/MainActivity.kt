@@ -47,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             R.id.homeFragment,
             R.id.listDevicesFragment,
             R.id.sceneFragment,
-            R.id.myProfileFragment
+            R.id.fragmentListItem
         )
     }
 }

@@ -2,12 +2,10 @@ package com.quyen.smarthome.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseFragment
-import com.quyen.smarthome.base.BaseViewPagerAdapter
 import com.quyen.smarthome.databinding.FragmentHomeBinding
-import com.quyen.smarthome.ui.device.listdevices.ListDevicesFragment
-import com.quyen.smarthome.ui.room.listrooms.FragmentListItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,6 +15,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         FragmentHomeBinding::inflate
 
     override fun initViews() {
+        binding.buttonAddDevice.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_fragmentAddDevice)
+        }
     }
 
     override fun initData() {

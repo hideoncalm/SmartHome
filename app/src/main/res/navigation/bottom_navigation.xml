@@ -11,7 +11,17 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.quyen.smarthome.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentAddDevice"
+            app:destination="@id/fragmentAddDevice" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentAddHouse"
+            app:destination="@id/fragmentAddHouse" />
+        <action
+            android:id="@+id/action_homeFragment_to_roomDetailFragment"
+            app:destination="@id/roomDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myProfileFragment"
         android:name="com.quyen.smarthome.ui.me.MyProfileFragment"
@@ -19,5 +29,41 @@
     <fragment
         android:id="@+id/listDevicesFragment"
         android:name="com.quyen.smarthome.ui.device.listdevices.ListDevicesFragment"
-        android:label="ListDevicesFragment" />
+        android:label="ListDevicesFragment" >
+        <action
+            android:id="@+id/action_listDevicesFragment_to_fragmentDeviceDetail"
+            app:destination="@id/fragmentDeviceDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddDevice"
+        android:name="com.quyen.smarthome.ui.device.adddevice.FragmentAddDevice"
+        android:label="FragmentAddDevice" >
+        <action
+            android:id="@+id/action_fragmentAddDevice_to_fragmentDeviceDetail"
+            app:destination="@id/fragmentDeviceDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddHouse"
+        android:name="com.quyen.smarthome.ui.addhouse.FragmentAddHouse"
+        android:label="FragmentAddHouse" >
+        <action
+            android:id="@+id/action_fragmentAddHouse_to_myProfileFragment"
+            app:destination="@id/myProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDeviceDetail"
+        android:name="com.quyen.smarthome.ui.device.detail.FragmentDeviceDetail"
+        android:label="FragmentDeviceDetail" />
+    <fragment
+        android:id="@+id/roomDetailFragment"
+        android:name="com.quyen.smarthome.ui.room.detail.RoomDetailFragment"
+        android:label="RoomDetailFragment" />
+    <fragment
+        android:id="@+id/fragmentListItem"
+        android:name="com.quyen.smarthome.ui.room.listrooms.FragmentListItem"
+        android:label="FragmentListItem" >
+        <action
+            android:id="@+id/action_fragmentListItem_to_roomDetailFragment"
+            app:destination="@id/roomDetailFragment" />
+    </fragment>
 </navigation>
