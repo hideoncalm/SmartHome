@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_homeFragment_to_roomDetailFragment"
             app:destination="@id/roomDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentDeviceDetail"
+            app:destination="@id/fragmentDeviceDetail" />
     </fragment>
     <fragment
         android:id="@+id/myProfileFragment"

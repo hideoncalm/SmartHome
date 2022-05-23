@@ -10,12 +10,14 @@ data class Device(
     var device_id: String = "",
     var device_name: String = "",
     var device_ip_addr: String = "",
-    var device_room_id: Int = 0,
+    var device_room_id: String = "",
     var device_hum: Int = 0,
     var device_temp: Int = 0,
     var device_state: Int = 0,
     var device_used_power: Int = 0,
     var device_speed: Int = 0,
+    var device_favorite : Boolean = false,
+    var device_type : Int = 0
 ) : Parcelable {
     companion object {
         var diffUtil = object : DiffUtil.ItemCallback<Device>() {

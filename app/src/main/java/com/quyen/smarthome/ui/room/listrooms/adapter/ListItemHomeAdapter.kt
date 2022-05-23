@@ -35,9 +35,10 @@ class ListItemHomeAdapter(
         override fun onBindData(item: Room) {
             super.onBindData(item)
             binding.apply {
-                imageDevice.loadImageFromUrl(item.roomImage)
-                textLocation.text = item.name
-                textTotalDevice.text = textTotalDevice.toString()
+                imageDevice.loadImageFromUrl(item.room_image)
+                textLocation.text = item.room_name
+                textTotalDevice.text = "${item.room_total_device} Devices"
+                switchDevice.isChecked = item.room_all_device
                 switchDevice.setOnCheckedChangeListener(onSwitchItemClick)
             }
         }

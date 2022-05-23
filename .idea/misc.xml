@@ -36,12 +36,13 @@
         <entry key="app/src/main/res/layout/fragment_me.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_pager_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_room_detail.xml" value="0.1539855072463768" />
-        <entry key="app/src/main/res/layout/fragment_rooms.xml" value="0.1490036231884058" />
+        <entry key="app/src/main/res/layout/fragment_rooms.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_scences.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.1539855072463768" />
         <entry key="app/src/main/res/layout/item_device.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_device_detail.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/item_room.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_house.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_room.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_scene.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_used_time.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_user.xml" value="0.1539855072463768" />

@@ -3,6 +3,8 @@ package com.quyen.smarthome.ui.device.listdevices
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseFragment
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.databinding.FragmentListDeviceBinding
@@ -19,7 +21,7 @@ class ListDevicesFragment : BaseFragment<FragmentListDeviceBinding>() {
         ListDevicesAdapter(::onItemClick)
     }
 
-    private val viewModel: ListNewDevicesViewModel by viewModels()
+    private val viewModel: ListDevicesViewModel by viewModels()
 
     override fun initViews() {
         binding.recyclerItem.adapter = newDeviceAdapter
@@ -33,6 +35,6 @@ class ListDevicesFragment : BaseFragment<FragmentListDeviceBinding>() {
 
     private fun onItemClick(item: Device) {
         // go to the fragment device detail
-
+        findNavController().navigate(R.id.action_listDevicesFragment_to_fragmentDeviceDetail)
     }
 }

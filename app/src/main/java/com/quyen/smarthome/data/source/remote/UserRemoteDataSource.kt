@@ -31,7 +31,6 @@ class UserRemoteDataSource @Inject constructor(
             }
 
         })
-        Timber.d("userSize ${users.size}")
         return users
     }
 

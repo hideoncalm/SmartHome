@@ -7,5 +7,7 @@ interface HouseDataSource {
         suspend fun getHome(homeId: String) : Home
         suspend fun updateHome(home: Home) : Boolean
         suspend fun insertHome(home: Home) : Boolean
+        suspend fun deleteHome(home: Home) : Boolean
+        suspend fun getHomes() : List<Home>
     }
 }

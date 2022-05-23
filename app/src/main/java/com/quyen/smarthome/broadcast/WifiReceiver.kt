@@ -7,8 +7,7 @@ import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class WifiReceiver(private val wifiManager: WifiManager) : BroadcastReceiver() {
+class WifiReceiver(private var wifiManager: WifiManager) : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent?.action.equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
