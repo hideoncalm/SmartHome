@@ -1,5 +1,17 @@
 package com.quyen.smarthome.ui.main
 
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.pm.PackageManager
+import android.net.wifi.ScanResult
+import android.net.wifi.WifiManager
+import android.os.Build
+import android.util.Log
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -41,6 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             setOnItemReselectedListener { }
         }
     }
+
 
     companion object {
         private val mainFragment = listOf(

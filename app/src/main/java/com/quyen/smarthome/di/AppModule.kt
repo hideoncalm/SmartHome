@@ -2,6 +2,7 @@ package com.quyen.smarthome.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.wifi.WifiManager
 import com.google.firebase.database.FirebaseDatabase
 import com.quyen.smarthome.utils.Constant
 import dagger.Module
@@ -41,4 +42,9 @@ object AppModule {
     @Provides
     fun provideFirebaseDatabase(): FirebaseDatabase =
         FirebaseDatabase.getInstance("https://smarthome-e6d0f-default-rtdb.asia-southeast1.firebasedatabase.app")
+
+//    @Singleton
+//    @Provides
+//    fun provideWifiManager(@ApplicationContext context: Context) =
+//        context.getSystemService(Context.WIFI_SERVICE) as WifiManager
 }
