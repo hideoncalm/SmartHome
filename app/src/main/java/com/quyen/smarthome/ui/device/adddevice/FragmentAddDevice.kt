@@ -76,9 +76,9 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
             for (scanResult in results!!) {
                 var wifi_ssid = scanResult.SSID
                 Timber.d("WIFIScannerActivity: WIFI SSID: $wifi_ssid")
+                Timber.d("WIFIScannerActivity: WIFI BSSID: ${scanResult.BSSID}")
                 arrayList.add(scanResult.SSID + " - " + scanResult.capabilities)
             }
-            Timber.d("WIFIScannerActivity : ${arrayList.size}")
             spinnerAdapter!!.notifyDataSetChanged()
             wifidapter!!.notifyDataSetChanged()
         }
