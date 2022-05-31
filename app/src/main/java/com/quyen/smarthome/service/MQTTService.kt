@@ -1,6 +1,7 @@
 package com.quyen.smarthome.service
 
 import android.content.Context
+import android.os.MessageQueue
 import com.quyen.smarthome.utils.Constant.MQTT_SERVER_URL
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
@@ -9,7 +10,7 @@ import java.io.UnsupportedEncodingException
 
 
 fun setupAndroidMqttClient(applicationContext: Context) {
-    val clientId: String = MqttClient.generateClientId();
+    val clientId: String = MqttClient.generateClientId()
     val client: MqttAndroidClient =
         MqttAndroidClient(applicationContext, MQTT_SERVER_URL, clientId)
     try {
@@ -17,6 +18,7 @@ fun setupAndroidMqttClient(applicationContext: Context) {
         token.actionCallback = object : IMqttActionListener {
             override fun onSuccess(asyncActionToken: IMqttToken?) {
                 Timber.d("MQTT client : Connected Success")
+                subscribeMqtt(client, "testtopic/1")
             }
 
             override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
@@ -28,25 +30,12 @@ fun setupAndroidMqttClient(applicationContext: Context) {
     }
 }
 
-fun publishMessageMqtt(client: MqttAndroidClient, topic: String, payload: String) {
+fun publishMessageMqtt(client: MqttAndroidClient, topic: String, payload: String, isRetain : Boolean) {
     var encodedPayload = ByteArray(0)
     try {
         encodedPayload = payload.toByteArray(charset("UTF-8"))
         val message = MqttMessage(encodedPayload)
-        client.publish(topic, message)
-    } catch (e: UnsupportedEncodingException) {
-        e.printStackTrace()
-    } catch (e: MqttException) {
-        e.printStackTrace()
-    }
-}
-
-fun publishMessageRetainedMqtt(client: MqttAndroidClient, topic: String, payload: String) {
-    var encodedPayload = ByteArray(0)
-    try {
-        encodedPayload = payload.toByteArray(charset("UTF-8"))
-        val message = MqttMessage(encodedPayload)
-        message.isRetained = true
+        message.isRetained = isRetain
         client.publish(topic, message)
     } catch (e: UnsupportedEncodingException) {
         e.printStackTrace()
@@ -56,12 +45,13 @@ fun publishMessageRetainedMqtt(client: MqttAndroidClient, topic: String, payload
 }
 
 fun subscribeMqtt(client: MqttAndroidClient, topic: String) {
-    val qos = 1
+    val qos = 2
     try {
         val subToken: IMqttToken = client.subscribe(topic, qos)
         subToken.actionCallback = object : IMqttActionListener {
             override fun onSuccess(asyncActionToken: IMqttToken) {
                 // The message was published
+                Timber.d("// The message was published")
             }
 
             override fun onFailure(
@@ -72,6 +62,19 @@ fun subscribeMqtt(client: MqttAndroidClient, topic: String) {
                 // authorized to subscribe on the specified topic e.g. using wildcards
             }
         }
+        client.setCallback(object : MqttCallback{
+            override fun connectionLost(cause: Throwable?) {
+            }
+
+            override fun messageArrived(topic: String?, message: MqttMessage?) {
+                Timber.d("%s %s", topic, message.toString())
+            }
+
+            override fun deliveryComplete(token: IMqttDeliveryToken?) {
+            }
+
+        })
+
     } catch (e: MqttException) {
         e.printStackTrace()
     }

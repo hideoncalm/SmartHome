@@ -8,9 +8,9 @@ import retrofit2.http.POST
 interface APIService {
 
     @FormUrlEncoded
-    @POST("config")
+    @POST("wifisave")
     suspend fun connectEspToWifi(
-        @Field("wifiSSID") wifiSSID: String,
-        @Field("password") password: String
+        @Field("s") wifiSSID: String,
+        @Field("p") password: String
     ): Response<String>
 }

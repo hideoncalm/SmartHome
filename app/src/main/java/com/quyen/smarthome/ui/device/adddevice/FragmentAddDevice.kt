@@ -48,7 +48,7 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
 
     private val spinnerListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-            Timber.d(" wifi add device : ${adapterView?.getItemAtPosition(pos).toString()}")
+            wifiSSID = adapterView?.getItemAtPosition(pos).toString()
         }
 
 
@@ -75,6 +75,8 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
             findNavController().popBackStack()
         }
         binding.buttonContinue.setOnClickListener {
+            wifiPassword = binding.editPasswordWifi.text.toString()
+            Toast.makeText(requireContext(), wifiSSID + wifiPassword, Toast.LENGTH_LONG).show()
             viewModel.registerDevice(wifiSSID, wifiPassword)
             setupAndroidMqttClient(requireContext())
         }

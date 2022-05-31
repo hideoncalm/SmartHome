@@ -42,7 +42,8 @@ class FragmentAddDeviceViewModel @Inject constructor(
 
     companion object
     {
-        private const val ESP_URL = "http://192.168.0.4"
+//        http://192.168.4.1/wifisave?s=quyenHaHa&p=0966733413
+        private const val ESP_URL = "http://192.168.4.1/"
     }
 
 }
