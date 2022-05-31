@@ -4,6 +4,7 @@ import android.content.Context
 import com.quyen.smarthome.utils.Constant.MQTT_SERVER_URL
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
+import timber.log.Timber
 import java.io.UnsupportedEncodingException
 
 
@@ -15,11 +16,13 @@ fun setupAndroidMqttClient(applicationContext: Context) {
         val token: IMqttToken = client.connect()
         token.actionCallback = object : IMqttActionListener {
             override fun onSuccess(asyncActionToken: IMqttToken?) {
+                Timber.d("MQTT client : Connected Success")
             }
 
             override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
+                Timber.d("MQTT client : Connected Failed")
             }
-        };
+        }
     } catch (e: MqttException) {
         e.printStackTrace()
     }

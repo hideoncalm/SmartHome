@@ -4,16 +4,26 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.wifi.WifiManager
 import com.google.firebase.database.FirebaseDatabase
+import com.quyen.smarthome.data.source.remote.util.APIConfig
+import com.quyen.smarthome.data.source.remote.util.APIService
+import com.quyen.smarthome.di.AppModule_ProvideAPIServiceFactory.create
 import com.quyen.smarthome.utils.Constant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import java.util.concurrent.TimeUnit
+import okhttp3.ResponseBody
+import okio.IOException
+import java.net.SocketTimeoutException
+
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -21,16 +31,30 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient()
+    fun provideOkHttpClient(): OkHttpClient {
+        val client =  OkHttpClient.Builder()
+            .readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
+//        client.interceptors().add(object : Interceptor{
+//            override fun intercept(chain: Interceptor.Chain): Response {
+//            }
+//        })
+        return client.build()
+    }
+
 
     @Singleton
     @Provides
     fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(Constant.BASE_URL)
+            .baseUrl(APIConfig.ESP_BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+    @Singleton
+    @Provides
+    fun provideAPIService(retrofit: Retrofit): APIService = retrofit.create(APIService::class.java)
 
     @Singleton
     @Provides
@@ -43,8 +67,5 @@ object AppModule {
     fun provideFirebaseDatabase(): FirebaseDatabase =
         FirebaseDatabase.getInstance("https://smarthome-e6d0f-default-rtdb.asia-southeast1.firebasedatabase.app")
 
-//    @Singleton
-//    @Provides
-//    fun provideWifiManager(@ApplicationContext context: Context) =
-//        context.getSystemService(Context.WIFI_SERVICE) as WifiManager
+
 }

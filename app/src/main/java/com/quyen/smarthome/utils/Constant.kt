@@ -11,4 +11,5 @@ object Constant {
     const val DHT11_PATH = "DHT11"
 
     const val MQTT_SERVER_URL = "tcp://broker.hivemq.com:1883"
+
 }
