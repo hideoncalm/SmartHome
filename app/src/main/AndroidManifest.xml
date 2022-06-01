@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".BaseApplication"
-        android:theme="@style/Theme.SmartHome">
+        android:theme="@style/Theme.SmartHome"
+        android:networkSecurityConfig="@xml/network_security_config">
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">

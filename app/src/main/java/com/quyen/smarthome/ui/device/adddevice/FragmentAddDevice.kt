@@ -78,7 +78,7 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
             wifiPassword = binding.editPasswordWifi.text.toString()
             Toast.makeText(requireContext(), wifiSSID + wifiPassword, Toast.LENGTH_LONG).show()
             viewModel.registerDevice(wifiSSID, wifiPassword)
-            setupAndroidMqttClient(requireContext())
+//            setupAndroidMqttClient(requireContext())
         }
 
         viewModel.loading.observe(viewLifecycleOwner, {

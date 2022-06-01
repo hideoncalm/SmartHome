@@ -23,6 +23,10 @@ import java.util.concurrent.TimeUnit
 import okhttp3.ResponseBody
 import okio.IOException
 import java.net.SocketTimeoutException
+import okhttp3.logging.HttpLoggingInterceptor
+
+
+
 
 
 @Module
@@ -32,13 +36,17 @@ object AppModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
+        val logging = HttpLoggingInterceptor()
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client =  OkHttpClient.Builder()
             .readTimeout(10, TimeUnit.SECONDS)
             .connectTimeout(10, TimeUnit.SECONDS)
+            .addInterceptor(logging)
 //        client.interceptors().add(object : Interceptor{
 //            override fun intercept(chain: Interceptor.Chain): Response {
 //            }
 //        })
+
         return client.build()
     }
 
