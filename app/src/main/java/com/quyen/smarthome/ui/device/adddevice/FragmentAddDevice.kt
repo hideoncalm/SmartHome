@@ -1,7 +1,6 @@
 package com.quyen.smarthome.ui.device.adddevice
 
 import android.Manifest
-import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -10,23 +9,18 @@ import android.content.pm.PackageManager
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import android.os.Build
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseFragment
 import com.quyen.smarthome.databinding.FragmentAddDeviceBinding
-import com.quyen.smarthome.service.setupAndroidMqttClient
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -42,9 +36,8 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
     private var results: List<ScanResult>? = null
     private val arrayList = arrayListOf<String>()
     private var spinnerAdapter: ArrayAdapter<String>? = null
-    private var wifidapter: ArrayAdapter<String>? = null
-    private var wifiSSID = ""
-    private var wifiPassword = ""
+    private var wifiSSID = "quyenHaHa"
+    private var wifiPassword = "0966733413"
 
     private val spinnerListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, pos: Int, id: Long) {
@@ -63,34 +56,25 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
             android.R.layout.simple_spinner_dropdown_item,
             arrayList
         )
-        wifidapter = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            arrayList
-        )
+
         binding.spinnerWifi.adapter = spinnerAdapter
-        binding.spinnerChooseWifi.adapter = wifidapter
-        binding.spinnerChooseWifi.onItemSelectedListener = spinnerListener
+        binding.spinnerWifi.onItemSelectedListener = spinnerListener
         binding.buttonBack.setOnClickListener {
             findNavController().popBackStack()
         }
         binding.buttonContinue.setOnClickListener {
             wifiPassword = binding.editPasswordWifi.text.toString()
             Toast.makeText(requireContext(), wifiSSID + wifiPassword, Toast.LENGTH_LONG).show()
-            viewModel.registerDevice(wifiSSID, wifiPassword)
-//            setupAndroidMqttClient(requireContext())
+            viewModel.connectToWfi(wifiSSID, wifiPassword)
         }
 
         viewModel.loading.observe(viewLifecycleOwner, {
             binding.progressBar.isVisible = it
-        })
-
-        viewModel.response.observe(viewLifecycleOwner, {
-            if(it.isSuccessful)
-            {
+            if (it) {
                 findNavController().navigate(R.id.action_fragmentAddDevice_to_fragmentDeviceDetail)
             }
         })
+
     }
 
     override fun initData() {
@@ -125,12 +109,12 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
             results = wifiManager!!.scanResults
             context.unregisterReceiver(this)
             for (scanResult in results!!) {
-                var wifi_ssid = scanResult.SSID
-                Timber.d("WIFIScannerActivity: WIFI SSID: $wifi_ssid")
+                val wifi_ssid = scanResult.SSID
+                val cap = scanResult.capabilities
+                Timber.d("WIFIScannerActivity: WIFI SSID: $wifi_ssid capacity : $cap")
                 arrayList.add(scanResult.SSID)
             }
             spinnerAdapter!!.notifyDataSetChanged()
-            wifidapter!!.notifyDataSetChanged()
         }
     }
 

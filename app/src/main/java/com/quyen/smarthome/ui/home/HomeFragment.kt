@@ -1,8 +1,15 @@
 package com.quyen.smarthome.ui.home
 
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.net.wifi.WifiManager
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.quyen.smarthome.R
@@ -13,6 +20,7 @@ import com.quyen.smarthome.databinding.FragmentHomeBinding
 import com.quyen.smarthome.ui.home.adapter.FavoriteDeviceAdapter
 import com.quyen.smarthome.ui.room.listrooms.adapter.ListItemHomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -28,10 +36,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         ListItemHomeAdapter(::onItemRoomClick, onSwitchClick)
     }
 
+    private val mResultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if(result.resultCode == RESULT_OK)
+        {
+            Timber.d("oklll")
+        }
+        else if(result.resultCode == RESULT_CANCELED)
+        {
+            Timber.d("RESULT_CANCELED")
+        }
+        findNavController().navigate(R.id.action_homeFragment_to_fragmentAddDevice)
+    }
+
     override fun initViews() {
         binding.apply {
             buttonAddDevice.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_fragmentAddDevice)
+                val intent = Intent(WifiManager.ACTION_PICK_WIFI_NETWORK)
+                mResultLauncher.launch(intent)
             }
             buttonManagerHome.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_fragmentAddHouse)

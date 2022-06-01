@@ -54,7 +54,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
-
     companion object {
         private val mainFragment = listOf(
             R.id.homeFragment,

@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:fontFamily="@font/lato"
-        android:text="Chon mang Wifi"
+        android:text="Choose Wifi"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -59,24 +59,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textSelectWifi" />
 
+
+
     <TextView
-        android:id="@+id/textWifi"
+        android:id="@+id/textChooseWifi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Wifi Name"
+        android:layout_marginTop="15dp"
+        android:text="Select your network"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textWarning" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinnerWifi"
+        android:id="@+id/spinnerChooseWifi"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/textWifi"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/textChooseWifi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textWifi"
-        app:layout_constraintTop_toTopOf="@id/textWifi" />
+        app:layout_constraintStart_toEndOf="@id/textChooseWifi"
+        app:layout_constraintTop_toTopOf="@id/textChooseWifi" />
 
     <TextView
         android:id="@+id/textPassWifi"
@@ -86,15 +89,15 @@
         android:text="Password"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textWifi" />
+        app:layout_constraintTop_toBottomOf="@id/textChooseWifi" />
 
     <EditText
         android:id="@+id/editPasswordWifi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/textPassWifi"
-        app:layout_constraintEnd_toEndOf="@id/spinnerWifi"
-        app:layout_constraintStart_toStartOf="@id/spinnerWifi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/spinnerChooseWifi"
         app:layout_constraintTop_toTopOf="@id/textPassWifi" />
 
     <ProgressBar

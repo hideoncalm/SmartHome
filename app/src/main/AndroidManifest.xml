@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:name=".BaseApplication"
         android:theme="@style/Theme.SmartHome"
+        android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config">
         <activity
             android:name=".ui.main.MainActivity"
