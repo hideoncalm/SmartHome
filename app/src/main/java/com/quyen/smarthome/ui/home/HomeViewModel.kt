@@ -27,7 +27,6 @@ class HomeViewModel @Inject constructor(
         get() = _rooms
 
     init {
-        insertDevice()
         getDevices()
         getRooms()
     }
@@ -42,24 +41,6 @@ class HomeViewModel @Inject constructor(
     {
         viewModelScope.launch {
             _rooms.postValue(roomRepo.getRooms() as MutableList<Room>?)
-        }
-    }
-
-    private fun insertDevice()
-    {
-        val device = Device("40:F5:20:22:E6:00", "Relay 1", "192.168.0.100", "2",
-        0,0,1,0, 0, true, 1)
-        val device1 = Device("40:F5:20:22:16:00", "Relay 2", "192.168.0.101", "2",
-            0,0,1,0, 0, true, 0)
-        val device2 = Device("40:F5:20:22:26:00", "Relay 3", "192.168.0.102", "2",
-            0,0,1,0, 0, true, 1)
-        val device3 = Device("40:F5:20:22:36:00", "Relay 4", "192.168.0.103", "2",
-            0,0,1,0, 0, true, 0)
-        viewModelScope.launch {
-            deviceRepo.insertDevice(device)
-            deviceRepo.insertDevice(device1)
-            deviceRepo.insertDevice(device2)
-            deviceRepo.insertDevice(device3)
         }
     }
 

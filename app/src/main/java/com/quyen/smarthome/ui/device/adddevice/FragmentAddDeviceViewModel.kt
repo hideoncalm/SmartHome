@@ -63,7 +63,6 @@ class FragmentAddDeviceViewModel @Inject constructor(
         override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
             val device : Device? = snapshot.getValue(Device::class.java)
             device?.let {
-                Timber.d("le ngoc quyen :  ${it.device_id} : ${wifiBSSID.value} : ${it.device_ip_addr}")
                 if(it.device_id == wifiBSSID.value)
                 {
                     _device.postValue(it)
@@ -84,45 +83,6 @@ class FragmentAddDeviceViewModel @Inject constructor(
         override fun onCancelled(error: DatabaseError) {
         }
 
-    }
-
-    fun connectToWifi2(wifiSSID: String, password: String)
-    {
-        val url = URL("http://192.168.4.1/wifisave?s=quyenHaHa&p=0966733413")
-        val conn = url.openConnection() as HttpsURLConnection
-        conn.readTimeout = 10000
-        conn.connectTimeout = 15000
-        conn.requestMethod = "POST"
-        conn.doInput = true
-        conn.doOutput = true
-
-//        val params: MutableList<Pair<String, String>> = ArrayList()
-//        params.add(("s" to wifiSSID))
-//        params.add(("p" to password))
-//
-//        val os: OutputStream = conn.outputStream
-//        val writer = BufferedWriter(
-//            OutputStreamWriter(os, "UTF-8")
-//        )
-//        writer.write(getQuery(params))
-//        writer.flush()
-//        writer.close()
-//        os.close()
-
-        conn.connect()
-    }
-
-    @Throws(UnsupportedEncodingException::class)
-    private fun getQuery(params: List<Pair<String, String>>): String? {
-        val result = StringBuilder()
-        var first = true
-        for (pair in params) {
-            if (first) first = false else result.append("&")
-            result.append(URLEncoder.encode(pair.first, "UTF-8"))
-            result.append("=")
-            result.append(URLEncoder.encode(pair.second, "UTF-8"))
-        }
-        return result.toString()
     }
 
     companion object

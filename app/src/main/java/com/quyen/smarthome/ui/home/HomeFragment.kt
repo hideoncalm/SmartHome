@@ -38,15 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val mResultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        if(result.resultCode == RESULT_OK)
-        {
-            Timber.d("oklll")
-        }
-        else if(result.resultCode == RESULT_CANCELED)
-        {
-            Timber.d("RESULT_CANCELED")
-        }
+    ) { _ ->
         findNavController().navigate(R.id.action_homeFragment_to_fragmentAddDevice)
     }
 
@@ -74,7 +66,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun onItemDeviceClick(device: Device) {
-        findNavController().navigate(R.id.action_homeFragment_to_fragmentDeviceDetail)
+        val directions = HomeFragmentDirections.actionHomeFragmentToFragmentDeviceDetail(device)
+        findNavController().navigate(directions)
     }
 
     private fun onItemRoomClick(room: Room) {

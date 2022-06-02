@@ -19,10 +19,14 @@ import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseActivity
 import com.quyen.smarthome.data.source.remote.UserRemoteDataSource
 import com.quyen.smarthome.databinding.ActivityMainBinding
+import com.quyen.smarthome.service.disconnectMqtt
+import com.quyen.smarthome.service.mqttClientConnect
 import com.quyen.smarthome.service.setupAndroidMqttClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.eclipse.paho.android.service.MqttAndroidClient
+import org.eclipse.paho.client.mqttv3.MqttClient
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -34,11 +38,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     @Inject
     lateinit var userData : UserRemoteDataSource
 
+    @Inject
+    lateinit var mqttClient : MqttAndroidClient
+
     override fun initViews() {
         setUpBottomNavigation()
     }
 
     override fun initData() {
+        mqttClientConnect(mqttClient)
     }
 
     private fun setUpBottomNavigation() {
@@ -55,6 +63,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        disconnectMqtt(mqttClient)
+    }
     companion object {
         private val mainFragment = listOf(
             R.id.homeFragment,

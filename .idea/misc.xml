@@ -12,6 +12,7 @@
         <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/fragment_room_detail.xml" value="0.3625" />
         <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/fragment_user.xml" value="0.3625" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/bg_circle_button.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/bg_circle_button_on.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_add_device.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_add_home.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_baseline_add_home.xml" value="0.36666666666666664" />
@@ -29,6 +30,8 @@
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_user.xml" value="0.34646739130434784" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/item_device.xml" value="0.34646739130434784" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/item_room.xml" value="0.34646739130434784" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/item_scene.xml" value="0.35052083333333334" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/item_used_time.xml" value="0.2513586956521739" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/item_user.xml" value="0.34646739130434784" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/xml/network_security_config.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/drawable/bg_bottom_nav.xml" value="0.10520833333333333" />

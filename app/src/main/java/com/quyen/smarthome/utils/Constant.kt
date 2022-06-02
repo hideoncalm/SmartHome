@@ -12,4 +12,8 @@ object Constant {
 
     const val MQTT_SERVER_URL = "tcp://broker.hivemq.com:1883"
 
+    const val DATE_TIME_FORMAT = "yyyy/MM/dd HH:mm:ss"
+    const val STATE_ON = 1
+    const val STATE_OFF = 0
+
 }

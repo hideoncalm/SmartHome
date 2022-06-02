@@ -5,10 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quyen.smarthome.data.model.Device
+import com.quyen.smarthome.data.model.DeviceTime
 import com.quyen.smarthome.data.source.remote.util.APIService
 import com.quyen.smarthome.service.disconnectMqtt
 import com.quyen.smarthome.service.mqttClientConnect
 import com.quyen.smarthome.service.publishMessageMqtt
+import com.quyen.smarthome.service.subscribeMqtt
+import com.quyen.smarthome.utils.Constant.DATE_TIME_FORMAT
+import com.quyen.smarthome.utils.Constant.STATE_OFF
+import com.quyen.smarthome.utils.Constant.STATE_ON
+import com.quyen.smarthome.utils.toString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,9 +22,11 @@ import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.IMqttActionListener
 import org.eclipse.paho.client.mqttv3.IMqttToken
 import org.eclipse.paho.client.mqttv3.MqttException
+import org.eclipse.paho.client.mqttv3.MqttMessage
 import retrofit2.Response
 import timber.log.Timber
 import java.lang.Exception
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,37 +35,29 @@ class FragmentDeviceDetailViewModel @Inject constructor(
     private val mqttClient: MqttAndroidClient
 ) : ViewModel() {
 
-/*
-    "http://192.168.70.206/1"
-    "http://192.168.70.206/0"
-*/
+    private val _isOn: MutableLiveData<Boolean> = MutableLiveData()
+    val isOn: LiveData<Boolean>
+        get() = _isOn
 
-    private val _isSucceed: MutableLiveData<Boolean> = MutableLiveData()
-    val isSucceed: LiveData<Boolean>
-        get() = _isSucceed
+    private val times = mutableListOf<DeviceTime>()
+    private val _useTimes = MutableLiveData<MutableList<DeviceTime>>()
+    val useTimes: LiveData<MutableList<DeviceTime>>
+        get() = _useTimes
+
+    private var pushTopic = ""
+    private var receiveTopic = ""
 
     fun turnDeviceOn(device: Device) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 // push message on to topic
-                val token: IMqttToken = mqttClient.connect()
-                token.actionCallback = object : IMqttActionListener {
-                    override fun onSuccess(asyncActionToken: IMqttToken?) {
-                        publishMessageMqtt(mqttClient, device.device_id, TURN_ON_MESSAGE, true)
-                    }
-
-                    override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                        Timber.d("MQTT client : Connected Failed")
-                    }
-                }
-
+                pushTopic = device.device_id
+                publishMessageMqtt(mqttClient, pushTopic, TURN_ON_MESSAGE, true)
                 // get to local server
-                val url: String = "http://" + device.device_ip_addr + "/1"
+                val url: String = "http://" + device.device_ip_addr + "/on"
                 val response = espService.turnDeviceOn(url)
                 if (response.isSuccessful) {
-                    _isSucceed.postValue(true)
-                } else {
-                    _isSucceed.postValue(false)
+                    _isOn.postValue(true)
                 }
             } catch (e: Exception) {
                 Timber.d(e.message)
@@ -69,23 +69,13 @@ class FragmentDeviceDetailViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 // push message off to topic
-                val token: IMqttToken = mqttClient.connect()
-                token.actionCallback = object : IMqttActionListener {
-                    override fun onSuccess(asyncActionToken: IMqttToken?) {
-                        publishMessageMqtt(mqttClient, device.device_id, TURN_OFF_MESSAGE, true)
-                    }
-
-                    override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                        Timber.d("MQTT client : Connected Failed")
-                    }
-                }
+                pushTopic = device.device_id
+                publishMessageMqtt(mqttClient, pushTopic, TURN_OFF_MESSAGE, true)
                 // get to local server
-                val url: String = "http://" + device.device_ip_addr + "/0"
+                val url: String = "http://" + device.device_ip_addr + "/off"
                 val response = espService.turnDeviceOn(url)
                 if (response.isSuccessful) {
-                    _isSucceed.postValue(true)
-                } else {
-                    _isSucceed.postValue(false)
+                    _isOn.postValue(false)
                 }
             } catch (e: Exception) {
                 Timber.d(e.message)
@@ -93,17 +83,43 @@ class FragmentDeviceDetailViewModel @Inject constructor(
         }
     }
 
-    fun connectMqtt()
-    {
-        mqttClientConnect(mqttClient)
+    fun subscribeMqttDevice(device: Device) {
+        viewModelScope.launch {
+            if (device.device_info.uppercase().contains(TURN_ON_MESSAGE)) {
+                _isOn.postValue(true)
+            } else {
+                _isOn.postValue(false)
+            }
+            receiveTopic = device.device_id + DEVICE_INFO
+            subscribeMqtt(mqttClient, receiveTopic, QOS, ::onMessageReceived)
+        }
     }
 
-    fun disConnectMqtt() {
-        disconnectMqtt(mqttClient)
+    private fun onMessageReceived(topic: String?, message: MqttMessage?) {
+        if (topic == receiveTopic) {
+            when (message.toString().uppercase()) {
+                TURN_ON_MESSAGE -> {
+                    val time = Calendar.getInstance().time.toString(DATE_TIME_FORMAT)
+                    times.add(DeviceTime(time, STATE_ON))
+                    _useTimes.postValue(times)
+                    _isOn.postValue(true)
+                }
+                TURN_OFF_MESSAGE -> {
+                    val time = Calendar.getInstance().time.toString(DATE_TIME_FORMAT)
+                    times.add(DeviceTime(time, STATE_OFF))
+                    _useTimes.postValue(times)
+                    _isOn.postValue(false)
+                }
+                else -> {
+                }
+            }
+        }
     }
 
     companion object {
         private const val TURN_ON_MESSAGE = "ON"
         private const val TURN_OFF_MESSAGE = "OFF"
+        private const val DEVICE_INFO = "/device_info"
+        private const val QOS = 1
     }
 }

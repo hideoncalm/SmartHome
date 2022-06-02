@@ -65,7 +65,12 @@ fun publishMessageMqtt(
     }
 }
 
-fun subscribeMqtt(client: MqttAndroidClient, topic: String, qos: Int = 2) {
+fun subscribeMqtt(
+    client: MqttAndroidClient,
+    topic: String,
+    qos: Int = 1,
+    onMessageReceive: (topic: String?, message: MqttMessage?) -> Unit
+) {
     try {
         val subToken: IMqttToken = client.subscribe(topic, qos)
         client.setCallback(object : MqttCallback {
@@ -73,7 +78,7 @@ fun subscribeMqtt(client: MqttAndroidClient, topic: String, qos: Int = 2) {
             }
 
             override fun messageArrived(topic: String?, message: MqttMessage?) {
-                Timber.d("%s %s", topic, message.toString())
+                onMessageReceive(topic, message)
             }
 
             override fun deliveryComplete(token: IMqttDeliveryToken?) {
@@ -113,7 +118,7 @@ fun disconnectMqtt(client: MqttAndroidClient) {
         val disconToken: IMqttToken = client.disconnect()
         disconToken.actionCallback = object : IMqttActionListener {
             override fun onSuccess(asyncActionToken: IMqttToken) {
-                // we are now successfully disconnected
+                Timber.d("Disconnected Success")
             }
 
             override fun onFailure(
