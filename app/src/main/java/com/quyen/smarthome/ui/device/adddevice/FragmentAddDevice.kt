@@ -96,7 +96,7 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
         // get current wifi connected
         val wifiInfo : WifiInfo = wifiManager!!.connectionInfo
         wifiInfo?.let {
-            viewModel.wifiBSSID.postValue(it.bssid.uppercase())
+            viewModel.wifiBSSID = it.ssid
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context!!.checkSelfPermission(Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
