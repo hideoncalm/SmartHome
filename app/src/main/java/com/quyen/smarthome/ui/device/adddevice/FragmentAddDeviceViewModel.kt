@@ -1,5 +1,6 @@
 package com.quyen.smarthome.ui.device.adddevice
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -62,6 +63,7 @@ class FragmentAddDeviceViewModel @Inject constructor(
         override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
             val device : Device? = snapshot.getValue(Device::class.java)
             device?.let {
+                Timber.d("le ngoc quyen :  ${it.device_id} : ${wifiBSSID.value} : ${it.device_ip_addr}")
                 if(it.device_id == wifiBSSID.value)
                 {
                     _device.postValue(it)

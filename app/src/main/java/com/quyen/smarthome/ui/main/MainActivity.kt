@@ -39,7 +39,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initData() {
-        setupAndroidMqttClient(applicationContext)
     }
 
     private fun setUpBottomNavigation() {

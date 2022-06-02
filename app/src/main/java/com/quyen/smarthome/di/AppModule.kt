@@ -2,31 +2,23 @@ package com.quyen.smarthome.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.net.wifi.WifiManager
 import com.google.firebase.database.FirebaseDatabase
 import com.quyen.smarthome.data.source.remote.util.APIConfig
 import com.quyen.smarthome.data.source.remote.util.APIService
-import com.quyen.smarthome.di.AppModule_ProvideAPIServiceFactory.create
 import com.quyen.smarthome.utils.Constant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 import java.util.concurrent.TimeUnit
-import okhttp3.ResponseBody
-import okio.IOException
-import java.net.SocketTimeoutException
 import okhttp3.logging.HttpLoggingInterceptor
-
-
-
+import org.eclipse.paho.android.service.MqttAndroidClient
+import org.eclipse.paho.client.mqttv3.MqttClient
 
 
 @Module
@@ -76,4 +68,10 @@ object AppModule {
         FirebaseDatabase.getInstance("https://smarthome-e6d0f-default-rtdb.asia-southeast1.firebasedatabase.app")
 
 
+    @Singleton
+    @Provides
+    fun provideMQTTClient(@ApplicationContext app: Context): MqttAndroidClient {
+        val clientId = MqttClient.generateClientId()
+        return MqttAndroidClient(app, Constant.MQTT_SERVER_URL, clientId)
+    }
 }

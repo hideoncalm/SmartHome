@@ -29,7 +29,29 @@ fun setupAndroidMqttClient(applicationContext: Context) {
     }
 }
 
-fun publishMessageMqtt(client: MqttAndroidClient, topic: String, payload: String, isRetain : Boolean) {
+fun mqttClientConnect(client: MqttAndroidClient) {
+    try {
+        val token: IMqttToken = client.connect()
+        token.actionCallback = object : IMqttActionListener {
+            override fun onSuccess(asyncActionToken: IMqttToken?) {
+                Timber.d("MQTT client : Connected Success")
+            }
+
+            override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
+                Timber.d("MQTT client : Connected Failed")
+            }
+        }
+    } catch (e: MqttException) {
+        e.printStackTrace()
+    }
+}
+
+fun publishMessageMqtt(
+    client: MqttAndroidClient,
+    topic: String,
+    payload: String,
+    isRetain: Boolean
+) {
     var encodedPayload = ByteArray(0)
     try {
         encodedPayload = payload.toByteArray(charset("UTF-8"))
@@ -43,25 +65,10 @@ fun publishMessageMqtt(client: MqttAndroidClient, topic: String, payload: String
     }
 }
 
-fun subscribeMqtt(client: MqttAndroidClient, topic: String) {
-    val qos = 2
+fun subscribeMqtt(client: MqttAndroidClient, topic: String, qos: Int = 2) {
     try {
         val subToken: IMqttToken = client.subscribe(topic, qos)
-        subToken.actionCallback = object : IMqttActionListener {
-            override fun onSuccess(asyncActionToken: IMqttToken) {
-                // The message was published
-                Timber.d("// The message was published")
-            }
-
-            override fun onFailure(
-                asyncActionToken: IMqttToken,
-                exception: Throwable
-            ) {
-                // The subscription could not be performed, maybe the user was not
-                // authorized to subscribe on the specified topic e.g. using wildcards
-            }
-        }
-        client.setCallback(object : MqttCallback{
+        client.setCallback(object : MqttCallback {
             override fun connectionLost(cause: Throwable?) {
             }
 
@@ -113,7 +120,6 @@ fun disconnectMqtt(client: MqttAndroidClient) {
                 asyncActionToken: IMqttToken,
                 exception: Throwable
             ) {
-                // something went wrong, but probably we are disconnected anyway
             }
         }
     } catch (e: MqttException) {

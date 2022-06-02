@@ -15,6 +15,7 @@
         android:fontFamily="@font/lato"
         android:text="Wellcome Home,"
         android:textSize="15sp"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,8 +36,8 @@
         android:id="@+id/buttonAddDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:contentDescription="@null"
+        android:background="@color/white"
         android:src="@drawable/ic_add_device"
         app:layout_constraintBottom_toBottomOf="@id/textName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +47,8 @@
         android:id="@+id/buttonManagerHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:contentDescription="@null"
+        android:background="@color/white"
         android:src="@drawable/ic_manager_home"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toStartOf="@id/buttonAddDevice"
@@ -157,6 +158,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/lato"
+        android:textColor="@color/black"
         android:text="Favorite Devices"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -181,6 +183,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/lato"
         android:text="Rooms"
+        android:textColor="@color/black"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="@id/recyclerRoom"
         app:layout_constraintTop_toBottomOf="@id/recyclerFavorite" />

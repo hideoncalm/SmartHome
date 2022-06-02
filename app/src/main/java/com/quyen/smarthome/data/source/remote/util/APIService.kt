@@ -1,9 +1,7 @@
 package com.quyen.smarthome.data.source.remote.util
 
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface APIService {
 
@@ -13,4 +11,11 @@ interface APIService {
         @Field("s") wifiSSID: String,
         @Field("p") password: String
     ): Response<String>
+
+    @GET
+    suspend fun turnDeviceOn(@Url url : String) : Response<String>
+
+    @GET
+    suspend fun turnDeviceOff(@Url url : String) : Response<String>
+
 }

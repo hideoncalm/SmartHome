@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.net.wifi.ScanResult
+import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.view.LayoutInflater
@@ -42,8 +43,6 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
     private val spinnerListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, pos: Int, id: Long) {
             wifiSSID = adapterView?.getItemAtPosition(pos).toString()
-            wifiBSSID = results?.get(pos)?.BSSID.toString()
-            viewModel.wifiBSSID.postValue(wifiBSSID)
         }
 
 
@@ -94,9 +93,14 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
                 .show()
             wifiManager!!.isWifiEnabled = true
         }
+        // get current wifi connected
+        val wifiInfo : WifiInfo = wifiManager!!.connectionInfo
+        wifiInfo?.let {
+            viewModel.wifiBSSID.postValue(it.bssid.uppercase())
+        }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context!!.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 0)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context!!.checkSelfPermission(Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_WIFI_STATE), 0)
         } else {
             scanWifi()
         }
