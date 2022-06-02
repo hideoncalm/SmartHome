@@ -56,7 +56,12 @@
     <fragment
         android:id="@+id/fragmentDeviceDetail"
         android:name="com.quyen.smarthome.ui.device.detail.FragmentDeviceDetail"
-        android:label="FragmentDeviceDetail" />
+        android:label="FragmentDeviceDetail">
+        <argument
+            android:name="device"
+            app:argType="com.quyen.smarthome.data.model.Device" />
+    </fragment>
+
     <fragment
         android:id="@+id/roomDetailFragment"
         android:name="com.quyen.smarthome.ui.room.detail.RoomDetailFragment"

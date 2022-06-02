@@ -18,7 +18,6 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseFragment
 import com.quyen.smarthome.databinding.FragmentAddDeviceBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,10 +37,13 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
     private var spinnerAdapter: ArrayAdapter<String>? = null
     private var wifiSSID = "quyenHaHa"
     private var wifiPassword = "0966733413"
+    private var wifiBSSID = ""
 
     private val spinnerListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, pos: Int, id: Long) {
             wifiSSID = adapterView?.getItemAtPosition(pos).toString()
+            wifiBSSID = results?.get(pos)?.BSSID.toString()
+            viewModel.wifiBSSID.postValue(wifiBSSID)
         }
 
 
@@ -70,8 +72,14 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
 
         viewModel.loading.observe(viewLifecycleOwner, {
             binding.progressBar.isVisible = it
-            if (it) {
-                findNavController().navigate(R.id.action_fragmentAddDevice_to_fragmentDeviceDetail)
+            if (!it) {
+                viewModel.device.value?.let { device ->
+                    val direction =
+                        FragmentAddDeviceDirections.actionFragmentAddDeviceToFragmentDeviceDetail(
+                            device
+                        )
+                    findNavController().navigate(direction)
+                }
             }
         })
 

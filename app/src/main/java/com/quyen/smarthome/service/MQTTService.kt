@@ -18,7 +18,6 @@ fun setupAndroidMqttClient(applicationContext: Context) {
         token.actionCallback = object : IMqttActionListener {
             override fun onSuccess(asyncActionToken: IMqttToken?) {
                 Timber.d("MQTT client : Connected Success")
-                subscribeMqtt(client, "testtopic/1")
             }
 
             override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {

@@ -19,6 +19,7 @@ import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseActivity
 import com.quyen.smarthome.data.source.remote.UserRemoteDataSource
 import com.quyen.smarthome.databinding.ActivityMainBinding
+import com.quyen.smarthome.service.setupAndroidMqttClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -38,6 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initData() {
+        setupAndroidMqttClient(applicationContext)
     }
 
     private fun setUpBottomNavigation() {

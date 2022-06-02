@@ -17,7 +17,8 @@ data class Device(
     var device_used_power: Int = 0,
     var device_speed: Int = 0,
     var device_favorite : Boolean = false,
-    var device_type : Int = 0
+    var device_type : Int = 0,
+    val device_info : String = ""
 ) : Parcelable {
     companion object {
         var diffUtil = object : DiffUtil.ItemCallback<Device>() {
