@@ -7,26 +7,17 @@ import androidx.lifecycle.viewModelScope
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.DeviceTime
 import com.quyen.smarthome.data.source.remote.util.APIService
-import com.quyen.smarthome.service.disconnectMqtt
-import com.quyen.smarthome.service.mqttClientConnect
 import com.quyen.smarthome.service.publishMessageMqtt
 import com.quyen.smarthome.service.subscribeMqtt
-import com.quyen.smarthome.utils.Constant.DATE_TIME_FORMAT
 import com.quyen.smarthome.utils.Constant.STATE_OFF
 import com.quyen.smarthome.utils.Constant.STATE_ON
-import com.quyen.smarthome.utils.toString
+import com.quyen.smarthome.utils.getTimeFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.eclipse.paho.android.service.MqttAndroidClient
-import org.eclipse.paho.client.mqttv3.IMqttActionListener
-import org.eclipse.paho.client.mqttv3.IMqttToken
-import org.eclipse.paho.client.mqttv3.MqttException
 import org.eclipse.paho.client.mqttv3.MqttMessage
-import retrofit2.Response
 import timber.log.Timber
-import java.lang.Exception
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -99,14 +90,14 @@ class FragmentDeviceDetailViewModel @Inject constructor(
         if (topic == receiveTopic) {
             when (message.toString().uppercase()) {
                 TURN_ON_MESSAGE -> {
-                    val time = Calendar.getInstance().time.toString(DATE_TIME_FORMAT)
-                    times.add(DeviceTime(time, STATE_ON))
+                    val time = getTimeFormat()
+                    times.add(DeviceTime(time, pushTopic, STATE_ON))
                     _useTimes.postValue(times)
                     _isOn.postValue(true)
                 }
                 TURN_OFF_MESSAGE -> {
-                    val time = Calendar.getInstance().time.toString(DATE_TIME_FORMAT)
-                    times.add(DeviceTime(time, STATE_OFF))
+                    val time = getTimeFormat()
+                    times.add(DeviceTime(time, pushTopic, STATE_OFF))
                     _useTimes.postValue(times)
                     _isOn.postValue(false)
                 }

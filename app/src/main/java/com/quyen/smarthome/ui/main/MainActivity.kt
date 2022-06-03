@@ -1,17 +1,5 @@
 package com.quyen.smarthome.ui.main
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
-import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.pm.PackageManager
-import android.net.wifi.ScanResult
-import android.net.wifi.WifiManager
-import android.os.Build
-import android.util.Log
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -21,13 +9,8 @@ import com.quyen.smarthome.data.source.remote.UserRemoteDataSource
 import com.quyen.smarthome.databinding.ActivityMainBinding
 import com.quyen.smarthome.service.disconnectMqtt
 import com.quyen.smarthome.service.mqttClientConnect
-import com.quyen.smarthome.service.setupAndroidMqttClient
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.eclipse.paho.android.service.MqttAndroidClient
-import org.eclipse.paho.client.mqttv3.MqttClient
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -36,10 +19,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     @Inject
-    lateinit var userData : UserRemoteDataSource
+    lateinit var userData: UserRemoteDataSource
 
     @Inject
-    lateinit var mqttClient : MqttAndroidClient
+    lateinit var mqttClient: MqttAndroidClient
 
     override fun initViews() {
         setUpBottomNavigation()
@@ -67,6 +50,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         super.onDestroy()
         disconnectMqtt(mqttClient)
     }
+
     companion object {
         private val mainFragment = listOf(
             R.id.homeFragment,

@@ -13,7 +13,7 @@ data class DeviceTime(
     @PrimaryKey
     @ColumnInfo(name = "time")
     var time: String? = "",
-
+    @ColumnInfo(name = "device_id") var deviceID: String? = "",
     @ColumnInfo(name = "state") var state: Int = 0
 ) : Parcelable {
     companion object {
