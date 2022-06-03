@@ -19,7 +19,7 @@ data class DeviceTime(
     companion object {
         var diffUtil = object : DiffUtil.ItemCallback<DeviceTime>() {
             override fun areItemsTheSame(oldItem: DeviceTime, newItem: DeviceTime): Boolean {
-                return true
+                return oldItem.time == newItem.time && oldItem.deviceID == newItem.deviceID && oldItem.state == newItem.state
             }
 
             override fun areContentsTheSame(oldItem: DeviceTime, newItem: DeviceTime): Boolean {

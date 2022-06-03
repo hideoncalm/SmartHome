@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="200dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
+    android:layout_gravity="center_horizontal|bottom"
     android:background="@drawable/bg_rounded_stroke_white"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp">
@@ -27,12 +27,14 @@
         <EditText
             android:id="@+id/editHour"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/textHour"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/textHour"
-            app:layout_constraintTop_toTopOf="@id/textHour" />
+            app:layout_constraintStart_toEndOf="@id/textHour" />
 
         <TextView
             android:id="@+id/textMinute"
@@ -49,11 +51,13 @@
         <EditText
             android:id="@+id/editMinute"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/textMinute"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@id/editHour"
+            app:layout_constraintTop_toBottomOf="@id/editHour"
             app:layout_constraintStart_toStartOf="@id/editHour"
-            app:layout_constraintTop_toTopOf="@id/textMinute" />
+            app:layout_constraintBottom_toBottomOf="@id/textMinute" />
 
         <TextView
             android:id="@+id/textSecond"
@@ -70,10 +74,36 @@
         <EditText
             android:id="@+id/editSecond"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/editMinute"
             app:layout_constraintBottom_toBottomOf="@id/textSecond"
             app:layout_constraintEnd_toEndOf="@id/editHour"
-            app:layout_constraintStart_toStartOf="@id/editHour"
-            app:layout_constraintTop_toTopOf="@id/textSecond" />
+            app:layout_constraintStart_toStartOf="@id/editHour" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonStartTimer"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_rounded_stroke_white"
+            android:text="Start Timer"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toStartOf="@id/buttonStopTimer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editSecond" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonStopTimer"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_rounded_stroke_white"
+            android:text="Cancel Timer"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/buttonStartTimer"
+            app:layout_constraintTop_toBottomOf="@id/editSecond" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

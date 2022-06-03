@@ -16,6 +16,12 @@ class DeviceTimeAdapter(
     onItemDeviceTimeClick
 ) {
 
+    override fun submitList(list: MutableList<DeviceTime>?) {
+        val result = arrayListOf<DeviceTime>()
+        list?.forEach { result.add(it.copy()) }
+        super.submitList(result)
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

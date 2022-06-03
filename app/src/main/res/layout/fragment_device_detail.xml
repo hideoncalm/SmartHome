@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_height="match_parent">
 
     <ImageButton
+        android:layout_margin="10dp"
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,6 +34,7 @@
         android:id="@+id/imageDevice"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginHorizontal="5dp"
         android:layout_marginVertical="30dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_light"
@@ -60,7 +61,7 @@
         app:layout_constraintVertical_bias="0.5" />
 
     <ImageButton
-        android:id="@+id/buttonAlarm"
+        android:id="@+id/buttonCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_circle_button"
@@ -73,7 +74,7 @@
         app:layout_constraintTop_toTopOf="@id/buttonOnOff" />
 
     <ImageButton
-        android:id="@+id/buttonCounter"
+        android:id="@+id/buttonAlarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
@@ -112,10 +113,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="00:00:00"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@id/buttonAlarm"
-        app:layout_constraintStart_toStartOf="@id/buttonAlarm"
+        app:layout_constraintEnd_toEndOf="@id/buttonCounter"
+        app:layout_constraintStart_toStartOf="@id/buttonCounter"
         app:layout_constraintTop_toBottomOf="@id/textAlarm" />
 
     <TextView

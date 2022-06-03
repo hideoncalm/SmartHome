@@ -19,6 +19,8 @@ import com.quyen.smarthome.service.TimerService
 import com.quyen.smarthome.ui.device.detail.adapter.DeviceTimeAdapter
 import com.quyen.smarthome.utils.makeTimeString
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import java.lang.Exception
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -35,13 +37,10 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
         DeviceTimeAdapter(::onItemTimeClick)
     }
 
-    private var timerStarted = false
-    private lateinit var serviceIntent: Intent
     private var time = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        serviceIntent = Intent(context, TimerService::class.java)
         requireActivity().registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
     }
 
@@ -59,13 +58,14 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
                     device?.let { it -> viewModel.turnDeviceOff(it) }
                 }
             }
-            buttonAlarm.setOnClickListener {
-                // call api on/off when exact time
-                startStopTimer()
-            }
             buttonCounter.setOnClickListener {
                 // call api on/off timer
-                resetTimer()
+                val action =
+                    FragmentDeviceDetailDirections.actionFragmentDeviceDetailToDialogCounterTimer(device!!)
+                findNavController().navigate(action)
+            }
+            buttonAlarm.setOnClickListener {
+                // call api on/off when exact time
             }
         }
         viewModel.isOn.observe(viewLifecycleOwner, {
@@ -93,35 +93,14 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
 
     }
 
-    private fun resetTimer() {
-        stopTimer()
-        time = 0.0
-        binding.textTimer.text = getTimeStringFromDouble(time)
-    }
-
-    private fun startStopTimer() {
-        if (timerStarted) {
-            stopTimer()
-        } else {
-            startTimer()
-        }
-    }
-
-    private fun startTimer() {
-        serviceIntent.putExtra(TimerService.TIME_EXTRA, time)
-        requireActivity().startService(serviceIntent)
-        timerStarted = true
-    }
-
-    private fun stopTimer() {
-        requireActivity().stopService(serviceIntent)
-        timerStarted = false
-    }
-
     private val updateTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            time = intent.getDoubleExtra(TimerService.TIME_EXTRA, 0.0)
-            binding.textTimer.text = getTimeStringFromDouble(time)
+            time = intent.getDoubleExtra(TimerService.BUNDLE_TIME, 0.0)
+            try {
+                binding.textTimer.text = getTimeStringFromDouble(time)
+            } catch (e: Exception) {
+                Timber.d(e.message)
+            }
         }
     }
 
