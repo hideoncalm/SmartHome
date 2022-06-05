@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.IBinder
 import dagger.hilt.android.AndroidEntryPoint
 import org.eclipse.paho.android.service.MqttAndroidClient
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -13,8 +14,9 @@ class TimerService : Service() {
     override fun onBind(p0: Intent?): IBinder? = null
 
     private val timer = Timer()
-    private var deviceID : String? = ""
-    private var message : String? = ""
+    private var deviceID: String? = ""
+    private var message: String? = ""
+
     @Inject
     lateinit var mqttAndroidClient: MqttAndroidClient
 
@@ -24,7 +26,7 @@ class TimerService : Service() {
         message = bundle?.getString(BUNDLE_DEVICE_MESSAGE)
         val time = bundle?.getDouble(BUNDLE_TIME, 0.0)
         timer.scheduleAtFixedRate(time?.let { TimeTask(it) }, 0, 1000)
-        return START_NOT_STICKY
+        return START_STICKY
     }
 
     override fun onDestroy() {
@@ -40,12 +42,15 @@ class TimerService : Service() {
             val intent = Intent(TIMER_UPDATED)
             time--
             intent.putExtra(BUNDLE_TIME, time)
+//            Timber.d("LNQ : time = ${time}")
             sendBroadcast(intent)
-            if(time == 0.0)
-            {
-                if(!deviceID.isNullOrEmpty() && !message.isNullOrEmpty())
-                {
-                    publishMessageMqtt(mqttAndroidClient, deviceID!!, message!!, true)
+            if (time == 0.0) {
+                if (!deviceID.isNullOrEmpty() && !message.isNullOrEmpty()) {
+                    mqttClientConnect(mqttAndroidClient, {
+                        publishMessageMqtt(mqttAndroidClient, deviceID!!, message!!, true)
+                    }, { _, _ ->
+                        Timber.d("LNQ : MQTT Connection Failed")
+                    })
                 }
                 stopSelf()
             }

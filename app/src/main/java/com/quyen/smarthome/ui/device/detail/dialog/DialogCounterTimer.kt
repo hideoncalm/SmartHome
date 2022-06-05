@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.databinding.DialogPickTimeBinding
@@ -13,7 +14,10 @@ import com.quyen.smarthome.service.TimerService
 import com.quyen.smarthome.service.TimerService.Companion.BUNDLE_DEVICE_ID
 import com.quyen.smarthome.service.TimerService.Companion.BUNDLE_DEVICE_MESSAGE
 import com.quyen.smarthome.service.TimerService.Companion.BUNDLE_TIME
-import com.quyen.smarthome.ui.device.detail.FragmentDeviceDetail
+import com.quyen.smarthome.ui.device.detail.FragmentDeviceDetailViewModel
+import com.quyen.smarthome.utils.Constant
+import com.quyen.smarthome.utils.Constant.KEY_DIALOG_COUNTER_TO_DEVICE_DETAIL
+import com.quyen.smarthome.utils.setNavigationResult
 import com.quyen.smarthome.utils.setWidthPercent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,8 +25,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class DialogCounterTimer : DialogFragment() {
 
     private lateinit var serviceIntent: Intent
-    private var time = 0.0
     private var device : Device? = null
+    private val viewModel : FragmentDeviceDetailViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,14 +48,17 @@ class DialogCounterTimer : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         device = arguments?.getParcelable(DEVICE_KEY)
         setWidthPercent(100)
+        val navController = findNavController()
         binding.apply {
             buttonStartTimer.setOnClickListener {
+                val time = getTime()
+                viewModel.setCountTime(time)
                 startTimer()
-                findNavController().popBackStack()
+                navController.popBackStack()
             }
             buttonStopTimer.setOnClickListener {
                 resetTimer()
-                findNavController().popBackStack()
+                navController.popBackStack()
             }
         }
     }
@@ -60,11 +67,15 @@ class DialogCounterTimer : DialogFragment() {
         stopTimer()
     }
 
-    private fun startTimer() {
+    private fun getTime(): Double {
         val hour: Int = Integer.parseInt(binding.editHour.text.toString())
         val minute: Int = Integer.parseInt(binding.editMinute.text.toString())
         val second: Int = Integer.parseInt(binding.editSecond.text.toString())
-        time = (hour * 3600 + minute * 60 + second).toDouble()
+        return (hour * 3600 + minute * 60 + second).toDouble()
+    }
+
+    private fun startTimer() {
+        val time = getTime()
         val bundle = Bundle().apply {
             putString(BUNDLE_DEVICE_ID, device?.device_id)
             putString(BUNDLE_DEVICE_MESSAGE, "OFF")

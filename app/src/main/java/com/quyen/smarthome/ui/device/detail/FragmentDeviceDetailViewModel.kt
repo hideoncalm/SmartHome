@@ -1,5 +1,6 @@
 package com.quyen.smarthome.ui.device.detail
 
+import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,17 +27,31 @@ class FragmentDeviceDetailViewModel @Inject constructor(
     private val mqttClient: MqttAndroidClient
 ) : ViewModel() {
 
+    // device State
     private val _isOn: MutableLiveData<Boolean> = MutableLiveData()
     val isOn: LiveData<Boolean>
         get() = _isOn
 
+    // time on/off history
     private val times = mutableListOf<DeviceTime>()
     private val _useTimes = MutableLiveData<MutableList<DeviceTime>>()
     val useTimes: LiveData<MutableList<DeviceTime>>
         get() = _useTimes
 
+    // public and subscribe
     private var pushTopic = ""
     private var receiveTopic = ""
+
+    // timer set
+    private var _countTime : MutableLiveData<Double> = MutableLiveData()
+    val countTime : LiveData<Double>
+        get() = _countTime
+
+    // timer countdown
+    private var _currentTimeCount : MutableLiveData<Double> = MutableLiveData()
+    val currentTimeCount : LiveData<Double>
+        get() = _currentTimeCount
+
 
     fun turnDeviceOn(device: Device) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -86,6 +101,11 @@ class FragmentDeviceDetailViewModel @Inject constructor(
         }
     }
 
+    fun setCountTime(time : Double)
+    {
+        _countTime.postValue(time)
+    }
+
     private fun onMessageReceived(topic: String?, message: MqttMessage?) {
         if (topic == receiveTopic) {
             when (message.toString().uppercase()) {
@@ -105,6 +125,20 @@ class FragmentDeviceDetailViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun startCountDownTimer(time: Double) {
+        // set Count Down Timer
+        val countDownTimer = object : CountDownTimer((time * 1000).toLong(), 1000) {
+            override fun onTick(p0: Long) {
+                _currentTimeCount.postValue(p0.toDouble())
+            }
+
+            override fun onFinish() {
+                _currentTimeCount.postValue(0.0)
+            }
+        }
+        countDownTimer.start()
     }
 
     companion object {

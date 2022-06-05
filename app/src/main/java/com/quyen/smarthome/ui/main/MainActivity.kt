@@ -11,6 +11,7 @@ import com.quyen.smarthome.service.disconnectMqtt
 import com.quyen.smarthome.service.mqttClientConnect
 import dagger.hilt.android.AndroidEntryPoint
 import org.eclipse.paho.android.service.MqttAndroidClient
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,7 +30,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initData() {
-        mqttClientConnect(mqttClient)
+        mqttClientConnect(mqttClient,
+            {
+                Timber.d("LNQ : Connected Success")
+            }, { _, _ ->
+                Timber.d("LNQ : Connected Failed")
+            })
     }
 
     private fun setUpBottomNavigation() {

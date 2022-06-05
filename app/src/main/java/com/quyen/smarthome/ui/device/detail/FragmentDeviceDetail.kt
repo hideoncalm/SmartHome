@@ -5,9 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.quyen.smarthome.R
@@ -17,6 +19,10 @@ import com.quyen.smarthome.data.model.DeviceTime
 import com.quyen.smarthome.databinding.FragmentDeviceDetailBinding
 import com.quyen.smarthome.service.TimerService
 import com.quyen.smarthome.ui.device.detail.adapter.DeviceTimeAdapter
+import com.quyen.smarthome.utils.Constant.DEVICE_KEY
+import com.quyen.smarthome.utils.Constant.KEY_DIALOG_COUNTER_TO_DEVICE_DETAIL
+import com.quyen.smarthome.utils.getNavigationResult
+import com.quyen.smarthome.utils.getTimeStringFromDouble
 import com.quyen.smarthome.utils.makeTimeString
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -29,7 +35,7 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDeviceDetailBinding =
         FragmentDeviceDetailBinding::inflate
 
-    private val viewModel: FragmentDeviceDetailViewModel by viewModels()
+    private val viewModel: FragmentDeviceDetailViewModel by activityViewModels()
     private var device: Device? = null
     private val backgroundOn = R.drawable.bg_circle_button_on
     private val backgroundOff = R.drawable.bg_circle_button
@@ -51,7 +57,7 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
                 findNavController().popBackStack()
             }
             buttonOnOff.setOnClickListener {
-                // call api on/off
+                // turn on/off device
                 if (viewModel.isOn.value == false) {
                     device?.let { it -> viewModel.turnDeviceOn(it) }
                 } else {
@@ -59,13 +65,16 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
                 }
             }
             buttonCounter.setOnClickListener {
-                // call api on/off timer
+                // turn on/off device with timer
                 val action =
-                    FragmentDeviceDetailDirections.actionFragmentDeviceDetailToDialogCounterTimer(device!!)
+                    FragmentDeviceDetailDirections.actionFragmentDeviceDetailToDialogCounterTimer(
+                        device!!
+                    )
                 findNavController().navigate(action)
             }
             buttonAlarm.setOnClickListener {
-                // call api on/off when exact time
+                val action = FragmentDeviceDetailDirections.actionFragmentDeviceDetailToFragmentAlarmDevice(device!!)
+                findNavController().navigate(action)
             }
         }
         viewModel.isOn.observe(viewLifecycleOwner, {
@@ -87,6 +96,11 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
         viewModel.useTimes.observe(viewLifecycleOwner, {
             timeAdapter.updateData(it)
         })
+
+        viewModel.countTime.observe(viewLifecycleOwner, {
+            time = it
+            viewModel.startCountDownTimer(time)
+        })
     }
 
     private fun onItemTimeClick(time: DeviceTime) {
@@ -104,16 +118,4 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
         }
     }
 
-    private fun getTimeStringFromDouble(time: Double): String {
-        val resultInt = time.roundToInt()
-        val hours = resultInt % 86400 / 3600
-        val minutes = resultInt % 86400 % 3600 / 60
-        val seconds = resultInt % 86400 % 3600 % 60
-
-        return makeTimeString(hours, minutes, seconds)
-    }
-
-    companion object {
-        private const val DEVICE_KEY = "device"
-    }
 }

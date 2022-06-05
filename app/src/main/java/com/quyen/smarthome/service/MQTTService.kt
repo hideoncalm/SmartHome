@@ -29,16 +29,20 @@ fun setupAndroidMqttClient(applicationContext: Context) {
     }
 }
 
-fun mqttClientConnect(client: MqttAndroidClient) {
+fun mqttClientConnect(
+    client: MqttAndroidClient,
+    onConnectedSuccess: (asyncActionToken: IMqttToken?) -> Unit,
+    onConnectionFailed: (asyncActionToken: IMqttToken?, exception: Throwable?) -> Unit
+) {
     try {
         val token: IMqttToken = client.connect()
         token.actionCallback = object : IMqttActionListener {
             override fun onSuccess(asyncActionToken: IMqttToken?) {
-                Timber.d("MQTT client : Connected Success")
+                onConnectedSuccess(asyncActionToken)
             }
 
             override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                Timber.d("MQTT client : Connected Failed")
+                onConnectionFailed(asyncActionToken, exception)
             }
         }
     } catch (e: MqttException) {

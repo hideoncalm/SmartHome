@@ -16,4 +16,9 @@ object Constant {
     const val STATE_ON = 1
     const val STATE_OFF = 0
 
+
+    const val NOTIFY_CHANNEL_ID = "1998"
+    const val NOTIFY_CHANNEL_NAME = "LNQ Notification"
+    const val DEVICE_KEY = "device"
+    const val KEY_DIALOG_COUNTER_TO_DEVICE_DETAIL = "KEY_DIALOG_COUNTER_TO_DEVICE_DETAIL"
 }

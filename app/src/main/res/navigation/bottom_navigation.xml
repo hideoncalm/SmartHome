@@ -7,11 +7,15 @@
     <fragment
         android:id="@+id/sceneFragment"
         android:name="com.quyen.smarthome.ui.scenes.SceneFragment"
-        android:label="SceneFragment" />
+        android:label="SceneFragment">
+        <action
+            android:id="@+id/action_sceneFragment_to_fragmentAlarmDevice"
+            app:destination="@id/fragmentAlarmDevice" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.quyen.smarthome.ui.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_fragmentAddDevice"
             app:destination="@id/fragmentAddDevice" />
@@ -32,7 +36,7 @@
     <fragment
         android:id="@+id/listDevicesFragment"
         android:name="com.quyen.smarthome.ui.device.listdevices.ListDevicesFragment"
-        android:label="ListDevicesFragment" >
+        android:label="ListDevicesFragment">
         <action
             android:id="@+id/action_listDevicesFragment_to_fragmentDeviceDetail"
             app:destination="@id/fragmentDeviceDetail" />
@@ -40,7 +44,7 @@
     <fragment
         android:id="@+id/fragmentAddDevice"
         android:name="com.quyen.smarthome.ui.device.adddevice.FragmentAddDevice"
-        android:label="FragmentAddDevice" >
+        android:label="FragmentAddDevice">
         <action
             android:id="@+id/action_fragmentAddDevice_to_fragmentDeviceDetail"
             app:destination="@id/fragmentDeviceDetail" />
@@ -48,7 +52,7 @@
     <fragment
         android:id="@+id/fragmentAddHouse"
         android:name="com.quyen.smarthome.ui.addhouse.FragmentAddHouse"
-        android:label="FragmentAddHouse" >
+        android:label="FragmentAddHouse">
         <action
             android:id="@+id/action_fragmentAddHouse_to_myProfileFragment"
             app:destination="@id/myProfileFragment" />
@@ -66,6 +70,9 @@
         <action
             android:id="@+id/action_fragmentDeviceDetail_to_dialogCounterTimer"
             app:destination="@id/dialogCounterTimer" />
+        <action
+            android:id="@+id/action_fragmentDeviceDetail_to_fragmentAlarmDevice"
+            app:destination="@id/fragmentAlarmDevice" />
     </fragment>
 
     <fragment
@@ -75,7 +82,7 @@
     <fragment
         android:id="@+id/fragmentListItem"
         android:name="com.quyen.smarthome.ui.room.listrooms.FragmentListItem"
-        android:label="FragmentListItem" >
+        android:label="FragmentListItem">
         <action
             android:id="@+id/action_fragmentListItem_to_roomDetailFragment"
             app:destination="@id/roomDetailFragment" />
@@ -88,4 +95,13 @@
             android:name="device"
             app:argType="com.quyen.smarthome.data.model.Device" />
     </dialog>
+    <fragment
+        android:id="@+id/fragmentAlarmDevice"
+        android:name="com.quyen.smarthome.ui.device.alarm.FragmentAlarmDevice"
+        android:label="FragmentAlarmDevice">
+        <argument
+            android:name="device"
+            app:argType="com.quyen.smarthome.data.model.Device" />
+    </fragment>
+
 </navigation>
