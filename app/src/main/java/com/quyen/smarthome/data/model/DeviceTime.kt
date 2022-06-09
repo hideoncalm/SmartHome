@@ -7,7 +7,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-@Entity
+@Entity(tableName = "active_time")
 @Parcelize
 data class DeviceTime(
     @PrimaryKey
@@ -19,7 +19,7 @@ data class DeviceTime(
     companion object {
         var diffUtil = object : DiffUtil.ItemCallback<DeviceTime>() {
             override fun areItemsTheSame(oldItem: DeviceTime, newItem: DeviceTime): Boolean {
-                return oldItem.time == newItem.time && oldItem.deviceID == newItem.deviceID && oldItem.state == newItem.state
+                return oldItem.time == newItem.time
             }
 
             override fun areContentsTheSame(oldItem: DeviceTime, newItem: DeviceTime): Boolean {

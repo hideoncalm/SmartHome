@@ -102,6 +102,15 @@
         <argument
             android:name="device"
             app:argType="com.quyen.smarthome.data.model.Device" />
+        <argument
+            android:name="srcDirection"
+            app:argType="string"
+            android:defaultValue="addDevice"/>
+        <argument
+            android:name="alarm"
+            app:argType="com.quyen.smarthome.data.model.AlarmTime"
+            app:nullable="true"
+            android:defaultValue="@null"/>
     </fragment>
 
 </navigation>
