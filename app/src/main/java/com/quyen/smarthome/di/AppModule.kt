@@ -1,5 +1,6 @@
 package com.quyen.smarthome.di
 
+import android.app.AlarmManager
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.firebase.database.FirebaseDatabase
@@ -74,4 +75,9 @@ object AppModule {
         val clientId = MqttClient.generateClientId()
         return MqttAndroidClient(app, Constant.MQTT_SERVER_URL, clientId)
     }
+
+    @Singleton
+    @Provides
+    fun provideAlarmManager(@ApplicationContext app: Context): AlarmManager =
+        app.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 }

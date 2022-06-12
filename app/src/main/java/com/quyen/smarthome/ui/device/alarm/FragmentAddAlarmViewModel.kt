@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.quyen.smarthome.data.model.AlarmTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,21 +17,21 @@ class FragmentAddAlarmViewModel @Inject constructor() : ViewModel() {
     val result : LiveData<Boolean>
         get() = _result
 
-    fun insertAlarm()
+    fun insertAlarm(alarmTime: AlarmTime)
     {
         viewModelScope.launch(Dispatchers.IO) {
             _result.postValue(true)
         }
     }
 
-    fun deleteAlarm()
+    fun deleteAlarm(alarmTime: AlarmTime)
     {
         viewModelScope.launch(Dispatchers.IO) {
             _result.postValue(true)
         }
     }
 
-    fun updateAlarm()
+    fun updateAlarm(alarmTime: AlarmTime)
     {
         viewModelScope.launch(Dispatchers.IO) {
             _result.postValue(true)

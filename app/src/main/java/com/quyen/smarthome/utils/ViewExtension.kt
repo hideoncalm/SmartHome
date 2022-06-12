@@ -1,5 +1,6 @@
 package com.quyen.smarthome.utils
 
+import android.content.BroadcastReceiver
 import android.content.res.Resources
 import android.graphics.Rect
 import android.view.Gravity
@@ -14,6 +15,9 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.quyen.smarthome.R
 import com.quyen.smarthome.utils.Constant.DATE_TIME_FORMAT
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
@@ -66,10 +70,23 @@ fun <T>Fragment.getNavigationResult(@IdRes id: Int, key: String, onResult: (resu
     })
 }
 
+fun BroadcastReceiver.goAsync(
+    coroutineScope: CoroutineScope,
+    dispatcher: CoroutineDispatcher,
+    block: suspend () -> Unit
+) {
+    val pendingResult = goAsync()
+    coroutineScope.launch(dispatcher) {
+        block()
+        pendingResult.finish()
+    }
+}
+
 fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
     val formatter = SimpleDateFormat(format, locale)
     return formatter.format(this)
 }
+
 
 fun getTimeFormat(): String = Calendar.getInstance().time.toString(DATE_TIME_FORMAT)
 
@@ -83,3 +100,4 @@ fun getTimeStringFromDouble(time: Double): String {
 
     return makeTimeString(hours, minutes, seconds)
 }
+

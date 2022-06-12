@@ -142,9 +142,9 @@ class FragmentDeviceDetailViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TURN_ON_MESSAGE = "ON"
-        private const val TURN_OFF_MESSAGE = "OFF"
-        private const val DEVICE_INFO = "/device_info"
-        private const val QOS = 1
+        const val TURN_ON_MESSAGE = "ON"
+        const val TURN_OFF_MESSAGE = "OFF"
+        const val DEVICE_INFO = "/device_info"
+        const val QOS = 1
     }
 }
