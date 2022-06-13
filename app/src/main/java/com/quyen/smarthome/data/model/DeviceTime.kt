@@ -7,13 +7,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "active_time")
+@Entity(tableName = "device_time")
 @Parcelize
 data class DeviceTime(
     @PrimaryKey
-    @ColumnInfo(name = "time")
-    var time: String? = "",
-    @ColumnInfo(name = "device_id") var deviceID: String? = "",
+    @ColumnInfo(name = "time") var time: String = "",
+    @ColumnInfo(name = "device_id") var deviceID: String = "",
     @ColumnInfo(name = "state") var state: Int = 0
 ) : Parcelable {
     companion object {

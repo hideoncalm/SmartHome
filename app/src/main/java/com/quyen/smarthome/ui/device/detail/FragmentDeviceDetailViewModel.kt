@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.DeviceTime
+import com.quyen.smarthome.data.source.local.TimeDao
 import com.quyen.smarthome.data.source.remote.util.APIService
 import com.quyen.smarthome.service.publishMessageMqtt
 import com.quyen.smarthome.service.subscribeMqtt
@@ -24,7 +25,8 @@ import javax.inject.Inject
 @HiltViewModel
 class FragmentDeviceDetailViewModel @Inject constructor(
     private val espService: APIService,
-    private val mqttClient: MqttAndroidClient
+    private val mqttClient: MqttAndroidClient,
+    private val timeDao: TimeDao
 ) : ViewModel() {
 
     // device State
@@ -34,24 +36,21 @@ class FragmentDeviceDetailViewModel @Inject constructor(
 
     // time on/off history
     private val times = mutableListOf<DeviceTime>()
-    private val _useTimes = MutableLiveData<MutableList<DeviceTime>>()
-    val useTimes: LiveData<MutableList<DeviceTime>>
-        get() = _useTimes
+    var useTimes: LiveData<List<DeviceTime>> = MutableLiveData()
 
     // public and subscribe
     private var pushTopic = ""
     private var receiveTopic = ""
 
     // timer set
-    private var _countTime : MutableLiveData<Double> = MutableLiveData()
-    val countTime : LiveData<Double>
+    private var _countTime: MutableLiveData<Double> = MutableLiveData()
+    val countTime: LiveData<Double>
         get() = _countTime
 
     // timer countdown
-    private var _currentTimeCount : MutableLiveData<Double> = MutableLiveData()
-    val currentTimeCount : LiveData<Double>
+    private var _currentTimeCount: MutableLiveData<Double> = MutableLiveData()
+    val currentTimeCount: LiveData<Double>
         get() = _currentTimeCount
-
 
     fun turnDeviceOn(device: Device) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -101,8 +100,7 @@ class FragmentDeviceDetailViewModel @Inject constructor(
         }
     }
 
-    fun setCountTime(time : Double)
-    {
+    fun setCountTime(time: Double) {
         _countTime.postValue(time)
     }
 
@@ -111,21 +109,25 @@ class FragmentDeviceDetailViewModel @Inject constructor(
             when (message.toString().uppercase()) {
                 TURN_ON_MESSAGE -> {
                     val time = getTimeFormat()
-                    times.add(DeviceTime(time, pushTopic, STATE_ON))
-                    _useTimes.postValue(times)
+                    val deviceTime = DeviceTime(time, pushTopic, STATE_ON)
+//                    times.add(deviceTime)
+//                    _useTimes.postValue(times)
                     _isOn.postValue(true)
+                    insertDeviceTime(deviceTime)
                 }
                 TURN_OFF_MESSAGE -> {
                     val time = getTimeFormat()
-                    times.add(DeviceTime(time, pushTopic, STATE_OFF))
-                    _useTimes.postValue(times)
+                    val deviceTime = DeviceTime(time, pushTopic, STATE_OFF)
+//                    times.add(deviceTime)
+//                    _useTimes.postValue(times)
                     _isOn.postValue(false)
+                    insertDeviceTime(deviceTime)
                 }
                 else -> {
                 }
             }
         }
-    }
+    } 
 
     fun startCountDownTimer(time: Double) {
         // set Count Down Timer
@@ -139,6 +141,17 @@ class FragmentDeviceDetailViewModel @Inject constructor(
             }
         }
         countDownTimer.start()
+    }
+
+    fun getDeviceTimeById(deviceId: String) {
+        pushTopic = deviceId
+        useTimes = timeDao.getDeviceTimesById(deviceId)
+    }
+
+    private fun insertDeviceTime(deviceTime: DeviceTime) {
+        viewModelScope.launch(Dispatchers.IO) {
+            timeDao.insertDeviceTime(deviceTime)
+        }
     }
 
     companion object {

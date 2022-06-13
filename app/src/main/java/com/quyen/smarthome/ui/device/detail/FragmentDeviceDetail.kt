@@ -92,9 +92,10 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
         device = arguments?.getParcelable(DEVICE_KEY)
         device?.let {
             viewModel.subscribeMqttDevice(it)
+            viewModel.getDeviceTimeById(it.device_id)
         }
         viewModel.useTimes.observe(viewLifecycleOwner, {
-            timeAdapter.updateData(it)
+            timeAdapter.updateData(it.toMutableList())
         })
 
         viewModel.countTime.observe(viewLifecycleOwner, {

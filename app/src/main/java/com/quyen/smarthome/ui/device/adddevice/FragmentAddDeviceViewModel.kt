@@ -9,6 +9,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.quyen.smarthome.data.model.Device
+import com.quyen.smarthome.data.model.DeviceTime
+import com.quyen.smarthome.data.source.local.TimeDao
 import com.quyen.smarthome.data.source.remote.util.APIService
 import com.quyen.smarthome.utils.Constant
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,7 +40,7 @@ class FragmentAddDeviceViewModel @Inject constructor(
     var wifiBSSID: String = ""
 
     fun connectToWfi(wifiSSID: String, password: String) {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 _loading.postValue(true)
                 val result = espService.connectEspToWifi(wifiSSID, password)

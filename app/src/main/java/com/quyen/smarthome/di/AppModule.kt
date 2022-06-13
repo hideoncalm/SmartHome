@@ -3,7 +3,9 @@ package com.quyen.smarthome.di
 import android.app.AlarmManager
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.room.Room
 import com.google.firebase.database.FirebaseDatabase
+import com.quyen.smarthome.data.source.local.TimeDatabase
 import com.quyen.smarthome.data.source.remote.util.APIConfig
 import com.quyen.smarthome.data.source.remote.util.APIService
 import com.quyen.smarthome.utils.Constant
@@ -78,6 +80,21 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideRoomDatabase(
+        @ApplicationContext context: Context
+    ): TimeDatabase =
+        Room.databaseBuilder(context, TimeDatabase::class.java, "time.db")
+            .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
+            .build()
+
+    @Singleton
+    @Provides
+    fun provideTimeDao(db: TimeDatabase) = db.getTimeDao()
+
+    @Singleton
+    @Provides
     fun provideAlarmManager(@ApplicationContext app: Context): AlarmManager =
         app.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
 }

@@ -2,6 +2,7 @@ package com.quyen.smarthome.data.model
 
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.quyen.smarthome.utils.Constant.MONDAY
@@ -14,20 +15,13 @@ import java.util.*
 @Parcelize
 @Entity(tableName = "alarm")
 data class AlarmTime(
-    val deviceId : String = "",
-    var hour: Int = 0,
-    var minute: Int = 0,
-    val state: Int = 0,
-//    val monday : Int = 0,
-//    val tus : Int = 0,
-//    val wed : Int = 0,
-//    val thus : Int = 0,
-//    val fri : Int = 0,
-//    val sat : Int = 0,
-//    val sun : Int = 0,
-    val dayOfWeek: Int = NOT_REPEAT,
-    val content: String? = "",
-    @PrimaryKey val requestCode: Int = (System.currentTimeMillis() % Int.MAX_VALUE).toInt()
+    @ColumnInfo(name = "device_id") val deviceId: String = "",
+    @ColumnInfo(name = "hour") var hour: Int = 0,
+    @ColumnInfo(name = "minute") var minute: Int = 0,
+    @ColumnInfo(name = "state") val state: Int = 0,
+    @ColumnInfo(name = "day_of_week") val dayOfWeek: Int = NOT_REPEAT,
+    @ColumnInfo(name = "content") val content: String? = "",
+    @PrimaryKey @ColumnInfo(name = "request_code") val requestCode: Int = (System.currentTimeMillis() % Int.MAX_VALUE).toInt()
 
 ) : Parcelable {
     companion object {

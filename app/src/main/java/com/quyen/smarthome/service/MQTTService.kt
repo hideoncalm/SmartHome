@@ -1,12 +1,12 @@
 package com.quyen.smarthome.service
 
 import android.content.Context
-import android.os.MessageQueue
 import com.quyen.smarthome.utils.Constant.MQTT_SERVER_URL
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import timber.log.Timber
 import java.io.UnsupportedEncodingException
+import kotlin.reflect.KFunction2
 
 
 fun setupAndroidMqttClient(applicationContext: Context) {
@@ -73,7 +73,7 @@ fun subscribeMqtt(
     client: MqttAndroidClient,
     topic: String,
     qos: Int = 1,
-    onMessageReceive: (topic: String?, message: MqttMessage?) -> Unit
+    onMessageReceive: KFunction2<String?, MqttMessage?, Unit>
 ) {
     try {
         val subToken: IMqttToken = client.subscribe(topic, qos)

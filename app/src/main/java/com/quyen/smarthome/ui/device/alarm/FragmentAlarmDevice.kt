@@ -56,9 +56,6 @@ class FragmentAlarmDevice : BaseFragment<FragmentSelectAlarmBinding>() {
             buttonSaveTimer.setOnClickListener {
                 setupAlarm()
             }
-            buttonDeleteTimer.setOnClickListener {
-                alarm?.let { it1 -> cancelAlarm(it1) }
-            }
         }
     }
 
@@ -91,6 +88,7 @@ class FragmentAlarmDevice : BaseFragment<FragmentSelectAlarmBinding>() {
             if (mon == NOT_REPEAT && tus == NOT_REPEAT && wed == NOT_REPEAT && thus == NOT_REPEAT && fri == NOT_REPEAT && sat == NOT_REPEAT && sun == NOT_REPEAT) {
                 val alarmTime = AlarmTime(it.device_id, hour, minute, state)
                 setAlarm(alarmTime, false)
+                viewModel.insertAlarm(alarmTime)
             }
             if (mon == REPEAT) {
                 val alarmTime = AlarmTime(it.device_id, hour, minute, state, Calendar.MONDAY)
@@ -129,7 +127,6 @@ class FragmentAlarmDevice : BaseFragment<FragmentSelectAlarmBinding>() {
             }
         }
     }
-
 
     private fun setAlarm(alarmTime: AlarmTime, isRepeat: Boolean) {
         val intent = Intent(context, AlarmReceiver::class.java)
