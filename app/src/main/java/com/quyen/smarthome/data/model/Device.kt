@@ -2,20 +2,19 @@ package com.quyen.smarthome.data.model
 
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
+@Entity(tableName = "device")
 @Parcelize
 data class Device(
-    var device_id: String = "",
+    @PrimaryKey var device_id: String = "",
     var device_name: String = "",
     var device_ip_addr: String = "",
     var device_room_id: String = "",
-    var device_hum: Int = 0,
-    var device_temp: Int = 0,
-    var device_state: Int = 0,
     var device_used_power: Int = 0,
-    var device_speed: Int = 0,
     var device_favorite : Boolean = false,
     var device_type : Int = 0,
     val device_info : String = ""

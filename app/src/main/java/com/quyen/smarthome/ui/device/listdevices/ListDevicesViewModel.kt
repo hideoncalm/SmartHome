@@ -6,15 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.Room
+import com.quyen.smarthome.data.repository.DeviceRepository
 import com.quyen.smarthome.data.source.remote.DeviceRemoteDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class ListDevicesViewModel @Inject constructor(
-    private val deviceDataSource: DeviceRemoteDataSource
+    private val deviceRepo: DeviceRepository
 ) : ViewModel() {
 
     private val _devices = MutableLiveData<MutableList<Device>>()
@@ -27,7 +27,7 @@ class ListDevicesViewModel @Inject constructor(
 
     private fun getNewDevices(){
         viewModelScope.launch {
-            _devices.postValue(deviceDataSource.getDevicesByRoomId(0) as MutableList<Device>?)
+            _devices.postValue(deviceRepo.getDevices() as MutableList<Device>?)
         }
     }
 }

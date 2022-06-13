@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.Room
-import com.quyen.smarthome.data.source.remote.DeviceRemoteDataSource
+import com.quyen.smarthome.data.repository.DeviceRepository
 import com.quyen.smarthome.data.source.remote.RoomRemoteDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,13 +14,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val deviceRepo : DeviceRemoteDataSource,
-    private val roomRepo : RoomRemoteDataSource
+    private val deviceRepo: DeviceRepository,
+    private val roomRepo: RoomRemoteDataSource,
 ) : ViewModel() {
 
-    private val _devices = MutableLiveData<MutableList<Device>>()
-    val devices: LiveData<MutableList<Device>>
-        get() = _devices
+    val devices: LiveData<List<Device>> = deviceRepo.getLocalFavoriteDevices()
 
     private val _rooms = MutableLiveData<MutableList<Room>>()
     val rooms: LiveData<MutableList<Room>>
@@ -31,14 +29,18 @@ class HomeViewModel @Inject constructor(
         getRooms()
     }
 
-    private fun getDevices(){
+    private fun getDevices() {
         viewModelScope.launch {
-            _devices.postValue(deviceRepo.getDevicesByRoomId(0) as MutableList<Device>?)
+            val devices = deviceRepo.getDevices() as MutableList<Device>
+            devices.let {
+                for (device in it) {
+                    deviceRepo.insertLocalDevice(device)
+                }
+            }
         }
     }
 
-    private fun getRooms()
-    {
+    private fun getRooms() {
         viewModelScope.launch {
             _rooms.postValue(roomRepo.getRooms() as MutableList<Room>?)
         }

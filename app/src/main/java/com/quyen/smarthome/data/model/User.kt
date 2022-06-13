@@ -7,9 +7,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class User(
     var id: String = "",
-    var role: Long = -1,
+    var account: String = "",
+    var password: String = "",
     var name: String = "",
-    var state: Boolean = false,
     var imageURI: String = "",
     var homeId: String = ""
 ) : Parcelable {
@@ -23,7 +23,6 @@ data class User(
             override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 }

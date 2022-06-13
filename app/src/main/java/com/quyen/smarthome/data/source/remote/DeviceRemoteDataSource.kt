@@ -27,7 +27,7 @@ class DeviceRemoteDataSource @Inject constructor(
         return deviceReference.child(device.device_id).setValue(device).isSuccessful
     }
 
-    override suspend fun getDevicesByRoomId(roomId: Int): List<Device>? {
+    override suspend fun getDevices(): List<Device>? {
         val snapshot = deviceReference.get().await()
         for(snap : DataSnapshot in snapshot.children)
         {

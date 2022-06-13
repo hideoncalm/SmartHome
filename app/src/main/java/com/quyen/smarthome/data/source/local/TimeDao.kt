@@ -1,20 +1,22 @@
 package com.quyen.smarthome.data.source.local
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.quyen.smarthome.data.model.AlarmTime
+import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.DeviceTime
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TimeDao {
 
-    @Query("select * from device_time where device_id = :deviceId")
-    fun getDeviceTimesById(deviceId : String) : LiveData<List<DeviceTime>>
+    /*
+        user for get device on/off time
+     */
+    @Query("select * from device_time where device_id like :deviceId")
+    fun getDeviceTimesById(deviceId: String): LiveData<List<DeviceTime>>
 
     @Query("select * from device_time")
-    fun getDeviceTimes() : LiveData<List<DeviceTime>>
+    fun getDeviceTimes(): LiveData<List<DeviceTime>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDeviceTime(deviceTime: DeviceTime)
@@ -25,8 +27,12 @@ interface TimeDao {
     @Delete
     suspend fun deleteDeviceTime(deviceTime: DeviceTime)
 
+
+    /*
+        use for get alarm time
+     */
     @Query("select * from alarm")
-    fun getAlarms() : LiveData<List<AlarmTime>>
+    fun getAlarms(): LiveData<List<AlarmTime>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAlarm(alarmTime: AlarmTime)
@@ -36,4 +42,30 @@ interface TimeDao {
 
     @Update
     suspend fun updateAlarmTime(alarmTime: AlarmTime)
+
+
+    /*
+        use for get alarm time
+     */
+
+    @Query("select * from device")
+    fun getDevices(): LiveData<List<Device>>
+
+    @Query("select * from device where device_favorite = 1")
+    fun getFavoriteDevices(): LiveData<List<Device>>
+
+    @Query("select * from device where device_id like :deviceID")
+    suspend fun getDeviceByID(deviceID : String): Device?
+
+    @Query("select * from device where device_room_id like :roomId")
+    fun getDeviceByRoomID(roomId : String): LiveData<List<Device>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertDevice(device: Device)
+
+    @Delete
+    suspend fun deleteDevice(device: Device)
+
+    @Update
+    suspend fun updateDevice(device: Device)
 }

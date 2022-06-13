@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.DeviceTime
+import com.quyen.smarthome.data.repository.TimeRepository
 import com.quyen.smarthome.data.source.local.TimeDao
 import com.quyen.smarthome.data.source.remote.util.APIService
 import com.quyen.smarthome.service.publishMessageMqtt
@@ -26,7 +27,7 @@ import javax.inject.Inject
 class FragmentDeviceDetailViewModel @Inject constructor(
     private val espService: APIService,
     private val mqttClient: MqttAndroidClient,
-    private val timeDao: TimeDao
+    private val timeRepo: TimeRepository
 ) : ViewModel() {
 
     // device State
@@ -65,7 +66,7 @@ class FragmentDeviceDetailViewModel @Inject constructor(
                     _isOn.postValue(true)
                 }
             } catch (e: Exception) {
-                Timber.d(e.message)
+                Timber.d(e)
             }
         }
     }
@@ -83,7 +84,7 @@ class FragmentDeviceDetailViewModel @Inject constructor(
                     _isOn.postValue(false)
                 }
             } catch (e: Exception) {
-                Timber.d(e.message)
+                Timber.d(e)
             }
         }
     }
@@ -145,12 +146,12 @@ class FragmentDeviceDetailViewModel @Inject constructor(
 
     fun getDeviceTimeById(deviceId: String) {
         pushTopic = deviceId
-        useTimes = timeDao.getDeviceTimesById(deviceId)
+        useTimes = timeRepo.getDeviceTimesById(deviceId)
     }
 
     private fun insertDeviceTime(deviceTime: DeviceTime) {
         viewModelScope.launch(Dispatchers.IO) {
-            timeDao.insertDeviceTime(deviceTime)
+            timeRepo.insertDeviceTime(deviceTime)
         }
     }
 
