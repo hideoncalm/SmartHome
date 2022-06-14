@@ -24,7 +24,7 @@ class FragmentAddAlarmViewModel @Inject constructor(
     fun insertAlarm(alarmTime: AlarmTime)
     {
         viewModelScope.launch(Dispatchers.IO) {
-            timeRepo.deleteAlarmTime(alarmTime)
+            timeRepo.insertAlarm(alarmTime)
             _result.postValue(true)
         }
     }

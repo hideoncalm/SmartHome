@@ -29,7 +29,7 @@ class FragmentListItem : BaseFragment<FragmentRoomsBinding>() {
 
     override fun initData() {
         roomViewModel.rooms.observe(viewLifecycleOwner, {
-            roomAdapter.updateData(it)
+            roomAdapter.updateData(it as MutableList<Room>)
         })
     }
 

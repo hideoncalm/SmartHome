@@ -37,7 +37,7 @@ class SceneAdapter(
                 imageDevice.loadImageFromUrl(item.imageURI)
                 textDeviceName.text = item.deviceName
                 textRoomName.text = item.roomName
-                textTime.text = item.time
+                textTime.text = "${item.hour}:${item.minute}"
             }
         }
     }

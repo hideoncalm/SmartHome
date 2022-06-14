@@ -61,7 +61,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             deviceAdapter.updateData(it as MutableList<Device>)
         })
         homeViewModel.rooms.observe(viewLifecycleOwner, {
-            roomAdapter.updateData(it)
+            roomAdapter.updateData(it as MutableList<Room>)
         })
     }
 
