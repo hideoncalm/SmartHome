@@ -25,7 +25,7 @@ class TimeRepositoryImp @Inject constructor(
     override suspend fun deleteDeviceTime(deviceTime: DeviceTime) =
         timeDao.deleteDeviceTime(deviceTime)
 
-    override fun getAlarms(): LiveData<List<AlarmTime>> = timeDao.getAlarms()
+    override suspend fun getAlarms(): List<AlarmTime> = timeDao.getAlarms()
 
     override suspend fun getAlarmDeviceByHourAndMinute(
         deviceId: String,

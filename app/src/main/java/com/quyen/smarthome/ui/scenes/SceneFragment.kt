@@ -6,9 +6,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.quyen.smarthome.base.BaseFragment
 import com.quyen.smarthome.broadcast.AlarmReceiver
 import com.quyen.smarthome.data.model.AlarmTime
+import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.databinding.FragmentScencesBinding
 import com.quyen.smarthome.ui.scenes.adapter.Scene
 import com.quyen.smarthome.ui.scenes.adapter.SceneAdapter
@@ -42,16 +44,21 @@ class SceneFragment : BaseFragment<FragmentScencesBinding>() {
         viewModel.scenes.observe(this, {
             sceneAdapter.updateData(it as MutableList<Scene>)
         })
+        viewModel.alarmsOfScene.observe(this, {
+            for(alarm in it){
+                viewModel.deleteScene(alarm)
+                cancelAlarm(alarm)
+            }
+        })
     }
 
     private fun onItemSceneClick(scene: Scene) {
+        val action = SceneFragmentDirections.actionSceneFragmentToFragmentAlarmDetail(scene)
+        findNavController().navigate(action)
     }
 
     private fun onDeleteButtonClick(scene: Scene) {
-        for (alarm in viewModel.alarmsOfScene) {
-            cancelAlarm(alarm)
-        }
-        viewModel.deleteScene()
+        viewModel.getAlarmsOfScene(scene)
     }
 
     private fun cancelAlarm(alarmTime: AlarmTime) {

@@ -33,10 +33,20 @@ object Constant {
     const val NOTIFY_ID = 1998
     const val NOTIFY_CHANNEL_NAME = "LNQ Notification"
     const val DEVICE_KEY = "device"
+    const val ROOM_KEY = "room"
     const val DEVICE_STATE_KEY = "DEVICE_STATE_KEY"
     const val SOURCE_DIRECTION = "srcDirection"
-    const val ALARM_KEY = "alarm"
+    const val SCENE_KEY = "scene"
     const val BUNDLE_ALARM = "BUNDLE_ALARM"
 
     const val KEY_DIALOG_COUNTER_TO_DEVICE_DETAIL = "KEY_DIALOG_COUNTER_TO_DEVICE_DETAIL"
+
+    const val TURN_ON_MESSAGE = "ON"
+    const val TURN_OFF_MESSAGE = "OFF"
+    const val DEVICE_INFO = "/device_info"
+    const val ROOM_ALL_DEVICE = "/all_devices_state"
+    const val TOPIC_SPLIT = "/"
+    const val QOS = 1
+    const val ON = "on"
+    const val OFF = "off"
 }

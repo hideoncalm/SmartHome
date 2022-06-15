@@ -14,22 +14,14 @@ import com.quyen.smarthome.broadcast.AlarmReceiver
 import com.quyen.smarthome.data.model.AlarmTime
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.databinding.FragmentSelectAlarmBinding
-import com.quyen.smarthome.utils.Constant
 import com.quyen.smarthome.utils.Constant.BUNDLE_ALARM
 import com.quyen.smarthome.utils.Constant.DEVICE_KEY
 import com.quyen.smarthome.utils.Constant.DEVICE_STATE_KEY
-import com.quyen.smarthome.utils.Constant.FRI
-import com.quyen.smarthome.utils.Constant.MONDAY
 import com.quyen.smarthome.utils.Constant.NOT_REPEAT
 import com.quyen.smarthome.utils.Constant.REPEAT
-import com.quyen.smarthome.utils.Constant.SAT
 import com.quyen.smarthome.utils.Constant.SOURCE_DIRECTION
 import com.quyen.smarthome.utils.Constant.STATUS_OFF
 import com.quyen.smarthome.utils.Constant.STATUS_ON
-import com.quyen.smarthome.utils.Constant.SUN
-import com.quyen.smarthome.utils.Constant.THUS
-import com.quyen.smarthome.utils.Constant.TUE
-import com.quyen.smarthome.utils.Constant.WED
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -39,7 +31,6 @@ class FragmentAlarmDevice : BaseFragment<FragmentSelectAlarmBinding>() {
 
     private var device: Device? = null
     private var srcDirection: String = ""
-    private var alarm: AlarmTime? = null
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSelectAlarmBinding =
         FragmentSelectAlarmBinding::inflate
 
@@ -60,8 +51,7 @@ class FragmentAlarmDevice : BaseFragment<FragmentSelectAlarmBinding>() {
     }
 
     override fun initData() {
-        device = arguments?.getParcelable(Constant.DEVICE_KEY)
-        alarm = arguments?.getParcelable(Constant.ALARM_KEY)
+        device = arguments?.getParcelable(DEVICE_KEY)
         srcDirection = arguments?.getString(SOURCE_DIRECTION).toString()
         binding.textToolbarTitle.text = device!!.device_name
 

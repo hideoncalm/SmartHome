@@ -12,8 +12,12 @@ import com.quyen.smarthome.data.source.local.TimeDao
 import com.quyen.smarthome.data.source.remote.util.APIService
 import com.quyen.smarthome.service.publishMessageMqtt
 import com.quyen.smarthome.service.subscribeMqtt
+import com.quyen.smarthome.utils.Constant.DEVICE_INFO
+import com.quyen.smarthome.utils.Constant.QOS
 import com.quyen.smarthome.utils.Constant.STATE_OFF
 import com.quyen.smarthome.utils.Constant.STATE_ON
+import com.quyen.smarthome.utils.Constant.TURN_OFF_MESSAGE
+import com.quyen.smarthome.utils.Constant.TURN_ON_MESSAGE
 import com.quyen.smarthome.utils.getTimeFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -155,10 +159,4 @@ class FragmentDeviceDetailViewModel @Inject constructor(
         }
     }
 
-    companion object {
-        const val TURN_ON_MESSAGE = "ON"
-        const val TURN_OFF_MESSAGE = "OFF"
-        const val DEVICE_INFO = "/device_info"
-        const val QOS = 1
-    }
 }

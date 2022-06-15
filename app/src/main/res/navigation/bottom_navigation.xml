@@ -9,8 +9,8 @@
         android:name="com.quyen.smarthome.ui.scenes.SceneFragment"
         android:label="SceneFragment">
         <action
-            android:id="@+id/action_sceneFragment_to_fragmentAlarmDevice"
-            app:destination="@id/fragmentAlarmDevice" />
+            android:id="@+id/action_sceneFragment_to_fragmentAlarmDetail"
+            app:destination="@id/fragmentAlarmDetail" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -78,7 +78,14 @@
     <fragment
         android:id="@+id/roomDetailFragment"
         android:name="com.quyen.smarthome.ui.room.detail.RoomDetailFragment"
-        android:label="RoomDetailFragment" />
+        android:label="RoomDetailFragment">
+        <argument
+            android:name="room"
+            app:argType="com.quyen.smarthome.data.model.Room" />
+        <action
+            android:id="@+id/action_roomDetailFragment_to_fragmentDeviceDetail"
+            app:destination="@id/fragmentDeviceDetail" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentListItem"
         android:name="com.quyen.smarthome.ui.room.listrooms.FragmentListItem"
@@ -102,15 +109,14 @@
         <argument
             android:name="device"
             app:argType="com.quyen.smarthome.data.model.Device" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAlarmDetail"
+        android:name="com.quyen.smarthome.ui.device.alarm.detail.FragmentAlarmDetail"
+        android:label="FragmentAlarmDetail">
         <argument
-            android:name="srcDirection"
-            app:argType="string"
-            android:defaultValue="addDevice"/>
-        <argument
-            android:name="alarm"
-            app:argType="com.quyen.smarthome.data.model.AlarmTime"
-            app:nullable="true"
-            android:defaultValue="@null"/>
+            android:name="scene"
+            app:argType="com.quyen.smarthome.ui.scenes.adapter.Scene" />
     </fragment>
 
 </navigation>

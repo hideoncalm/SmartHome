@@ -15,7 +15,7 @@ interface DeviceDataSource {
         suspend fun insertDevice(device: Device)
         fun getDevices(): LiveData<List<Device>>
         fun getFavoriteDevices(): LiveData<List<Device>>
-        fun getDevicesByRoomId(roomID: String): LiveData<List<Device>>
+        suspend fun getDevicesByRoomId(roomID: String): List<Device>
         suspend fun getDeviceById(deviceID: String): Device?
         suspend fun updateDevice(device: Device)
         suspend fun deleteDevice(device: Device)

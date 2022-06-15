@@ -34,7 +34,7 @@ interface TimeDao {
         use for get alarm time
      */
     @Query("select * from alarm")
-    fun getAlarms(): LiveData<List<AlarmTime>>
+    suspend fun getAlarms(): List<AlarmTime>
 
     @Query("select *from alarm where alarm.device_id like :deviceId and alarm.hour = :hour and alarm.minute = :minute")
     suspend fun getAlarmDeviceByHourAndMinute(
@@ -67,7 +67,7 @@ interface TimeDao {
     suspend fun getDeviceByID(deviceID: String): Device?
 
     @Query("select * from device where device_room_id like :roomId")
-    fun getDeviceByRoomID(roomId: String): LiveData<List<Device>>
+    suspend fun getDeviceByRoomID(roomId: String): List<Device>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDevice(device: Device)

@@ -2,7 +2,6 @@ package com.quyen.smarthome.ui.room.listrooms.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import com.quyen.smarthome.base.BaseRecyclerViewAdapter
 import com.quyen.smarthome.base.BaseViewHolder
 import com.quyen.smarthome.data.model.Room
@@ -11,7 +10,7 @@ import com.quyen.smarthome.utils.loadImageFromUrl
 
 class ListItemHomeAdapter(
     private val onItemRoomClick: (Room) -> Unit,
-    private val onSwitchItemClick: CompoundButton.OnCheckedChangeListener
+    private val onSwitchItemClick: (Room) -> Unit
 ) : BaseRecyclerViewAdapter<Room, ListItemHomeAdapter.ListItemHolder>(
     Room.diffUtil,
     onItemRoomClick
@@ -29,7 +28,7 @@ class ListItemHomeAdapter(
     class ListItemHolder(
         private val binding: ItemRoomBinding,
         onItemRoomClick: (Room) -> Unit,
-        private val onSwitchItemClick: CompoundButton.OnCheckedChangeListener
+        private val onSwitchItemClick: (Room) -> Unit
     ) : BaseViewHolder<Room>(binding, onItemRoomClick) {
 
         override fun onBindData(item: Room) {
@@ -39,7 +38,7 @@ class ListItemHomeAdapter(
                 textLocation.text = item.room_name
                 textTotalDevice.text = "${item.room_total_device} Devices"
                 switchDevice.isChecked = item.room_all_device
-                switchDevice.setOnCheckedChangeListener(onSwitchItemClick)
+                switchDevice.setOnClickListener { onSwitchItemClick(item) }
             }
         }
     }

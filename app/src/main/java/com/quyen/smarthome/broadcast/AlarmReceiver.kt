@@ -16,14 +16,14 @@ import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.source.remote.util.APIService
 import com.quyen.smarthome.service.mqttClientConnect
 import com.quyen.smarthome.service.publishMessageMqtt
-import com.quyen.smarthome.ui.device.detail.FragmentDeviceDetailViewModel
-import com.quyen.smarthome.ui.device.detail.FragmentDeviceDetailViewModel.Companion.TURN_ON_MESSAGE
 import com.quyen.smarthome.ui.main.MainActivity
 import com.quyen.smarthome.utils.Constant
 import com.quyen.smarthome.utils.Constant.BUNDLE_ALARM
 import com.quyen.smarthome.utils.Constant.NOTIFY_CHANNEL_ID
 import com.quyen.smarthome.utils.Constant.NOTIFY_ID
 import com.quyen.smarthome.utils.Constant.STATE_ON
+import com.quyen.smarthome.utils.Constant.TURN_OFF_MESSAGE
+import com.quyen.smarthome.utils.Constant.TURN_ON_MESSAGE
 import com.quyen.smarthome.utils.goAsync
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -118,7 +118,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 publishMessageMqtt(
                     mqttClient,
                     pushTopic,
-                    FragmentDeviceDetailViewModel.TURN_OFF_MESSAGE,
+                    TURN_OFF_MESSAGE,
                     true
                 )
                 // get to local server
@@ -127,7 +127,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 if (response.isSuccessful) {
                 }
             } catch (e: Exception) {
-                Timber.d(e.message)
+                Timber.d(e)
             }
         }
     }

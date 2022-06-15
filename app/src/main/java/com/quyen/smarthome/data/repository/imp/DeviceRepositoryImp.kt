@@ -15,7 +15,7 @@ class DeviceRepositoryImp @Inject constructor(
 
     override fun getLocalFavoriteDevices(): LiveData<List<Device>> = local.getFavoriteDevices()
 
-    override fun getLocalDeviceByRoomID(roomId: String): LiveData<List<Device>> =
+    override suspend fun getLocalDeviceByRoomID(roomId: String): List<Device> =
         local.getDevicesByRoomId(roomId)
 
     override suspend fun getLocalDeviceByID(deviceID: String): Device? =

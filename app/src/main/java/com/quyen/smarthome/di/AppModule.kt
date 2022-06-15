@@ -70,7 +70,6 @@ object AppModule {
     fun provideFirebaseDatabase(): FirebaseDatabase =
         FirebaseDatabase.getInstance("https://smarthome-e6d0f-default-rtdb.asia-southeast1.firebasedatabase.app")
 
-
     @Singleton
     @Provides
     fun provideMQTTClient(@ApplicationContext app: Context): MqttAndroidClient {

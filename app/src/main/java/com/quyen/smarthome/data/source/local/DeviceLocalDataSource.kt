@@ -17,7 +17,7 @@ class DeviceLocalDataSource @Inject constructor(
 
     override fun getFavoriteDevices(): LiveData<List<Device>> = timeDao.getFavoriteDevices()
 
-    override fun getDevicesByRoomId(roomID : String): LiveData<List<Device>> = timeDao.getDeviceByRoomID(roomID)
+    override suspend fun getDevicesByRoomId(roomID : String): List<Device> = timeDao.getDeviceByRoomID(roomID)
 
     override suspend fun getDeviceById(deviceID: String): Device? = timeDao.getDeviceByID(deviceID)
 

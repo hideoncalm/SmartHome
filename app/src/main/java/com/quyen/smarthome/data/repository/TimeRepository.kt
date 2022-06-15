@@ -12,7 +12,7 @@ interface TimeRepository {
     suspend fun updateDeviceTime(deviceTime: DeviceTime)
     suspend fun deleteDeviceTime(deviceTime: DeviceTime)
 
-    fun getAlarms(): LiveData<List<AlarmTime>>
+    suspend fun getAlarms(): List<AlarmTime>
     suspend fun getAlarmDeviceByHourAndMinute(deviceId : String, hour: Int, minute: Int) : List<AlarmTime>
     suspend fun insertAlarm(alarmTime: AlarmTime)
     suspend fun deleteAlarmTime(alarmTime: AlarmTime)

@@ -91,6 +91,7 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
     override fun initData() {
         device = arguments?.getParcelable(DEVICE_KEY)
         device?.let {
+            binding.textToolbarTitle.text = it.device_name
             viewModel.subscribeMqttDevice(it)
             viewModel.getDeviceTimeById(it.device_id)
         }

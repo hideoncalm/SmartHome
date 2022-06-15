@@ -2,7 +2,6 @@ package com.quyen.smarthome.ui.room.listrooms
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.quyen.smarthome.R
@@ -20,7 +19,7 @@ class FragmentListItem : BaseFragment<FragmentRoomsBinding>() {
     private val roomViewModel: FragmentListRoomViewModel by viewModels()
 
     private val roomAdapter: ListItemHomeAdapter by lazy {
-        ListItemHomeAdapter(this::onItemHomeClick, onSwitchClick)
+        ListItemHomeAdapter(::onItemHomeClick, ::onSwitchClick)
     }
 
     override fun initViews() {
@@ -34,13 +33,11 @@ class FragmentListItem : BaseFragment<FragmentRoomsBinding>() {
     }
 
     private fun onItemHomeClick(room: Room) {
-        findNavController().navigate(R.id.action_fragmentListItem_to_roomDetailFragment)
+        val action = FragmentListItemDirections.actionFragmentListItemToRoomDetailFragment(room)
+        findNavController().navigate(action)
     }
 
-    private val onSwitchClick = object : CompoundButton.OnCheckedChangeListener {
-        override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
-
-        }
-
+    private fun onSwitchClick(room: Room) {
+        findNavController().navigate(R.id.action_fragmentListItem_to_roomDetailFragment)
     }
 }

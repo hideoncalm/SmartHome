@@ -32,6 +32,7 @@ class FragmentAddAlarmViewModel @Inject constructor(
     fun deleteAlarm(alarmTime: AlarmTime)
     {
         viewModelScope.launch(Dispatchers.IO) {
+            timeRepo.deleteAlarmTime(alarmTime)
             _result.postValue(true)
         }
     }
@@ -39,6 +40,7 @@ class FragmentAddAlarmViewModel @Inject constructor(
     fun updateAlarm(alarmTime: AlarmTime)
     {
         viewModelScope.launch(Dispatchers.IO) {
+            timeRepo.updateAlarmTime(alarmTime)
             _result.postValue(true)
         }
     }

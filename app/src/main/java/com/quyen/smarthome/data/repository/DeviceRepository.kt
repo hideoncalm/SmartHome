@@ -9,7 +9,7 @@ interface DeviceRepository {
      */
     fun getLocalDevices(): LiveData<List<Device>>
     fun getLocalFavoriteDevices(): LiveData<List<Device>>
-    fun getLocalDeviceByRoomID(roomId: String): LiveData<List<Device>>
+    suspend fun getLocalDeviceByRoomID(roomId: String): List<Device>
     suspend fun getLocalDeviceByID(deviceID: String): Device?
     suspend fun insertLocalDevice(device: Device)
     suspend fun deleteLocalDevice(device: Device)

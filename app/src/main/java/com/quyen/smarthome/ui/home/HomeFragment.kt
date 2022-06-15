@@ -1,13 +1,10 @@
 package com.quyen.smarthome.ui.home
 
-import android.app.Activity.RESULT_CANCELED
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.net.wifi.WifiManager
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -20,7 +17,6 @@ import com.quyen.smarthome.databinding.FragmentHomeBinding
 import com.quyen.smarthome.ui.home.adapter.FavoriteDeviceAdapter
 import com.quyen.smarthome.ui.room.listrooms.adapter.ListItemHomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -33,7 +29,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         FavoriteDeviceAdapter(::onItemDeviceClick)
     }
     private val roomAdapter: ListItemHomeAdapter by lazy {
-        ListItemHomeAdapter(::onItemRoomClick, onSwitchClick)
+        ListItemHomeAdapter(::onItemRoomClick, ::onSwitchClick)
     }
 
     private val mResultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -71,12 +67,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun onItemRoomClick(room: Room) {
-        findNavController().navigate(R.id.action_homeFragment_to_roomDetailFragment)
+        val action = HomeFragmentDirections.actionHomeFragmentToRoomDetailFragment(room)
+        findNavController().navigate(action)
     }
 
-    private val onSwitchClick = object : CompoundButton.OnCheckedChangeListener {
-        override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
-
-        }
+    private fun onSwitchClick(room: Room) {
     }
 }
