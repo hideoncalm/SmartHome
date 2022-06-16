@@ -1,9 +1,11 @@
 package com.quyen.smarthome.ui.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quyen.smarthome.data.model.Device
+import com.quyen.smarthome.data.model.Home
 import com.quyen.smarthome.data.model.Room
 import com.quyen.smarthome.data.repository.DeviceRepository
 import com.quyen.smarthome.data.repository.RoomRepository
@@ -23,7 +25,9 @@ class HomeViewModel @Inject constructor(
 
     val devices: LiveData<List<Device>> = deviceRepo.getLocalFavoriteDevices()
 
-    val rooms: LiveData<List<Room>> = roomRepo.getLocalRooms()
+    private val _rooms: MutableLiveData<MutableList<Room>> = MutableLiveData()
+    val rooms: MutableLiveData<MutableList<Room>>
+        get() = _rooms
 
     init {
         getDevices()
@@ -50,4 +54,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getRoomsByHomeId(home: Home) {
+        viewModelScope.launch {
+            val rooms = roomRepo.getRoomsByHomeId(home.home_id) as MutableList<Room>
+            _rooms.postValue(rooms)
+        }
+    }
 }

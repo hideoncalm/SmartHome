@@ -21,6 +21,8 @@ class RoomRepositoryImp @Inject constructor(
 
     override suspend fun getLocalRoomById(roomId: String): Room? = local.getRoomById(roomId)
 
+    override suspend fun getRoomsByHomeId(homeId: String): List<Room> = local.getRoomsByHomeId(homeId)
+
     override suspend fun getRooms(): List<Room> = remote.getRooms()
 
     override suspend fun insertRoom(room: Room): Boolean = remote.insertRoom(room)

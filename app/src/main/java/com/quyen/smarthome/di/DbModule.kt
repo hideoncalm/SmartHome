@@ -2,19 +2,16 @@ package com.quyen.smarthome.di
 
 import com.google.firebase.database.FirebaseDatabase
 import com.quyen.smarthome.data.DeviceDataSource
+import com.quyen.smarthome.data.HouseDataSource
 import com.quyen.smarthome.data.RoomDataSource
-import com.quyen.smarthome.data.repository.DeviceRepository
-import com.quyen.smarthome.data.repository.RoomRepository
-import com.quyen.smarthome.data.repository.SceneRepository
-import com.quyen.smarthome.data.repository.TimeRepository
-import com.quyen.smarthome.data.repository.imp.DeviceRepositoryImp
-import com.quyen.smarthome.data.repository.imp.RoomRepositoryImp
-import com.quyen.smarthome.data.repository.imp.SceneRepositoryImp
-import com.quyen.smarthome.data.repository.imp.TimeRepositoryImp
+import com.quyen.smarthome.data.repository.*
+import com.quyen.smarthome.data.repository.imp.*
 import com.quyen.smarthome.data.source.local.DeviceLocalDataSource
+import com.quyen.smarthome.data.source.local.HomeLocalDataSource
 import com.quyen.smarthome.data.source.local.RoomLocalDataSource
 import com.quyen.smarthome.data.source.local.TimeDao
 import com.quyen.smarthome.data.source.remote.DeviceRemoteDataSource
+import com.quyen.smarthome.data.source.remote.HomeRemoteDataSource
 import com.quyen.smarthome.data.source.remote.RoomRemoteDataSource
 import dagger.Module
 import dagger.Provides
@@ -66,4 +63,21 @@ object DbModule {
     @Singleton
     @Provides
     fun provideSceneRepo(timeDao: TimeDao): SceneRepository = SceneRepositoryImp(timeDao)
+
+    @Singleton
+    @Provides
+    fun provideHomeRemote(firebase: FirebaseDatabase): HouseDataSource.Remote =
+        HomeRemoteDataSource(firebase)
+
+    @Singleton
+    @Provides
+    fun provideHomeLocal(timeDao: TimeDao): HouseDataSource.Local = HomeLocalDataSource(timeDao)
+
+    @Provides
+    @Singleton
+    fun provideHomeRepository(
+        local: HouseDataSource.Local,
+        remote: HouseDataSource.Remote
+    ): HomeRepository = HomeRepositoryImp(remote, local)
+
 }

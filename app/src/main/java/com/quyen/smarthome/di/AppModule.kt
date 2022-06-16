@@ -4,7 +4,10 @@ import android.app.AlarmManager
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.quyen.smarthome.data.source.local.TimeDatabase
 import com.quyen.smarthome.data.source.remote.util.APIConfig
 import com.quyen.smarthome.data.source.remote.util.APIService
@@ -33,7 +36,7 @@ object AppModule {
     fun provideOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client =  OkHttpClient.Builder()
+        val client = OkHttpClient.Builder()
             .readTimeout(10, TimeUnit.SECONDS)
             .connectTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(logging)
@@ -68,7 +71,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideFirebaseDatabase(): FirebaseDatabase =
-        FirebaseDatabase.getInstance("https://smarthome-e6d0f-default-rtdb.asia-southeast1.firebasedatabase.app")
+        FirebaseDatabase.getInstance("https://iot-project-ebf71-default-rtdb.asia-southeast1.firebasedatabase.app")
 
     @Singleton
     @Provides
@@ -96,4 +99,7 @@ object AppModule {
     fun provideAlarmManager(@ApplicationContext app: Context): AlarmManager =
         app.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
+    @Singleton
+    @Provides
+    fun provideFirebaseAuthentication() : FirebaseAuth = FirebaseAuth.getInstance()
 }

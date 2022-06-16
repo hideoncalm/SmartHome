@@ -7,9 +7,12 @@ import javax.inject.Inject
 
 class RoomLocalDataSource @Inject constructor(
     private val timeDao: TimeDao
-) : RoomDataSource.Local{
+) : RoomDataSource.Local {
 
     override fun getRooms(): LiveData<List<Room>> = timeDao.getRooms()
+
+    override suspend fun getRoomsByHomeId(homeId: String): List<Room> =
+        timeDao.getRoomsByHomeId(homeId)
 
     override suspend fun insertRoom(room: Room) = timeDao.insertRoom(room)
 

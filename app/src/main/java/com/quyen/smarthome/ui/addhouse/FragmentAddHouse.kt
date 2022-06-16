@@ -19,7 +19,7 @@ class FragmentAddHouse : BaseFragment<FragmentHouseBinding>() {
     private val houseAdapter: HouseAdapter by lazy {
         HouseAdapter(::onItemHouseClick)
     }
-    private val viewModel : FragmentAddHouseViewModel by viewModels()
+    private val viewModel: FragmentAddHouseViewModel by viewModels()
 
     override fun initViews() {
         binding.recyclerHome.adapter = houseAdapter
@@ -30,11 +30,13 @@ class FragmentAddHouse : BaseFragment<FragmentHouseBinding>() {
 
     override fun initData() {
         viewModel.houses.observe(viewLifecycleOwner, {
-            houseAdapter.updateData(it)
+            houseAdapter.updateData(it as MutableList<Home>)
         })
     }
 
     private fun onItemHouseClick(house: Home) {
         // go to house detail fragment
+        val action = FragmentAddHouseDirections.actionFragmentAddHouseToHomeFragment(house)
+        findNavController().navigate(action)
     }
 }

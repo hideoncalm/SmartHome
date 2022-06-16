@@ -13,22 +13,31 @@
         <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/fragment_user.xml" value="0.3625" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/bg_circle_button.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/bg_circle_button_on.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/button_login_bg.xml" value="0.37083333333333335" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_add_device.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_add_home.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_baseline_add_home.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_clock.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_clock_timmer.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_email.xml" value="0.37083333333333335" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_lock.xml" value="0.37083333333333335" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_logo.xml" value="0.37083333333333335" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_logo_bg.xml" value="0.37083333333333335" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_manager_home.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_power.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/drawable/ic_profile.xml" value="0.37083333333333335" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_account.xml" value="0.3546875" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_add_device.xml" value="0.3546875" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_device_detail.xml" value="0.34646739130434784" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_house.xml" value="0.17046605876393112" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_list_new_device.xml" value="0.34646739130434784" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_login.xml" value="0.3546875" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_pager_list_item.xml" value="0.34646739130434784" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_room_detail.xml" value="0.3546875" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_scences.xml" value="0.3546875" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_select_alarm.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_sign_up.xml" value="0.3546875" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/fragment_user.xml" value="0.34646739130434784" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/item_device.xml" value="0.34646739130434784" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/item_room.xml" value="0.34646739130434784" />

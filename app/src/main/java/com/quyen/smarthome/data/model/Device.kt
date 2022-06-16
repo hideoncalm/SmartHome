@@ -22,7 +22,6 @@ data class Device(
         var diffUtil = object : DiffUtil.ItemCallback<Device>() {
             override fun areItemsTheSame(oldItem: Device, newItem: Device): Boolean {
                 return oldItem.device_id == newItem.device_id
-
             }
 
             override fun areContentsTheSame(oldItem: Device, newItem: Device): Boolean {

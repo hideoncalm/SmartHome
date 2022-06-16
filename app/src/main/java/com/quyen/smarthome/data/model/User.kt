@@ -6,13 +6,13 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User(
-    var id: String = "",
     var account: String = "",
     var password: String = "",
     var name: String = "",
     var imageURI: String = "",
-    var homeId: String = ""
-) : Parcelable {
+    var homeId: String = "",
+    var id: Int = (System.currentTimeMillis() % Int.MAX_VALUE).toInt(),
+    ) : Parcelable {
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<User>() {

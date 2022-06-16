@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quyen.smarthome.data.model.Home
+import com.quyen.smarthome.data.repository.HomeRepository
 import com.quyen.smarthome.data.source.remote.HomeRemoteDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,12 +13,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FragmentAddHouseViewModel @Inject constructor(
-    private val homeRepo : HomeRemoteDataSource
-) : ViewModel(){
+    private val homeRepo: HomeRepository
+) : ViewModel() {
 
-    private val _houses = MutableLiveData<MutableList<Home>>()
-    val houses: LiveData<MutableList<Home>>
-        get() = _houses
+    val houses: LiveData<List<Home>> = homeRepo.getLocalHomes()
 
     init {
         getHouses()
@@ -25,13 +24,17 @@ class FragmentAddHouseViewModel @Inject constructor(
 
     private fun getHouses() {
         viewModelScope.launch {
-            _houses.postValue(homeRepo.getHomes() as MutableList<Home>?)
+            val houses = homeRepo.getHomes() as MutableList<Home>
+            for (house in houses) {
+                homeRepo.insertLocalHome(house)
+            }
         }
     }
 
     fun insertHome(home: Home) {
         viewModelScope.launch {
             homeRepo.insertHome(home)
+            homeRepo.insertLocalHome(home)
         }
     }
 }

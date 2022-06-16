@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_navigation"
-    app:startDestination="@id/sceneFragment">
+    app:startDestination="@id/fragmentAccount">
 
     <fragment
         android:id="@+id/sceneFragment"
@@ -28,6 +28,10 @@
         <action
             android:id="@+id/action_homeFragment_to_fragmentDeviceDetail"
             app:destination="@id/fragmentDeviceDetail" />
+        <argument
+            android:name="home"
+            app:argType="com.quyen.smarthome.data.model.Home"/>
+
     </fragment>
     <fragment
         android:id="@+id/myProfileFragment"
@@ -56,6 +60,9 @@
         <action
             android:id="@+id/action_fragmentAddHouse_to_myProfileFragment"
             app:destination="@id/myProfileFragment" />
+        <action
+            android:id="@+id/action_fragmentAddHouse_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentDeviceDetail"
@@ -117,6 +124,26 @@
         <argument
             android:name="scene"
             app:argType="com.quyen.smarthome.ui.scenes.adapter.Scene" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAccount"
+        android:name="com.quyen.smarthome.ui.login.FragmentAccount"
+        android:label="FragmentAccount" >
+        <action
+            android:id="@+id/action_fragmentAccount_to_fragmentAddHouse"
+            app:destination="@id/fragmentAddHouse" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentLogin"
+        android:name="com.quyen.smarthome.ui.login.login.FragmentLogin"
+        android:label="FragmentLogin" />
+    <fragment
+        android:id="@+id/fragmentSignUp"
+        android:name="com.quyen.smarthome.ui.login.signup.FragmentSignUp"
+        android:label="FragmentSignUp" >
+        <action
+            android:id="@+id/action_fragmentSignUp_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
     </fragment>
 
 </navigation>

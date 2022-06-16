@@ -37,6 +37,7 @@ object Constant {
     const val DEVICE_STATE_KEY = "DEVICE_STATE_KEY"
     const val SOURCE_DIRECTION = "srcDirection"
     const val SCENE_KEY = "scene"
+    const val HOME_KEY = "home"
     const val BUNDLE_ALARM = "BUNDLE_ALARM"
 
     const val KEY_DIALOG_COUNTER_TO_DEVICE_DETAIL = "KEY_DIALOG_COUNTER_TO_DEVICE_DETAIL"

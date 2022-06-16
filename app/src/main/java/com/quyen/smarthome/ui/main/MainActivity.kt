@@ -1,8 +1,10 @@
 package com.quyen.smarthome.ui.main
 
+import android.content.Intent
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseActivity
 import com.quyen.smarthome.data.source.remote.UserRemoteDataSource
@@ -24,6 +26,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     @Inject
     lateinit var mqttClient: MqttAndroidClient
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun initViews() {
         setUpBottomNavigation()
@@ -47,8 +52,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
         binding.bottomNavigation.apply {
             setupWithNavController(navController)
-            selectedItemId = R.id.homeFragment
             setOnItemReselectedListener { }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 

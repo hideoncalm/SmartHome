@@ -9,6 +9,7 @@ interface RoomRepository {
     suspend fun deleteLocalRoom(room: Room)
     fun getLocalRooms(): LiveData<List<Room>>
     suspend fun getLocalRoomById(roomId: String): Room?
+    suspend fun getRoomsByHomeId(homeId: String): List<Room>
 
     suspend fun getRooms() : List<Room>
     suspend fun insertRoom(room: Room) : Boolean

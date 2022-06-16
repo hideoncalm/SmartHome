@@ -2,9 +2,7 @@ package com.quyen.smarthome.data.source.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.quyen.smarthome.data.model.AlarmTime
-import com.quyen.smarthome.data.model.Device
-import com.quyen.smarthome.data.model.DeviceTime
+import com.quyen.smarthome.data.model.*
 import com.quyen.smarthome.data.model.Room
 import com.quyen.smarthome.ui.scenes.adapter.Scene
 
@@ -94,6 +92,9 @@ interface TimeDao {
     @Query("select * from room")
     fun getRooms(): LiveData<List<Room>>
 
+    @Query("select * from room where room_home_id like :homeId")
+    suspend fun getRoomsByHomeId(homeId: String): List<Room>
+
     @Query("select * from room where room_id like :roomId")
     suspend fun getRoomById(roomId: String): Room?
 
@@ -108,4 +109,20 @@ interface TimeDao {
                 "group by hour, minute"
     )
     fun getScenes(): LiveData<List<Scene>>
+
+    /*
+        house
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertHome(home: Home)
+
+    @Update
+    suspend fun updateHome(home: Home)
+
+    @Delete
+    suspend fun deleteHome(home: Home)
+
+    @Query("select * from home")
+    fun getHomes(): LiveData<List<Home>>
+
 }
