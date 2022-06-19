@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseFragment
 import com.quyen.smarthome.databinding.FragmentAddDeviceBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,7 +55,7 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
     override fun initViews() {
         spinnerAdapter = ArrayAdapter<String>(
             requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
+            R.layout.item_spinner,
             arrayList
         )
 

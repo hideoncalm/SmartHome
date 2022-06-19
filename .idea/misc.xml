@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.13134057971014493" />
         <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/drawable/ic_add_device.xml" value="0.37864583333333335" />
         <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/AndroidStudioP/SmartHome/app/src/main/res/layout/fragment_analysis.xml" value="0.3625" />
@@ -37,7 +38,9 @@
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/layout/item_user.xml" value="0.34646739130434784" />
         <entry key="..\:/AndroidStudioProject/SmartHome/app/src/main/res/xml/network_security_config.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/drawable/bg_bottom_nav.xml" value="0.10520833333333333" />
+        <entry key="app/src/main/res/drawable/bg_button_black_alpha.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/bg_circle_button.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable/bg_custom_spinner.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/bg_edit_text.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/bg_rounded_stroke_black.xml" value="0.20615384615384616" />
         <entry key="app/src/main/res/drawable/bg_rounded_stroke_white.xml" value="0.20615384615384616" />
@@ -45,8 +48,16 @@
         <entry key="app/src/main/res/drawable/button_login_bg.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_add_device.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_add_home.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_arrow_drop_down.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_back_black.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_drop_down_spinner.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_email.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_home_black.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_lock.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_login_bg.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_manager_home.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_person_black.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_room.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_unfavorite.xml" value="0.209375" />
         <entry key="app/src/main/res/font/lato.xml" value="0.2234375" />
@@ -76,6 +87,7 @@
         <entry key="app/src/main/res/layout/item_house.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_room.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_scene.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_spinner.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_used_time.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_user.xml" value="0.1539855072463768" />
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.19322916666666667" />
