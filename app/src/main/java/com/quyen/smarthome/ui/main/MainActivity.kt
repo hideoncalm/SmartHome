@@ -1,6 +1,6 @@
 package com.quyen.smarthome.ui.main
 
-import android.content.Intent
+import android.content.SharedPreferences
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -11,6 +11,7 @@ import com.quyen.smarthome.data.source.remote.UserRemoteDataSource
 import com.quyen.smarthome.databinding.ActivityMainBinding
 import com.quyen.smarthome.service.disconnectMqtt
 import com.quyen.smarthome.service.mqttClientConnect
+import com.quyen.smarthome.utils.Constant
 import dagger.hilt.android.AndroidEntryPoint
 import org.eclipse.paho.android.service.MqttAndroidClient
 import timber.log.Timber
@@ -29,6 +30,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun initViews() {
         setUpBottomNavigation()
@@ -58,10 +62,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onStart() {
         super.onStart()
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser == null) {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
+//        val currentUser = firebaseAuth.currentUser
+//        if (currentUser == null) {
+//            startActivity(Intent(this, MainActivity::class.java))
+//        }
     }
 
     override fun onDestroy() {

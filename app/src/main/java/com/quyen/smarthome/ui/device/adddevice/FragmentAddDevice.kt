@@ -99,8 +99,8 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
             viewModel.wifiBSSID = it.ssid
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context!!.checkSelfPermission(Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(Manifest.permission.ACCESS_WIFI_STATE), 0)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context!!.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
         } else {
             scanWifi()
         }

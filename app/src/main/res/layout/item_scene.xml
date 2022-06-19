@@ -42,6 +42,7 @@
         android:ellipsize="end"
         android:fontFamily="@font/lato"
         android:lines="1"
+        android:textColor="@color/black"
         android:text="Kitchen"
         app:layout_constraintBottom_toBottomOf="@id/imageDevice"
         app:layout_constraintStart_toStartOf="@id/textDeviceName" />

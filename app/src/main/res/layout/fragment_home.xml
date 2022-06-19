@@ -4,18 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:paddingHorizontal="25dp">
+    android:background="@color/green_bg">
+
+    <View
+        android:id="@+id/viewToolbar"
+        android:layout_width="0dp"
+        android:background="@color/green_388E3C"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/viewPower"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
         android:fontFamily="@font/lato"
         android:text="Wellcome Home,"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,20 +36,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/lato"
-        android:text="Yua Mikami"
-        android:textColor="@color/black"
+        android:text="Le Ngoc Quyen"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textWelcome"
         app:layout_constraintTop_toBottomOf="@id/textWelcome" />
 
     <ImageButton
         android:id="@+id/buttonAddDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?selectableItemBackground"
         android:contentDescription="@null"
         android:src="@drawable/ic_add_device"
+        android:layout_marginEnd="25dp"
         app:layout_constraintBottom_toBottomOf="@id/textName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/textWelcome" />
@@ -48,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:background="@color/white"
+        android:background="?selectableItemBackground"
         android:contentDescription="@null"
         android:src="@drawable/ic_manager_home"
         app:layout_constraintEnd_toStartOf="@id/buttonAddDevice"
@@ -60,6 +72,7 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="25dp"
         android:background="@drawable/bg_rounded_stroke_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,8 +123,8 @@
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_rounded_stroke_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/viewPower"
+        app:layout_constraintStart_toStartOf="@id/viewPower"
         app:layout_constraintTop_toBottomOf="@id/viewPower" />
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -162,7 +175,7 @@
         android:text="Favorite Devices"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/viewPower"
         app:layout_constraintTop_toBottomOf="@id/viewTempHum" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -171,8 +184,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/viewPower"
+        app:layout_constraintStart_toStartOf="@id/viewPower"
         app:layout_constraintTop_toBottomOf="@id/textFavorite"
         app:spanCount="2"
         tools:listitem="@layout/item_device" />
@@ -195,8 +208,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/viewPower"
+        app:layout_constraintStart_toStartOf="@id/viewPower"
         app:layout_constraintTop_toBottomOf="@id/textRoom"
         app:spanCount="1"
         tools:listitem="@layout/item_room" />

@@ -17,5 +17,6 @@
     <color name="F2F2F2">#F2F2F2</color>
     <color name="red_F44336">#F44336</color>
     <color name="green_388E3C">#388E3C</color>
+    <color name="green_bg">#F1F8E9</color>
     <color name="purple_heart">#5D20CD</color>
 </resources>

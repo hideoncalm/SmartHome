@@ -50,4 +50,8 @@ object Constant {
     const val QOS = 1
     const val ON = "on"
     const val OFF = "off"
+
+    const val SHARED_USER_KEY = "SHARED_USER_KEY"
+    const val SHARED_PASSWORD_KEY = "SHARED_PASSWORD_KEY"
+
 }

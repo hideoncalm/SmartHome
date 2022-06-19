@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/green_bg">
 
     <View
         android:id="@+id/viewToolbar"
         android:layout_width="0dp"
+        android:background="@color/green_388E3C"
         android:layout_height="?actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,12 +31,94 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:fontFamily="@font/lato"
-        android:text="Add Home"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:text="Create Home"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonBack"
         app:layout_constraintTop_toTopOf="@id/buttonBack" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tipHomeName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:boxStrokeColor="@null"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewToolbar">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textHomeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edit_text"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="25dp"
+            android:hint="Home Name"
+            android:inputType="textEmailAddress"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tipHomeAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@null"
+        android:textColorHint="@color/black"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tipHomeName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textHomeAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="25dp"
+            android:background="@drawable/bg_edit_text"
+            android:hint="Home Address"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/imageHome"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="20dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/buttonChooseImage"
+        app:layout_constraintEnd_toEndOf="@id/buttonChooseImage"
+        app:layout_constraintStart_toStartOf="@id/buttonChooseImage"
+        app:layout_constraintTop_toBottomOf="@id/tipHomeAddress" />
+
+    <Button
+        android:id="@+id/buttonChooseImage"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_login_bg"
+        android:text="Choose Image"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/buttonCreateHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonCreateHome"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_login_bg"
+        android:text="Create Home"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_fragmentAddHouse_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_fragmentAddHouse_to_fragmentCreateHome"
+            app:destination="@id/fragmentCreateHome" />
     </fragment>
     <fragment
         android:id="@+id/fragmentDeviceDetail"
@@ -145,5 +148,9 @@
             android:id="@+id/action_fragmentSignUp_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentCreateHome"
+        android:name="com.quyen.smarthome.ui.createhouse.FragmentCreateHome"
+        android:label="FragmentCreateHome" />
 
 </navigation>

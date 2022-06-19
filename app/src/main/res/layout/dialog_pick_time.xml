@@ -11,6 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:padding="20dp">
 
         <TextView
@@ -22,17 +23,21 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/editHour"
+            app:layout_constraintBottom_toBottomOf="@id/editHour"/>
 
         <EditText
             android:id="@+id/editHour"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@drawable/bg_edit_text"
             android:layout_marginHorizontal="30dp"
             android:textSize="15sp"
+            android:gravity="center"
+            android:inputType="number"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/textHour"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/textHour" />
 
@@ -45,8 +50,9 @@
             android:text="Minute"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textHour" />
+            app:layout_constraintStart_toStartOf="@id/textHour"
+            app:layout_constraintTop_toTopOf="@id/editMinute"
+            app:layout_constraintBottom_toBottomOf="@id/editMinute"/>
 
         <EditText
             android:id="@+id/editMinute"
@@ -54,10 +60,14 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:background="@drawable/bg_edit_text"
             app:layout_constraintEnd_toEndOf="@id/editHour"
             app:layout_constraintTop_toBottomOf="@id/editHour"
-            app:layout_constraintStart_toStartOf="@id/editHour"
-            app:layout_constraintBottom_toBottomOf="@id/textMinute" />
+            app:layout_constraintStart_toStartOf="@id/editHour"/>
 
         <TextView
             android:id="@+id/textSecond"
@@ -68,17 +78,22 @@
             android:text="Second"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textMinute" />
+            app:layout_constraintBottom_toBottomOf="@id/editSecond"
+            app:layout_constraintStart_toStartOf="@id/textHour"
+            app:layout_constraintTop_toTopOf="@id/editSecond" />
 
         <EditText
             android:id="@+id/editSecond"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textSize="15sp"
+            android:background="@drawable/bg_edit_text"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/editMinute"
-            app:layout_constraintBottom_toBottomOf="@id/textSecond"
             app:layout_constraintEnd_toEndOf="@id/editHour"
             app:layout_constraintStart_toStartOf="@id/editHour" />
 
@@ -89,6 +104,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_rounded_stroke_white"
             android:text="Start Timer"
+            android:textColor="@color/black"
             android:textAllCaps="false"
             app:layout_constraintEnd_toStartOf="@id/buttonStopTimer"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +117,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_rounded_stroke_white"
             android:text="Cancel Timer"
+            android:textColor="@color/black"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/buttonStartTimer"

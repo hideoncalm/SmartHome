@@ -4,28 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:paddingHorizontal="25dp">
+    android:background="@color/green_bg">
+
+    <View
+        android:id="@+id/viewToolbar"
+        android:layout_width="0dp"
+        android:background="@color/green_388E3C"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="?selectableItemBackground"
         android:contentDescription="@null"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:background="?selectableItemBackground"
         android:src="@drawable/ic_back_black"
-        app:layout_constraintBottom_toBottomOf="@id/imageAvatar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/viewToolbar"
+        app:layout_constraintStart_toStartOf="@id/viewToolbar"
+        app:layout_constraintTop_toTopOf="@id/viewToolbar" />
 
     <TextView
         android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato"
-        android:text="Hey Miakami"
+        android:text="Hey Quyen"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/buttonBack"
         app:layout_constraintTop_toTopOf="@id/buttonBack" />
@@ -35,10 +44,12 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:scaleType="fitCenter"
+        android:background="@color/white"
         android:src="@drawable/jisoo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/viewToolbar"
+        app:layout_constraintTop_toTopOf="@id/viewToolbar"
         app:shapeAppearance="@style/RoundedImage" />
 
     <TextView
@@ -46,9 +57,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
         android:fontFamily="@font/lato"
         android:text="Projects"
-        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageAvatar" />
 
@@ -57,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add_home"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="@id/textHouse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/textHouse" />
@@ -66,7 +81,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:paddingStart="50dp"
+        android:paddingEnd="0dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

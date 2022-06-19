@@ -41,6 +41,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato"
         android:text="Kitchen"
+        android:textColor="@color/black"
         android:lines="1"
         android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="parent"

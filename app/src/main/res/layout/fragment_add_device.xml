@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:background="@color/green_bg">
 
     <View
         android:id="@+id/viewToolbar"
         android:layout_width="0dp"
+        android:background="@color/green_388E3C"
         android:layout_height="?actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +32,8 @@
         android:layout_marginStart="30dp"
         android:fontFamily="@font/lato"
         android:text="Chon mang Wifi"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonBack"
@@ -43,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
         android:text="Chon mang Wifi"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -54,9 +56,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:textStyle="bold"
         android:text="Thiet bi nay chi ho tro ket noi Wifi 2.4Ghz"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/textSelectWifi"
         app:layout_constraintTop_toBottomOf="@id/textSelectWifi" />
 
     <TextView
@@ -66,13 +70,16 @@
         android:layout_marginTop="50dp"
         android:text="Wifi Name"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/textWarning"
         app:layout_constraintTop_toBottomOf="@id/textWarning" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinnerWifi"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/C1C1C1"
+        android:layout_marginHorizontal="30dp"
         app:layout_constraintBottom_toBottomOf="@id/textWifi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textWifi"
@@ -85,17 +92,31 @@
         android:layout_marginTop="15dp"
         android:text="Password"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/tipPassword"
+        app:layout_constraintStart_toStartOf="@id/textWifi"
         app:layout_constraintTop_toBottomOf="@id/textWifi" />
 
-    <EditText
-        android:id="@+id/editPasswordWifi"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tipPassword"
         android:layout_width="0dp"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/textPassWifi"
+        app:boxStrokeColor="@null"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="@id/spinnerWifi"
         app:layout_constraintStart_toStartOf="@id/spinnerWifi"
-        app:layout_constraintTop_toTopOf="@id/textPassWifi" />
+        app:layout_constraintTop_toBottomOf="@id/spinnerWifi">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPasswordWifi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edit_text"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -105,20 +126,21 @@
         app:layout_constraintBottom_toTopOf="@id/buttonContinue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editPasswordWifi" />
+        app:layout_constraintTop_toBottomOf="@id/tipPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonContinue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/bg_user_active"
+        android:background="@drawable/button_login_bg"
         android:fontFamily="@font/lato"
         android:text="Continue"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintWidth_percent="0.8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

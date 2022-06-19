@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseFragment
 import com.quyen.smarthome.data.model.Home
 import com.quyen.smarthome.databinding.FragmentHouseBinding
@@ -25,6 +26,9 @@ class FragmentAddHouse : BaseFragment<FragmentHouseBinding>() {
         binding.recyclerHome.adapter = houseAdapter
         binding.buttonBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+        binding.buttonAddHome.setOnClickListener {
+            findNavController().navigate(R.id.action_fragmentAddHouse_to_fragmentCreateHome)
         }
     }
 

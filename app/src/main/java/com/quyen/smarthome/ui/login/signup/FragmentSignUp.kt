@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.quyen.smarthome.base.BaseFragment
+import com.quyen.smarthome.data.model.User
 import com.quyen.smarthome.databinding.FragmentSignUpBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -38,7 +39,7 @@ class FragmentSignUp : BaseFragment<FragmentSignUpBinding>() {
         val email = binding.textPersonEmail.text.toString()
         val password = binding.textPassword.text.toString()
         val confirmPassword = binding.textConfirmPassword.text.toString()
-
+        val userName = binding.textUserName.text.toString()
         Timber.d("LNQ : email : $email, password : $password, confirmPassword : $confirmPassword");
         if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             Snackbar.make(binding.root, "Email or password invalid", Snackbar.LENGTH_SHORT)
@@ -47,7 +48,8 @@ class FragmentSignUp : BaseFragment<FragmentSignUpBinding>() {
             Snackbar.make(binding.root, "password not equals", Snackbar.LENGTH_SHORT)
                 .show()
         } else {
-            viewModel.createUserWithEmail(email, password)
+            val user = User(email, password, userName)
+            viewModel.createUserWithEmail(user)
         }
     }
 }

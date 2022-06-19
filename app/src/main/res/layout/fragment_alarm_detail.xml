@@ -3,19 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="15dp">
+    android:background="@color/green_bg">
+
+    <View
+        android:id="@+id/viewToolbar"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        android:background="@color/green_388E3C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:layout_margin="10dp"
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:background="?selectableItemBackground"
         android:contentDescription="@null"
         android:src="@drawable/ic_back_black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/viewToolbar"
+        app:layout_constraintStart_toStartOf="@id/viewToolbar"
+        app:layout_constraintTop_toTopOf="@id/viewToolbar" />
 
     <TextView
         android:id="@+id/textToolbarTitle"
@@ -24,8 +33,9 @@
         android:layout_marginStart="30dp"
         android:fontFamily="@font/lato"
         android:text="Device Detail"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonBack"
         app:layout_constraintTop_toTopOf="@id/buttonBack" />
@@ -34,6 +44,7 @@
         android:id="@+id/textHour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:fontFamily="@font/lato"
         android:text="Hour"
         android:textColor="@color/black"
@@ -47,7 +58,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_edit_text"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="15sp"
@@ -73,8 +85,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:textColor="@color/black"
+        android:background="@drawable/bg_edit_text"
         android:gravity="center"
+        android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@id/textMinute"
         app:layout_constraintTop_toTopOf="@id/editHour"
@@ -84,7 +97,7 @@
         android:id="@+id/textMonday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/lato"
         android:text="Monday"
         android:textColor="@color/black"
@@ -96,6 +109,7 @@
         android:id="@+id/checkMonday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
         android:checked="false"
         app:layout_constraintBottom_toBottomOf="@id/textMonday"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +119,7 @@
         android:id="@+id/textTue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato"
         android:text="Tuesday"
         android:textColor="@color/black"
@@ -119,14 +133,14 @@
         android:layout_height="wrap_content"
         android:checked="false"
         app:layout_constraintBottom_toBottomOf="@id/textTue"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/checkMonday"
         app:layout_constraintTop_toTopOf="@id/textTue" />
 
     <TextView
         android:id="@+id/textWed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato"
         android:text="Wednesday"
         android:textColor="@color/black"
@@ -138,16 +152,16 @@
         android:id="@+id/checkWed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/textWed"
         android:checked="false"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/textWed"
+        app:layout_constraintEnd_toEndOf="@id/checkMonday"
         app:layout_constraintTop_toTopOf="@id/textWed" />
 
     <TextView
         android:id="@+id/textThus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato"
         android:text="Thursday"
         android:textColor="@color/black"
@@ -158,17 +172,17 @@
     <CheckBox
         android:id="@+id/checkThus"
         android:layout_width="wrap_content"
-        android:checked="false"
         android:layout_height="wrap_content"
+        android:checked="false"
         app:layout_constraintBottom_toBottomOf="@id/textThus"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/checkMonday"
         app:layout_constraintTop_toTopOf="@id/textThus" />
 
     <TextView
         android:id="@+id/textFri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato"
         android:text="Friday"
         android:textColor="@color/black"
@@ -182,14 +196,14 @@
         android:layout_height="wrap_content"
         android:checked="false"
         app:layout_constraintBottom_toBottomOf="@id/textFri"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/checkMonday"
         app:layout_constraintTop_toTopOf="@id/textFri" />
 
     <TextView
         android:id="@+id/textSat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato"
         android:text="Saturday"
         android:textColor="@color/black"
@@ -203,14 +217,14 @@
         android:layout_height="wrap_content"
         android:checked="false"
         app:layout_constraintBottom_toBottomOf="@id/textSat"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/checkMonday"
         app:layout_constraintTop_toTopOf="@id/textSat" />
 
     <TextView
         android:id="@+id/textSun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato"
         android:text="Sunday"
         android:textColor="@color/black"
@@ -222,18 +236,19 @@
         android:id="@+id/checkSun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/textSun"
         android:checked="false"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/textSun"
+        app:layout_constraintEnd_toEndOf="@id/checkMonday"
         app:layout_constraintTop_toTopOf="@id/textSun" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/checkMonday"
+        app:layout_constraintStart_toStartOf="@id/textHour"
         app:layout_constraintTop_toBottomOf="@id/checkSun">
 
         <RadioButton
@@ -242,8 +257,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="On"
             android:gravity="center"
+            android:text="On"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/radioGroup"
             app:layout_constraintTop_toTopOf="@id/radioGroup" />
 
@@ -255,6 +272,8 @@
             android:checked="true"
             android:gravity="center"
             android:text="Off"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/radioGroup"
             app:layout_constraintTop_toTopOf="@id/radioGroup" />
     </RadioGroup>
@@ -263,25 +282,27 @@
         android:id="@+id/buttonSaveTimer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_rounded_stroke_white"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_login_bg"
         android:text="Save Alarm"
         android:textAllCaps="false"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/buttonDeleteTimer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroup"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.8" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonDeleteTimer"
         android:layout_width="0dp"
+        android:layout_marginBottom="20dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_rounded_stroke_white"
+        android:background="@drawable/button_login_bg"
         android:text="Delete Alarm"
+        android:textColor="@color/white"
         android:textAllCaps="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonSaveTimer"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.8" />
 </androidx.constraintlayout.widget.ConstraintLayout>
