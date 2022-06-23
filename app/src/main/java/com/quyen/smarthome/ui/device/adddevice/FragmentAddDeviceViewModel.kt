@@ -8,6 +8,7 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.quyen.smarthome.base.BaseViewModel
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.DeviceTime
 import com.quyen.smarthome.data.source.local.TimeDao
@@ -23,7 +24,7 @@ import javax.inject.Inject
 class FragmentAddDeviceViewModel @Inject constructor(
     private val espService: APIService,
     private val firebase: FirebaseDatabase
-) : ViewModel() {
+) : BaseViewModel() {
 
 //        http://192.168.4.1/wifisave?s=quyenHaHa&p=0966733413
 

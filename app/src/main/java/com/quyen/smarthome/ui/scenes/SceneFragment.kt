@@ -19,7 +19,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SceneFragment : BaseFragment<FragmentScencesBinding>() {
+class SceneFragment : BaseFragment<FragmentScencesBinding, SceneViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentScencesBinding =
         FragmentScencesBinding::inflate
@@ -27,7 +27,7 @@ class SceneFragment : BaseFragment<FragmentScencesBinding>() {
     @Inject
     lateinit var alarmManager: AlarmManager
 
-    private val viewModel: SceneViewModel by viewModels()
+    override val viewModel: SceneViewModel by viewModels()
 
     private val sceneAdapter by lazy {
         SceneAdapter(::onItemSceneClick, ::onDeleteButtonClick)

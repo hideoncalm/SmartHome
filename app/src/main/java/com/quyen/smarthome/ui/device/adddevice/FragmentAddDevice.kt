@@ -26,12 +26,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding>() {
+class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding, FragmentAddDeviceViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddDeviceBinding =
         FragmentAddDeviceBinding::inflate
 
-    private val viewModel: FragmentAddDeviceViewModel by viewModels()
+    override val viewModel: FragmentAddDeviceViewModel by viewModels()
 
     private var wifiManager: WifiManager? = null
     private var results: List<ScanResult>? = null

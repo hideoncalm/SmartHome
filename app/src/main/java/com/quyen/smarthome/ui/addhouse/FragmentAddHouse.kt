@@ -12,7 +12,7 @@ import com.quyen.smarthome.ui.addhouse.adapter.HouseAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentAddHouse : BaseFragment<FragmentHouseBinding>() {
+class FragmentAddHouse : BaseFragment<FragmentHouseBinding, FragmentAddHouseViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHouseBinding =
         FragmentHouseBinding::inflate
@@ -20,7 +20,7 @@ class FragmentAddHouse : BaseFragment<FragmentHouseBinding>() {
     private val houseAdapter: HouseAdapter by lazy {
         HouseAdapter(::onItemHouseClick)
     }
-    private val viewModel: FragmentAddHouseViewModel by viewModels()
+    override val viewModel: FragmentAddHouseViewModel by viewModels()
 
     override fun initViews() {
         binding.recyclerHome.adapter = houseAdapter

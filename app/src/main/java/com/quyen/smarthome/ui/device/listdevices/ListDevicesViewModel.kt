@@ -3,6 +3,7 @@ package com.quyen.smarthome.ui.device.listdevices
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.quyen.smarthome.base.BaseViewModel
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.DeviceTime
 import com.quyen.smarthome.data.repository.DeviceRepository
@@ -34,7 +35,7 @@ class ListDevicesViewModel @Inject constructor(
     private val mqttClient: MqttAndroidClient,
     private val deviceRepo: DeviceRepository,
     private val timeRepo: TimeRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     val devices: LiveData<List<Device>> = deviceRepo.getLocalDevices()
 

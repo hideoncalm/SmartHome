@@ -30,12 +30,13 @@ import java.lang.Exception
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
-class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding>() {
+class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding, FragmentDeviceDetailViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDeviceDetailBinding =
         FragmentDeviceDetailBinding::inflate
 
-    private val viewModel: FragmentDeviceDetailViewModel by activityViewModels()
+    override val viewModel: FragmentDeviceDetailViewModel by activityViewModels()
+
     private var device: Device? = null
     private val backgroundOn = R.drawable.bg_circle_button_on
     private val backgroundOff = R.drawable.bg_circle_button

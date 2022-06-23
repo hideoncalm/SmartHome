@@ -11,7 +11,7 @@ import com.quyen.smarthome.ui.device.listdevices.adapter.ListDevicesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ListDevicesFragment : BaseFragment<FragmentListDeviceBinding>() {
+class ListDevicesFragment : BaseFragment<FragmentListDeviceBinding, ListDevicesViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentListDeviceBinding =
         FragmentListDeviceBinding::inflate
@@ -20,7 +20,7 @@ class ListDevicesFragment : BaseFragment<FragmentListDeviceBinding>() {
         ListDevicesAdapter(::onItemClick, ::onButtonFavoriteClick, ::onSwitchClick)
     }
 
-    private val viewModel: ListDevicesViewModel by viewModels()
+    override val viewModel: ListDevicesViewModel by viewModels()
 
     override fun initViews() {
         binding.recyclerItem.adapter = newDeviceAdapter

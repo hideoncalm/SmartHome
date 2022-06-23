@@ -19,4 +19,5 @@
     <color name="green_388E3C">#388E3C</color>
     <color name="green_bg">#F1F8E9</color>
     <color name="purple_heart">#5D20CD</color>
+    <color name="color_semi_transparent">#60000000</color>
 </resources>

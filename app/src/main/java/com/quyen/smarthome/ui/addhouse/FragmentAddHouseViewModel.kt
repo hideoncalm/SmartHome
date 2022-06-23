@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.quyen.smarthome.base.BaseViewModel
 import com.quyen.smarthome.data.model.Home
 import com.quyen.smarthome.data.repository.HomeRepository
 import com.quyen.smarthome.data.source.remote.HomeRemoteDataSource
@@ -14,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FragmentAddHouseViewModel @Inject constructor(
     private val homeRepo: HomeRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     val houses: LiveData<List<Home>> = homeRepo.getLocalHomes()
 

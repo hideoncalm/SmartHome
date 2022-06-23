@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.quyen.smarthome.base.BaseViewModel
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.Home
 import com.quyen.smarthome.data.model.Room
@@ -21,7 +22,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val deviceRepo: DeviceRepository,
     private val roomRepo: RoomRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     val devices: LiveData<List<Device>> = deviceRepo.getLocalFavoriteDevices()
 

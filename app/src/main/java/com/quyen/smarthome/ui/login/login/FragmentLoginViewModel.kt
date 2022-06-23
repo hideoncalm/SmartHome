@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.quyen.smarthome.base.BaseViewModel
 import com.quyen.smarthome.data.source.remote.UserRemoteDataSource
 import com.quyen.smarthome.utils.Constant
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +19,7 @@ class FragmentLoginViewModel @Inject constructor(
     private var firebaseAuth: FirebaseAuth,
     private val userRepo: UserRemoteDataSource,
     private var sharePre: SharedPreferences
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _isLoginSucceed: MutableLiveData<Boolean> = MutableLiveData()
     val isLoginSucceed: LiveData<Boolean>
@@ -26,6 +27,7 @@ class FragmentLoginViewModel @Inject constructor(
 
 
     fun loginUser(email: String, password: String) {
+        showLoading()
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
                 // login success
@@ -37,11 +39,15 @@ class FragmentLoginViewModel @Inject constructor(
                             putString(Constant.SHARED_PASSWORD_KEY, u?.user_password)
                         }.apply()
                         _isLoginSucceed.postValue(true)
+                        setMessage("Login Succeed")
                     }
                 }
+                hideLoading()
             } else {
                 // login failed
                 _isLoginSucceed.postValue(false)
+                hideLoading()
+                setMessage("User or password invalid")
             }
         }
     }

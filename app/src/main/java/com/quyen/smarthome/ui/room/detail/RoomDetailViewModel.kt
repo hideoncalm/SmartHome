@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.quyen.smarthome.base.BaseViewModel
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.DeviceTime
 import com.quyen.smarthome.data.model.Room
@@ -30,7 +31,7 @@ class RoomDetailViewModel @Inject constructor(
     private val timeRepo: TimeRepository,
     private val deviceRepository: DeviceRepository,
     private val roomRepository: RoomRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _devices: MutableLiveData<MutableList<Device>> = MutableLiveData()
     val devices: LiveData<MutableList<Device>>

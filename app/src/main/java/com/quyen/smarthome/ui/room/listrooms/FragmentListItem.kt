@@ -12,11 +12,12 @@ import com.quyen.smarthome.ui.room.listrooms.adapter.ListItemHomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentListItem : BaseFragment<FragmentRoomsBinding>() {
+class FragmentListItem : BaseFragment<FragmentRoomsBinding, FragmentListRoomViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRoomsBinding =
         FragmentRoomsBinding::inflate
-    private val roomViewModel: FragmentListRoomViewModel by viewModels()
+
+    override val viewModel: FragmentListRoomViewModel by viewModels()
 
     private val roomAdapter: ListItemHomeAdapter by lazy {
         ListItemHomeAdapter(::onItemHomeClick, ::onSwitchClick)
@@ -27,7 +28,7 @@ class FragmentListItem : BaseFragment<FragmentRoomsBinding>() {
     }
 
     override fun initData() {
-        roomViewModel.rooms.observe(viewLifecycleOwner, {
+        viewModel.rooms.observe(viewLifecycleOwner, {
             roomAdapter.updateData(it as MutableList<Room>)
         })
     }
@@ -40,4 +41,5 @@ class FragmentListItem : BaseFragment<FragmentRoomsBinding>() {
     private fun onSwitchClick(room: Room) {
         findNavController().navigate(R.id.action_fragmentListItem_to_roomDetailFragment)
     }
+
 }

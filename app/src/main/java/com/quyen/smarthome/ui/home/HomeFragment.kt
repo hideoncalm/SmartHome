@@ -21,13 +21,13 @@ import com.quyen.smarthome.utils.Constant
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding =
         FragmentHomeBinding::inflate
 
     private var home : Home? = null
-    private val homeViewModel: HomeViewModel by viewModels()
+    override val viewModel: HomeViewModel by viewModels()
     private val deviceAdapter: FavoriteDeviceAdapter by lazy {
         FavoriteDeviceAdapter(::onItemDeviceClick)
     }
@@ -44,7 +44,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun initViews() {
         home = arguments?.getParcelable(Constant.HOME_KEY)
         home?.let {
-            homeViewModel.getRoomsByHomeId(it)
+            viewModel.getRoomsByHomeId(it)
         }
         binding.apply {
             buttonAddDevice.setOnClickListener {
@@ -60,10 +60,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initData() {
-        homeViewModel.devices.observe(viewLifecycleOwner, {
+        viewModel.devices.observe(viewLifecycleOwner, {
             deviceAdapter.updateData(it as MutableList<Device>)
         })
-        homeViewModel.rooms.observe(viewLifecycleOwner, {
+        viewModel.rooms.observe(viewLifecycleOwner, {
             roomAdapter.updateData(it)
         })
     }

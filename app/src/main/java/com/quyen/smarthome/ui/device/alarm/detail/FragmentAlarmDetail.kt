@@ -19,14 +19,14 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FragmentAlarmDetail : BaseFragment<FragmentAlarmDetailBinding>() {
+class FragmentAlarmDetail : BaseFragment<FragmentAlarmDetailBinding, FragmentAlarmDetailViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAlarmDetailBinding =
         FragmentAlarmDetailBinding::inflate
 
     private var scene: Scene? = null
     private var alarms = mutableListOf<AlarmTime>()
-    private val viewModel: FragmentAlarmDetailViewModel by viewModels()
+    override val viewModel: FragmentAlarmDetailViewModel by viewModels()
 
     @Inject
     lateinit var alarmManager : AlarmManager

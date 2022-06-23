@@ -11,11 +11,13 @@ import com.quyen.smarthome.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
+class FragmentLogin : BaseFragment<FragmentLoginBinding, FragmentLoginViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding =
         FragmentLoginBinding::inflate
-    private val viewModel: FragmentLoginViewModel by viewModels()
+
+
+    override val viewModel: FragmentLoginViewModel by viewModels()
 
     override fun initViews() {
         binding.buttonLogin.setOnClickListener {
@@ -26,11 +28,7 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
     override fun initData() {
         viewModel.isLoginSucceed.observe(viewLifecycleOwner, {
             if (it) {
-                Snackbar.make(binding.root, "Login Succeed", Snackbar.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_fragmentAccount_to_fragmentAddHouse)
-            } else {
-                Snackbar.make(binding.root, "User or password invalid", Snackbar.LENGTH_SHORT)
-                    .show()
             }
         })
     }
@@ -45,4 +43,5 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
             viewModel.loginUser(email, password)
         }
     }
+
 }

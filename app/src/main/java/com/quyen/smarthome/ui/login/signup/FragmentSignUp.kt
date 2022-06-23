@@ -12,11 +12,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class FragmentSignUp : BaseFragment<FragmentSignUpBinding>() {
+class FragmentSignUp : BaseFragment<FragmentSignUpBinding, FragmentSignupViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignUpBinding =
         FragmentSignUpBinding::inflate
-    private val viewModel: FragmentSignupViewModel by viewModels()
+
+    override val viewModel: FragmentSignupViewModel by viewModels()
 
     override fun initViews() {
         binding.buttonSignUp.setOnClickListener {
@@ -25,14 +26,6 @@ class FragmentSignUp : BaseFragment<FragmentSignUpBinding>() {
     }
 
     override fun initData() {
-        viewModel.isSignUpSucceed.observe(viewLifecycleOwner, {
-            if (it) {
-                Snackbar.make(binding.root, "Register Succeed", Snackbar.LENGTH_SHORT).show()
-            } else {
-                Snackbar.make(binding.root, "User or password invalid", Snackbar.LENGTH_SHORT)
-                    .show()
-            }
-        })
     }
 
     private fun createUser() {

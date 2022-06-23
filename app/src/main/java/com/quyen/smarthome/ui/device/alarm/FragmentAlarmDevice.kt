@@ -27,7 +27,7 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FragmentAlarmDevice : BaseFragment<FragmentSelectAlarmBinding>() {
+class FragmentAlarmDevice : BaseFragment<FragmentSelectAlarmBinding, FragmentAddAlarmViewModel>() {
 
     private var device: Device? = null
     private var srcDirection: String = ""
@@ -37,7 +37,7 @@ class FragmentAlarmDevice : BaseFragment<FragmentSelectAlarmBinding>() {
     @Inject
     lateinit var alarmManager: AlarmManager
 
-    private val viewModel: FragmentAddAlarmViewModel by viewModels()
+    override val viewModel: FragmentAddAlarmViewModel by viewModels()
 
     override fun initViews() {
         binding.apply {

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.quyen.smarthome.base.BaseViewModel
 import com.quyen.smarthome.data.model.Room
 import com.quyen.smarthome.data.repository.RoomRepository
 import com.quyen.smarthome.data.source.remote.RoomRemoteDataSource
@@ -14,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FragmentListRoomViewModel @Inject constructor(
     private val roomRepo : RoomRepository
-) : ViewModel(){
+) : BaseViewModel(){
 
     val rooms: LiveData<List<Room>> = roomRepo.getLocalRooms()
 

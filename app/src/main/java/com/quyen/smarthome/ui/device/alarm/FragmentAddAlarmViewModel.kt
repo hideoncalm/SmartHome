@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.quyen.smarthome.base.BaseViewModel
 import com.quyen.smarthome.data.model.AlarmTime
 import com.quyen.smarthome.data.repository.TimeRepository
 import com.quyen.smarthome.data.source.local.TimeDao
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FragmentAddAlarmViewModel @Inject constructor(
     private val timeRepo: TimeRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _result : MutableLiveData<Boolean> = MutableLiveData()
     val result : LiveData<Boolean>

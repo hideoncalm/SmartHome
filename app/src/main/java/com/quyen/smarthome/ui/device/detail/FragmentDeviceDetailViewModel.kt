@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.quyen.smarthome.base.BaseViewModel
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.DeviceTime
 import com.quyen.smarthome.data.repository.TimeRepository
@@ -32,7 +33,7 @@ class FragmentDeviceDetailViewModel @Inject constructor(
     private val espService: APIService,
     private val mqttClient: MqttAndroidClient,
     private val timeRepo: TimeRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     // device State
     private val _isOn: MutableLiveData<Boolean> = MutableLiveData()

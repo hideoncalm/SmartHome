@@ -13,12 +13,12 @@ import com.quyen.smarthome.utils.Constant.ROOM_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RoomDetailFragment : BaseFragment<FragmentRoomDetailBinding>() {
+class RoomDetailFragment : BaseFragment<FragmentRoomDetailBinding, RoomDetailViewModel>() {
 
     lateinit var room: Room
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRoomDetailBinding =
         FragmentRoomDetailBinding::inflate
-    private val viewModel: RoomDetailViewModel by viewModels()
+    override val viewModel: RoomDetailViewModel by viewModels()
 
     private val deviceAdapter by lazy {
         FavoriteDeviceAdapter(::onItemDeviceClick)

@@ -13,11 +13,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FragmentCreateHome : BaseFragment<FragmentAddHomeBinding>() {
+class FragmentCreateHome : BaseFragment<FragmentAddHomeBinding, FragmentCreateHomeViewModel>() {
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddHomeBinding =
         FragmentAddHomeBinding::inflate
-    private val viewModel: FragmentCreateHomeViewModel by viewModels()
+    override val viewModel: FragmentCreateHomeViewModel by viewModels()
 
     @Inject
     lateinit var sharePre: SharedPreferences
