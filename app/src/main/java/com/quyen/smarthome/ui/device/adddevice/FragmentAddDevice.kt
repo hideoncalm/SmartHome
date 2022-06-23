@@ -104,6 +104,7 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding, FragmentAddDevi
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
         } else {
             scanWifi()
+            viewModel.showLoading()
         }
     }
 
@@ -127,6 +128,7 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding, FragmentAddDevi
                 Timber.d("WIFIScannerActivity: WIFI SSID: $wifi_ssid capacity : $cap")
                 arrayList.add(scanResult.SSID)
             }
+            viewModel.hideLoading()
             spinnerAdapter!!.notifyDataSetChanged()
         }
     }
