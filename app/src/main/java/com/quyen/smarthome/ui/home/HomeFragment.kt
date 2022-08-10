@@ -43,9 +43,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun initViews() {
         home = arguments?.getParcelable(Constant.HOME_KEY)
-        home?.let {
-            viewModel.getRoomsByHomeId(it)
-        }
         binding.apply {
             buttonAddDevice.setOnClickListener {
                 val intent = Intent(WifiManager.ACTION_PICK_WIFI_NETWORK)
@@ -64,7 +61,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             deviceAdapter.updateData(it as MutableList<Device>)
         })
         viewModel.rooms.observe(viewLifecycleOwner, {
-            roomAdapter.updateData(it)
+            roomAdapter.updateData(it as MutableList<Room>)
         })
     }
 

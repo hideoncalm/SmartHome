@@ -26,9 +26,7 @@ class HomeViewModel @Inject constructor(
 
     val devices: LiveData<List<Device>> = deviceRepo.getLocalFavoriteDevices()
 
-    private val _rooms: MutableLiveData<MutableList<Room>> = MutableLiveData()
-    val rooms: MutableLiveData<MutableList<Room>>
-        get() = _rooms
+    val rooms: LiveData<List<Room>> = roomRepo.getLocalRooms()
 
     init {
         getDevices()
@@ -55,10 +53,4 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getRoomsByHomeId(home: Home) {
-        viewModelScope.launch {
-            val rooms = roomRepo.getRoomsByHomeId(home.home_id) as MutableList<Room>
-            _rooms.postValue(rooms)
-        }
-    }
 }

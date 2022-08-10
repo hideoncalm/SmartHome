@@ -3,13 +3,12 @@ package com.quyen.smarthome.ui.device.detail
 import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quyen.smarthome.base.BaseViewModel
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.DeviceTime
+import com.quyen.smarthome.data.repository.DeviceRepository
 import com.quyen.smarthome.data.repository.TimeRepository
-import com.quyen.smarthome.data.source.local.TimeDao
 import com.quyen.smarthome.data.source.remote.util.APIService
 import com.quyen.smarthome.service.publishMessageMqtt
 import com.quyen.smarthome.service.subscribeMqtt
@@ -32,13 +31,17 @@ import javax.inject.Inject
 class FragmentDeviceDetailViewModel @Inject constructor(
     private val espService: APIService,
     private val mqttClient: MqttAndroidClient,
-    private val timeRepo: TimeRepository
+    private val timeRepo: TimeRepository,
+    private val deviceRepo : DeviceRepository
 ) : BaseViewModel() {
 
-    // device State
-    private val _isOn: MutableLiveData<Boolean> = MutableLiveData()
-    val isOn: LiveData<Boolean>
+    private val _isOn : MutableLiveData<Boolean> = MutableLiveData()
+    val isOn : LiveData<Boolean>
         get() = _isOn
+
+    private val _dev : MutableLiveData<Device> = MutableLiveData()
+    val dev : LiveData<Device>
+        get() = _dev
 
     // time on/off history
     private val times = mutableListOf<DeviceTime>()
@@ -63,13 +66,7 @@ class FragmentDeviceDetailViewModel @Inject constructor(
             try {
                 // push message on to topic
                 pushTopic = device.device_id
-                publishMessageMqtt(mqttClient, pushTopic, TURN_ON_MESSAGE, true)
-                // get to local server
-                val url: String = "http://" + device.device_ip_addr + "/on"
-                val response = espService.turnDeviceOn(url)
-                if (response.isSuccessful) {
-                    _isOn.postValue(true)
-                }
+                publishMessageMqtt(mqttClient, pushTopic, TURN_ON_MESSAGE, false)
             } catch (e: Exception) {
                 Timber.d(e)
             }
@@ -81,26 +78,28 @@ class FragmentDeviceDetailViewModel @Inject constructor(
             try {
                 // push message off to topic
                 pushTopic = device.device_id
-                publishMessageMqtt(mqttClient, pushTopic, TURN_OFF_MESSAGE, true)
-                // get to local server
-                val url: String = "http://" + device.device_ip_addr + "/off"
-                val response = espService.turnDeviceOn(url)
-                if (response.isSuccessful) {
-                    _isOn.postValue(false)
-                }
+                publishMessageMqtt(mqttClient, pushTopic, TURN_OFF_MESSAGE, false)
             } catch (e: Exception) {
                 Timber.d(e)
             }
         }
     }
 
-    fun subscribeMqttDevice(device: Device) {
-        viewModelScope.launch {
-            if (device.device_info.uppercase().contains(TURN_ON_MESSAGE)) {
-                _isOn.postValue(true)
-            } else {
-                _isOn.postValue(false)
+    fun turnDeviceOnOff()
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            _dev.value?.let {
+                if (it.device_info.lowercase().equals("on")) {
+                    turnDeviceOff(it)
+                } else {
+                    turnDeviceOn(it)
+                }
             }
+        }
+    }
+
+    fun subscribeMqttDevice(device: Device) {
+        viewModelScope.launch(Dispatchers.IO)  {
             receiveTopic = device.device_id + DEVICE_INFO
             subscribeMqtt(mqttClient, receiveTopic, QOS, ::onMessageReceived)
         }
@@ -116,17 +115,22 @@ class FragmentDeviceDetailViewModel @Inject constructor(
                 TURN_ON_MESSAGE -> {
                     val time = getTimeFormat()
                     val deviceTime = DeviceTime(time, pushTopic, STATE_ON)
-//                    times.add(deviceTime)
-//                    _useTimes.postValue(times)
+                    _dev.value!!.device_info = "on"
                     _isOn.postValue(true)
+                    viewModelScope.launch(Dispatchers.IO)  {
+                        deviceRepo.insertDevice(_dev.value!!)
+                    }
                     insertDeviceTime(deviceTime)
+
                 }
                 TURN_OFF_MESSAGE -> {
                     val time = getTimeFormat()
                     val deviceTime = DeviceTime(time, pushTopic, STATE_OFF)
-//                    times.add(deviceTime)
-//                    _useTimes.postValue(times)
+                    _dev.value!!.device_info = "off"
                     _isOn.postValue(false)
+                    viewModelScope.launch(Dispatchers.IO)  {
+                        deviceRepo.insertDevice(_dev.value!!)
+                    }
                     insertDeviceTime(deviceTime)
                 }
                 else -> {
@@ -160,4 +164,7 @@ class FragmentDeviceDetailViewModel @Inject constructor(
         }
     }
 
+    fun updateDevice(device : Device){
+        _dev.postValue(device)
+    }
 }

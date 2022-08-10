@@ -26,7 +26,7 @@ class FragmentAddDeviceViewModel @Inject constructor(
     private val firebase: FirebaseDatabase
 ) : BaseViewModel() {
 
-//        http://192.168.4.1/wifisave?s=quyenHaHa&p=0966733413
+//  http://192.168.4.1/wifisave?s=quyenHaHa&p=0966733413
 
     private val deviceRefer = firebase.getReference(Constant.DEVICE_PATH)
 

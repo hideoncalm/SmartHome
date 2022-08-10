@@ -11,13 +11,12 @@ import androidx.navigation.fragment.findNavController
 import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.databinding.DialogPickTimeBinding
 import com.quyen.smarthome.service.TimerService
+import com.quyen.smarthome.service.TimerService.Companion.ACTION_COUNTER
+import com.quyen.smarthome.service.TimerService.Companion.BUNDLE_ACTION_ID
 import com.quyen.smarthome.service.TimerService.Companion.BUNDLE_DEVICE_ID
 import com.quyen.smarthome.service.TimerService.Companion.BUNDLE_DEVICE_MESSAGE
 import com.quyen.smarthome.service.TimerService.Companion.BUNDLE_TIME
 import com.quyen.smarthome.ui.device.detail.FragmentDeviceDetailViewModel
-import com.quyen.smarthome.utils.Constant
-import com.quyen.smarthome.utils.Constant.KEY_DIALOG_COUNTER_TO_DEVICE_DETAIL
-import com.quyen.smarthome.utils.setNavigationResult
 import com.quyen.smarthome.utils.setWidthPercent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -76,11 +75,22 @@ class DialogCounterTimer : DialogFragment() {
 
     private fun startTimer() {
         val time = getTime()
+        var message = "on"
+        device?.let {
+            message = if (it.device_info.lowercase() == "on") {
+                "off"
+            } else {
+                "on"
+            }
+        }
+
         val bundle = Bundle().apply {
+            putString(BUNDLE_ACTION_ID, ACTION_COUNTER)
             putString(BUNDLE_DEVICE_ID, device?.device_id)
-            putString(BUNDLE_DEVICE_MESSAGE, "OFF")
+            putString(BUNDLE_DEVICE_MESSAGE, message)
             putDouble(BUNDLE_TIME, time)
         }
+
         serviceIntent.putExtras(bundle)
         requireActivity().startService(serviceIntent)
     }

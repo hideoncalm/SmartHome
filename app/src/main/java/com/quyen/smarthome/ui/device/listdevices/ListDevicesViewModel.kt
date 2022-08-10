@@ -57,14 +57,8 @@ class ListDevicesViewModel @Inject constructor(
                     mqttClient,
                     pushTopic,
                     TURN_ON_MESSAGE,
-                    true
+                    false
                 )
-                // get to local server
-                val url: String = "http://" + device.device_ip_addr + "/on"
-                val response = espService.turnDeviceOn(url)
-                if (response.isSuccessful) {
-                    updateDevice(device, ON)
-                }
             } catch (e: Exception) {
                 Timber.d(e)
             }
@@ -78,14 +72,8 @@ class ListDevicesViewModel @Inject constructor(
                 val pushTopic = device.device_id
                 publishMessageMqtt(
                     mqttClient, pushTopic,
-                    TURN_OFF_MESSAGE, true
+                    TURN_OFF_MESSAGE, false
                 )
-                // get to local server
-                val url: String = "http://" + device.device_ip_addr + "/off"
-                val response = espService.turnDeviceOn(url)
-                if (response.isSuccessful) {
-                    updateDevice(device, OFF)
-                }
             } catch (e: Exception) {
                 Timber.d(e)
             }

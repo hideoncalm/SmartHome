@@ -16,16 +16,29 @@ class TimerService : Service() {
     private val timer = Timer()
     private var deviceID: String? = ""
     private var message: String? = ""
-
+    private var actionID : String? = ""
     @Inject
     lateinit var mqttAndroidClient: MqttAndroidClient
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         val bundle = intent.extras
+        actionID = bundle?.getString(BUNDLE_ACTION_ID)
         deviceID = bundle?.getString(BUNDLE_DEVICE_ID)
         message = bundle?.getString(BUNDLE_DEVICE_MESSAGE)
-        val time = bundle?.getDouble(BUNDLE_TIME, 0.0)
-        timer.scheduleAtFixedRate(time?.let { TimeTask(it) }, 0, 1000)
+        when {
+            actionID.equals(ACTION_COUNTER) -> {
+                Timber.d("LNQ >>>>>>> ACTION_COUNTER: deviceID: $deviceID, message: $message")
+                val time = bundle?.getDouble(BUNDLE_TIME, 0.0)
+                timer.scheduleAtFixedRate(time?.let { TimeTask(it) }, 0, 1000)
+            }
+            actionID.equals(ACTION_ALARM) -> {
+                Timber.d("LNQ >>>>>>> ACTION_ALARM: deviceID: $deviceID, message: $message")
+                sendMessageMQTT(deviceID, message)
+                stopSelf()
+            }
+            else -> {
+            }
+        }
         return START_STICKY
     }
 
@@ -45,24 +58,30 @@ class TimerService : Service() {
 //            Timber.d("LNQ : time = ${time}")
             sendBroadcast(intent)
             if (time == 0.0) {
-                if (!deviceID.isNullOrEmpty() && !message.isNullOrEmpty()) {
-                    mqttClientConnect(mqttAndroidClient, {
-                        publishMessageMqtt(mqttAndroidClient, deviceID!!, message!!, true)
-                    }, { _, _ ->
-                        Timber.d("LNQ : MQTT Connection Failed")
-                    })
-                }
+                sendMessageMQTT(deviceID, message)
                 stopSelf()
             }
         }
     }
 
+    private fun sendMessageMQTT(deviceId: String?, ms: String?) {
+        if (!deviceId.isNullOrEmpty() && !ms.isNullOrEmpty()) {
+            mqttClientConnect(mqttAndroidClient, {
+                publishMessageMqtt(mqttAndroidClient, deviceId, ms, false)
+            }, { _, _ ->
+                Timber.d("LNQ : MQTT Connection Failed")
+            })
+        }
+    }
 
     companion object {
         const val TIMER_UPDATED = "timerUpdated"
         const val BUNDLE_TIME = "timeExtra"
         const val BUNDLE_DEVICE_MESSAGE = "BUNDLE_DEVICE_MESSAGE"
         const val BUNDLE_DEVICE_ID = "BUNDLE_DEVICE_ID"
+        const val BUNDLE_ACTION_ID = "BUNDLE_ACTION_ID"
+        const val ACTION_COUNTER = "ACTION_COUNTER"
+        const val ACTION_ALARM = "ACTION_ALARM"
     }
 
 }

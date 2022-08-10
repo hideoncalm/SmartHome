@@ -5,12 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.quyen.smarthome.R
 import com.quyen.smarthome.base.BaseFragment
@@ -20,14 +18,9 @@ import com.quyen.smarthome.databinding.FragmentDeviceDetailBinding
 import com.quyen.smarthome.service.TimerService
 import com.quyen.smarthome.ui.device.detail.adapter.DeviceTimeAdapter
 import com.quyen.smarthome.utils.Constant.DEVICE_KEY
-import com.quyen.smarthome.utils.Constant.KEY_DIALOG_COUNTER_TO_DEVICE_DETAIL
-import com.quyen.smarthome.utils.getNavigationResult
 import com.quyen.smarthome.utils.getTimeStringFromDouble
-import com.quyen.smarthome.utils.makeTimeString
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.lang.Exception
-import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding, FragmentDeviceDetailViewModel>() {
@@ -59,11 +52,7 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding, FragmentD
             }
             buttonOnOff.setOnClickListener {
                 // turn on/off device
-                if (viewModel.isOn.value == false) {
-                    device?.let { it -> viewModel.turnDeviceOn(it) }
-                } else {
-                    device?.let { it -> viewModel.turnDeviceOff(it) }
-                }
+                viewModel.turnDeviceOnOff()
             }
             buttonCounter.setOnClickListener {
                 // turn on/off device with timer
@@ -95,7 +84,18 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding, FragmentD
             binding.textToolbarTitle.text = it.device_name
             viewModel.subscribeMqttDevice(it)
             viewModel.getDeviceTimeById(it.device_id)
+            viewModel.updateDevice(it)
+            if (it.device_info.lowercase().equals("on")) {
+                binding.buttonOnOff.background = activity?.let { activity ->
+                    ContextCompat.getDrawable(activity, backgroundOn)
+                }
+            } else {
+                binding.buttonOnOff.background = activity?.let { activity ->
+                    ContextCompat.getDrawable(activity, backgroundOff)
+                }
+            }
         }
+
         viewModel.useTimes.observe(viewLifecycleOwner, {
             timeAdapter.updateData(it.toMutableList())
         })
