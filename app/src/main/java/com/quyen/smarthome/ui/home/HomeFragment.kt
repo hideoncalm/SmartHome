@@ -54,6 +54,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             recyclerFavorite.adapter = deviceAdapter
             recyclerRoom.adapter = roomAdapter
         }
+        viewModel.subscribeMqttPower()
+        viewModel.subscribeMqttTemperature()
+        viewModel.subscribeMqttHumidity()
     }
 
     override fun initData() {
@@ -62,6 +65,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         })
         viewModel.rooms.observe(viewLifecycleOwner, {
             roomAdapter.updateData(it as MutableList<Room>)
+        })
+        viewModel.temperature.observe(viewLifecycleOwner, {
+            binding.textTemperature.text = "$it C"
+        })
+        viewModel.hum.observe(viewLifecycleOwner, {
+            binding.textHum.text = "$it %"
+        })
+        viewModel.power.observe(viewLifecycleOwner, {
+            binding.textPowerTotal.text = "$it kWh"
         })
     }
 
