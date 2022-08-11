@@ -25,7 +25,7 @@ class FragmentAddHouse : BaseFragment<FragmentHouseBinding, FragmentAddHouseView
     override fun initViews() {
         binding.recyclerHome.adapter = houseAdapter
         binding.buttonBack.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_fragmentAddHouse_to_homeFragment)
         }
         binding.buttonAddHome.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentAddHouse_to_fragmentCreateHome)

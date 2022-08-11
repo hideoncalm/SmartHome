@@ -16,11 +16,14 @@ import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.DeviceTime
 import com.quyen.smarthome.databinding.FragmentDeviceDetailBinding
 import com.quyen.smarthome.service.TimerService
+import com.quyen.smarthome.service.mqttClientConnect
 import com.quyen.smarthome.ui.device.detail.adapter.DeviceTimeAdapter
 import com.quyen.smarthome.utils.Constant.DEVICE_KEY
 import com.quyen.smarthome.utils.getTimeStringFromDouble
 import dagger.hilt.android.AndroidEntryPoint
+import org.eclipse.paho.android.service.MqttAndroidClient
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding, FragmentDeviceDetailViewModel>() {
@@ -39,6 +42,9 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding, FragmentD
 
     private var time = 0.0
 
+    @Inject
+    lateinit var mqttClient: MqttAndroidClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
@@ -48,7 +54,7 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding, FragmentD
         binding.apply {
             recyclerUsedTime.adapter = timeAdapter
             buttonBack.setOnClickListener {
-                findNavController().popBackStack()
+                findNavController().navigate(R.id.action_fragmentDeviceDetail_to_listDevicesFragment)
             }
             buttonOnOff.setOnClickListener {
                 // turn on/off device
@@ -82,7 +88,13 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding, FragmentD
         device = arguments?.getParcelable(DEVICE_KEY)
         device?.let {
             binding.textToolbarTitle.text = it.device_name
-            viewModel.subscribeMqttDevice(it)
+            mqttClientConnect(mqttClient,
+                { _ ->
+                    Timber.d("LNQ : Connected Success ${it.device_id}")
+                    viewModel.subscribeMqttDevice(it)
+                }, { _, _ ->
+                    Timber.d("LNQ : Connected Failed")
+                })
             viewModel.getDeviceTimeById(it.device_id)
             viewModel.updateDevice(it)
             if (it.device_info.lowercase().equals("on")) {

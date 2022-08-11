@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.wifi.WifiManager
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -15,13 +14,20 @@ import com.quyen.smarthome.data.model.Device
 import com.quyen.smarthome.data.model.Home
 import com.quyen.smarthome.data.model.Room
 import com.quyen.smarthome.databinding.FragmentHomeBinding
+import com.quyen.smarthome.service.mqttClientConnect
 import com.quyen.smarthome.ui.home.adapter.FavoriteDeviceAdapter
 import com.quyen.smarthome.ui.room.listrooms.adapter.ListItemHomeAdapter
 import com.quyen.smarthome.utils.Constant
 import dagger.hilt.android.AndroidEntryPoint
+import org.eclipse.paho.android.service.MqttAndroidClient
+import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
+
+    @Inject
+    lateinit var mqttClient: MqttAndroidClient
 
     override val methodInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding =
         FragmentHomeBinding::inflate
@@ -54,9 +60,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             recyclerFavorite.adapter = deviceAdapter
             recyclerRoom.adapter = roomAdapter
         }
-        viewModel.subscribeMqttPower()
-        viewModel.subscribeMqttTemperature()
-        viewModel.subscribeMqttHumidity()
+        mqttClientConnect(mqttClient,
+            {
+                viewModel.subscribeMqttPower()
+                viewModel.subscribeMqttTemperature()
+                viewModel.subscribeMqttHumidity()
+            }, { _, _ ->
+                Timber.d("LNQ : Connected Failed")
+            })
     }
 
     override fun initData() {

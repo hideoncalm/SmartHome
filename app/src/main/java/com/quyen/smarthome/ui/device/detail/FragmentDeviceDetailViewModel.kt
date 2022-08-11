@@ -101,6 +101,7 @@ class FragmentDeviceDetailViewModel @Inject constructor(
     fun subscribeMqttDevice(device: Device) {
         viewModelScope.launch(Dispatchers.IO)  {
             receiveTopic = device.device_id + DEVICE_INFO
+            Timber.d("LNQ $receiveTopic")
             subscribeMqtt(mqttClient, receiveTopic, QOS, ::onMessageReceived)
         }
     }

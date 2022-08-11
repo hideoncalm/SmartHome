@@ -59,6 +59,7 @@ class FragmentAddDeviceViewModel @Inject constructor(
             device?.let {
                 if (wifiBSSID.contains(it.device_id)) {
                     _device.postValue(it)
+                    Timber.d("LNQ $device.toString()")
                     _loading.postValue(false)
                 }
             }

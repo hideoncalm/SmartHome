@@ -54,6 +54,7 @@
         <entry key="app/src/main/res/drawable/bg_rounded_stroke_black.xml" value="0.20615384615384616" />
         <entry key="app/src/main/res/drawable/bg_rounded_stroke_white.xml" value="0.20615384615384616" />
         <entry key="app/src/main/res/drawable/bg_user_active.xml" value="0.20615384615384616" />
+        <entry key="app/src/main/res/drawable/ic_delete_clock.xml" value="0.20277777777777778" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/dialog_pick_time.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_add_device.xml" value="0.25" />

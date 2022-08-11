@@ -62,7 +62,9 @@
             app:destination="@id/myProfileFragment" />
         <action
             android:id="@+id/action_fragmentAddHouse_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_fragmentAddHouse_to_fragmentCreateHome"
             app:destination="@id/fragmentCreateHome" />
@@ -70,7 +72,8 @@
     <fragment
         android:id="@+id/fragmentDeviceDetail"
         android:name="com.quyen.smarthome.ui.device.detail.FragmentDeviceDetail"
-        android:label="FragmentDeviceDetail">
+        android:label="FragmentDeviceDetail"
+        >
         <argument
             android:name="device"
             app:argType="com.quyen.smarthome.data.model.Device" />
@@ -83,6 +86,12 @@
         <action
             android:id="@+id/action_fragmentDeviceDetail_to_fragmentAlarmDevice"
             app:destination="@id/fragmentAlarmDevice" />
+        <action
+            android:id="@+id/action_fragmentDeviceDetail_to_listDevicesFragment"
+            app:destination="@id/listDevicesFragment"
+            app:popUpTo="@+id/listDevicesFragment"
+            app:popUpToInclusive="true"/>
+
     </fragment>
 
     <fragment
@@ -151,6 +160,7 @@
     <fragment
         android:id="@+id/fragmentCreateHome"
         android:name="com.quyen.smarthome.ui.createhouse.FragmentCreateHome"
-        android:label="FragmentCreateHome" />
+        android:label="FragmentCreateHome" >
+    </fragment>
 
 </navigation>
