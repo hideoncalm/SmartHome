@@ -15,7 +15,7 @@ data class Room(
     var room_home_id: String = "",
     var room_total_device: Int? = 0,
     var room_all_device: Boolean =  false,
-    var room_image: String = ""
+    var room_image: String = "https://pix10.agoda.net/hotelImages/6561704/0/882e771b5b2eeace295261c569b941bf.jpg?ca=26&ce=0&s=1024x768"
 ) : Parcelable {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Room>() {

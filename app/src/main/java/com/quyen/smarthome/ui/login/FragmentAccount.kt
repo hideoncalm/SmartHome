@@ -21,7 +21,7 @@ class FragmentAccount : BaseFragment<FragmentAccountBinding, FragmentAccountView
     private val accountAdapter by lazy {
         BaseViewPagerAdapter(
             listOf(FragmentLogin(), FragmentSignUp()),
-            listOf("Login", "Sign up"),
+            listOf("Đăng nhập", "Đăng kí"),
             childFragmentManager
         )
     }

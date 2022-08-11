@@ -29,6 +29,18 @@
         app:layout_constraintStart_toStartOf="@id/viewToolbar"
         app:layout_constraintTop_toTopOf="@id/viewToolbar" />
 
+    <ImageButton
+        android:id="@+id/buttonAddRoom"
+        android:layout_marginEnd="10dp"
+        android:background="?selectableItemBackground"
+        android:src="@drawable/ic_add_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/viewToolbar"
+        app:layout_constraintEnd_toEndOf="@id/viewToolbar"
+        app:layout_constraintBottom_toBottomOf="@id/viewToolbar"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerItem"
         android:layout_width="0dp"

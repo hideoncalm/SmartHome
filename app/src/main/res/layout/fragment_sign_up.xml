@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="25dp"
-            android:hint="Your Name"
+            android:hint="Tên của bạn"
             android:background="@drawable/bg_edit_text"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -46,7 +46,7 @@
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="25dp"
             android:background="@drawable/bg_edit_text"
-            android:hint="Your Email"
+            android:hint="Email của bạn"
             android:textColor="@color/black"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +69,7 @@
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="25dp"
             android:background="@drawable/bg_edit_text"
-            android:hint="Password"
+            android:hint="Mật khẩu"
             android:inputType="textPassword"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="25dp"
-            android:hint="Confirm Password"
+            android:hint="Nhập lại mật khẩu"
             android:background="@drawable/bg_edit_text"
             android:inputType="textPassword"
             android:textColor="@color/black"
@@ -106,7 +106,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_login_bg"
-        android:text="Sign Up"
+        android:text="Đăng kí"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

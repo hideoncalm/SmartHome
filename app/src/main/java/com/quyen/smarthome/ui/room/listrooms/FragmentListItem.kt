@@ -25,6 +25,10 @@ class FragmentListItem : BaseFragment<FragmentRoomsBinding, FragmentListRoomView
 
     override fun initViews() {
         binding.recyclerItem.adapter = roomAdapter
+
+        binding.buttonAddRoom.setOnClickListener {
+            findNavController().navigate(R.id.action_fragmentListItem_to_fragmentCreateRoom)
+        }
     }
 
     override fun initData() {

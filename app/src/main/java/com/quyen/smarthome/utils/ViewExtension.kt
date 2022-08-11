@@ -25,8 +25,8 @@ import kotlin.math.roundToInt
 fun ImageView.loadImageFromUrl(url: String) {
     Glide.with(context)
         .load(url)
-        .placeholder(R.drawable.ic_living_room)
-        .error(R.drawable.ic_living_room)
+        .placeholder(R.drawable.ic_home_room)
+        .error(R.drawable.ic_home_room)
         .into(this)
 }
 

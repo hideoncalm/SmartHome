@@ -73,10 +73,10 @@ class FragmentAddDevice : BaseFragment<FragmentAddDeviceBinding, FragmentAddDevi
         viewModel.loading.observe(viewLifecycleOwner, {
             binding.progressBar.isVisible = it
             if (!it) {
-                viewModel.device.value?.let { device ->
+                viewModel.device.value?.let { dv ->
                     val direction =
                         FragmentAddDeviceDirections.actionFragmentAddDeviceToFragmentDeviceDetail(
-                            device
+                            dv
                         )
                     findNavController().navigate(direction)
                 }

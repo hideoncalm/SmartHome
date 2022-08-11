@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:shapeAppearance="@style/RoundedImage20"
-        android:src="@drawable/ic_living_room"
+        android:src="@drawable/ic_home_room"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

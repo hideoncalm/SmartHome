@@ -27,6 +27,17 @@
         app:layout_constraintStart_toStartOf="@id/viewToolbar"
         app:layout_constraintTop_toTopOf="@id/viewToolbar" />
 
+    <ImageButton
+        android:id="@+id/buttonSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:background="?selectableItemBackground"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintBottom_toBottomOf="@id/viewToolbar"
+        app:layout_constraintEnd_toEndOf="@id/viewToolbar"
+        app:layout_constraintTop_toTopOf="@id/viewToolbar" />
+
     <TextView
         android:id="@+id/textToolbarTitle"
         android:layout_width="0dp"

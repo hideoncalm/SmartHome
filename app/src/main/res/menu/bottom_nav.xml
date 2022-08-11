@@ -7,13 +7,13 @@
     <item
         android:id="@+id/listDevicesFragment"
         android:icon="@drawable/ic_devices"
-        android:title="Device" />
+        android:title="Thiết bị" />
     <item
         android:id="@+id/sceneFragment"
         android:icon="@drawable/ic_time"
-        android:title="Scenes" />
+        android:title="Báo thức" />
     <item
         android:id="@+id/fragmentListItem"
         android:icon="@drawable/ic_room"
-        android:title="Room" />
+        android:title="Phòng" />
 </menu>

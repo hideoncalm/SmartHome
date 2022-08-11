@@ -91,6 +91,9 @@
             app:destination="@id/listDevicesFragment"
             app:popUpTo="@+id/listDevicesFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_fragmentDeviceDetail_to_fragmentDeviceSetting"
+            app:destination="@id/fragmentDeviceSetting" />
 
     </fragment>
 
@@ -112,6 +115,9 @@
         <action
             android:id="@+id/action_fragmentListItem_to_roomDetailFragment"
             app:destination="@id/roomDetailFragment" />
+        <action
+            android:id="@+id/action_fragmentListItem_to_fragmentCreateRoom"
+            app:destination="@id/fragmentCreateRoom" />
     </fragment>
     <dialog
         android:id="@+id/dialogCounterTimer"
@@ -161,6 +167,18 @@
         android:id="@+id/fragmentCreateHome"
         android:name="com.quyen.smarthome.ui.createhouse.FragmentCreateHome"
         android:label="FragmentCreateHome" >
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCreateRoom"
+        android:name="com.quyen.smarthome.ui.room.createroom.FragmentCreateRoom"
+        android:label="FragmentCreateRoom" />
+    <fragment
+        android:id="@+id/fragmentDeviceSetting"
+        android:name="com.quyen.smarthome.ui.device.setting.FragmentDeviceSetting"
+        android:label="FragmentDeviceSetting">
+        <argument
+            android:name="device"
+            app:argType="com.quyen.smarthome.data.model.Device" />
     </fragment>
 
 </navigation>

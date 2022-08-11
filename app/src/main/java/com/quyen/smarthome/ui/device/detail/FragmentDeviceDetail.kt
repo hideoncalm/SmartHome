@@ -72,6 +72,14 @@ class FragmentDeviceDetail : BaseFragment<FragmentDeviceDetailBinding, FragmentD
                 val action = FragmentDeviceDetailDirections.actionFragmentDeviceDetailToFragmentAlarmDevice(device!!)
                 findNavController().navigate(action)
             }
+
+            buttonSetting.setOnClickListener {
+                val action =
+                    FragmentDeviceDetailDirections.actionFragmentDeviceDetailToFragmentDeviceSetting(
+                        device!!
+                    )
+                findNavController().navigate(action)
+            }
         }
         viewModel.isOn.observe(viewLifecycleOwner, {
             if (it) {

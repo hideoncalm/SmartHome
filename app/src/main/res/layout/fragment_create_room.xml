@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:fontFamily="@font/lato"
-        android:text="Create Home"
+        android:text="Tạo phòng"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -57,32 +57,9 @@
             android:background="@drawable/bg_edit_text"
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="25dp"
-            android:hint="Home Name"
+            android:hint="Tên phòng"
             android:textColor="@color/black"
             android:inputType="textEmailAddress"
-            android:textSize="16sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tipHomeAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="@null"
-        android:textColorHint="@color/black"
-        android:layout_margin="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tipHomeName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textHomeAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawablePadding="25dp"
-            android:background="@drawable/bg_edit_text"
-            android:hint="Home Address"
-            android:textColor="@color/black"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,7 +72,7 @@
         app:layout_constraintBottom_toTopOf="@id/buttonChooseImage"
         app:layout_constraintEnd_toEndOf="@id/buttonChooseImage"
         app:layout_constraintStart_toStartOf="@id/buttonChooseImage"
-        app:layout_constraintTop_toBottomOf="@id/tipHomeAddress" />
+        app:layout_constraintTop_toBottomOf="@id/tipHomeName" />
 
     <Button
         android:id="@+id/buttonChooseImage"
@@ -104,7 +81,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_login_bg"
-        android:text="Choose Image"
+        android:text="Chọn ảnh"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/buttonCreateHome"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +94,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_login_bg"
-        android:text="Create Home"
+        android:text="Tạo phòng"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
