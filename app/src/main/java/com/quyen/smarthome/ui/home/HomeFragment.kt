@@ -84,7 +84,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             binding.textHum.text = "$it %"
         })
         viewModel.power.observe(viewLifecycleOwner, {
-            binding.textPowerTotal.text = "$it kWh"
+            binding.textPowerTotal.text = "$it kW"
         })
     }
 

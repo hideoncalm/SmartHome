@@ -19,6 +19,7 @@ class DeviceTimeAdapter(
     override fun submitList(list: MutableList<DeviceTime>?) {
         val result = arrayListOf<DeviceTime>()
         list?.forEach { result.add(it.copy()) }
+        result.reverse()
         super.submitList(result)
     }
 
